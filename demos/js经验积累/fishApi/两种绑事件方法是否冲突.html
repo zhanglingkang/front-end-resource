@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>两种绑定方法是否冲突</title>
+		<link rel = "stylesheet" href = "css/base.css"/>
+		<style>
+			div{
+				background:#f00;
+				width:100px;
+				height:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<script type="text/javascript" src = "js/jquery-1.7.1.js"></script>
+		<script type="text/javascript" src = "http://js.40017.cn/cn/public/fish.1.2.3.js"></script>
+		<script>
+			if(!console){
+				var console= {};
+				console.log = alert;
+			}
+			fish.one("div").on("mouseover",function(){
+				console.log("mouseover");
+			});
+			fish.one("div").on("mouseout",function(){
+				console.log("mouseout");
+			});
+			fish.one("div").hover(function(){
+				console.log("hov-mouseover");
+			},function(){
+				console.log("hov-mouseout");
+			});
+			fish.dom("div").onmouseover = function(){
+				console.log("old-mouseover");
+			};
+			fish.dom("div").onmouseout = function(){
+				console.log("old-mouseout");
+			};
+		</script>
+	</body>
+</html>

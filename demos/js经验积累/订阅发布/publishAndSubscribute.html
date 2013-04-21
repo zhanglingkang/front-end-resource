@@ -1,0 +1,105 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>发布订阅模式的demo</title>
+	<link  rel="stylesheet" href="base.css">
+	<link  rel="stylesheet" href="pAs.css">
+</head>
+<body>
+	<!-- 购物车 -->
+	<div class="header"></div>
+	<div class="container">
+		<div class="slideBox">
+
+		</div>
+		<div class="mainBox"></div>
+		<span class="data none">
+			<span class=""></span>
+		</span>
+	</div>
+	<divn class="footer"></div>
+	<div class="template">
+		<li class="goodItem">
+			<dl class="clearfix">
+				<dt class="goodsName"></dt>
+				<dd class="goodsNum"></dd>
+			</dl>
+			<div  class="clearfix">
+				<div class="numPicker">
+					<span class="numMinus">-</span>
+					<input type="text"></input>
+					<span class="numPlus">+</span>
+				</div>
+				<a herf="javascript:void(0);" title="购买">购买</a>
+			</div>
+			
+		</li>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="js/publishAndSubscribute.js"></script>
+	<script type="text/javascript" src="js/data.js"></script>
+	<script>
+		(function(){
+
+			//计算总价的
+			function PriceModel(name,num,eachPrice) {
+				this.name = name;
+				this.num = num || 0;
+				this.eachPrice = eachPrice || 0;
+			}
+			PriceModel.prototype={
+				setName:function(name){
+					this.name = name;
+				},
+				setNum:function(num){
+					this.num = num;
+				},
+				setEachPrice:function(eachPrice){
+					this.eachPrice = eachPrice;
+				},
+				getTolPrice:function(){
+					return parseFloat(this.num)*parseFloat(this.eachPrice);
+				}
+
+			};
+
+			function TotalPriceModel(){
+				this.allPriceInfo={};
+			};
+			totalPriceModel.prototype = {
+				addPriceType:function(name,num,eachPrice){
+					var priceModel = this.allPriceInfo[name];
+					if(priceModel){
+						priceModel.setNum(num);
+						priceModel.setEachPrice(eachPrice);
+					}else{
+						priceModel = new PriceModel(name,num,eachPrice);
+					}
+				},
+				removePriceType:function(name){
+					var priceModel = this.allPriceInfo[name];
+					delete priceModel;
+				},
+				update:function(name,num,eachPrice){
+					var priceModel = this.allPriceInfo[name];
+					if(priceModel){
+						priceModel.setNum(num);
+						priceModel.setEachPrice(eachPrice);
+						return true;
+					}else{
+						return false;
+					}
+				},
+				getAllPrice:function(){
+					var allPrice = 0;
+					for(var key in this.allPriceInfo){
+						allPrice += this.allPriceInfo[key].getTolPrice();
+					}
+				}
+			};
+			
+		})();
+	</script>
+</body>
+</html>

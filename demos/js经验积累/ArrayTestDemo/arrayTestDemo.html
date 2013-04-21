@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Array Test</title>
+		<link  rel="stylesheet" href="resource/qunit-1.10.0.css">
+	</head>
+	<body>
+		<div id="qunit"></div><!-- 必须有 -->
+		<script src="resource/qunit-1.10.0.js"></script>
+		<script>
+		/*
+			test("title",function(assert){
+			});
+		*/
+			module("Array Test");
+			test("concat(arrayX,arrayX,......,arrayX)",function(assert){
+				var arr1 = [1,2,3],
+					arr2 = [2,3,4];
+				assert.deepEqual(arr1.concat(arr2),[1,2,3,2,3,4],"返回值不会将重复元素删除");	
+				assert.deepEqual(arr1,[1,2,3],"不改变原来的数组");	
+				assert.deepEqual(arr1.concat(100),[1,2,3,100],"数组链接非数组");	
+				assert.deepEqual(arr1.concat(null,undefined,NaN),[1,2,3,null,undefined,NaN],"连接一些奇怪的东西也行");	
+				assert.notEqual(arr1.concat(arr2),[1,2,3,2,3,4],"不同的指向");					
+			});
+			test("join([separator])",function(assert){
+				var arr1 = [1,2,3],
+					myObj = {};
+				myObj.toString = function(){
+					return "hello";
+				};
+				assert.equal(arr1.join(),"1,2,3","默认用','连接");
+				assert.equal(arr1.join("&"),"1&2&3","用'&'连接");
+				assert.equal(arr1.join("@#$"),"1@#$2@#$3","用多个符号连接");
+				assert.deepEqual(arr1,[1,2,3],"不改变原来的数组");
+				assert.equal(arr1.join([]),arr1.join(""),"空数组等效于空字符串");
+				
+				assert.equal(arr1.join([1,2]),arr1.join([1,2].toString()),"join先对传参做toString方法");				
+				assert.equal(arr1.join(myObj),arr1.join(myObj.toString()),"join先对传参做toString方法");
+				assert.equal(arr1.join(myObj),"1hello2hello3","join先对传参做toString方法");
+				
+			});
+			test("pop()",function(assert){
+				var arr1 = [1,2,3];
+				assert.deepEqual(arr1.pop(),3,"弹出最后一个元素");	
+				assert.deepEqual(arr1,[1,2],"修改原数组");	
+			});
+			test("push()",function(assert){
+				var arr1 = [1,2,3];
+				assert.deepEqual(arr1.push(1,2),arr1.length,"返回此时数组的长度");	
+				assert.deepEqual(arr1,[1,2,3,1,2],"数组的内容改变");	
+
+			});
+			test("reverse()",function(assert){
+				var arr1 = [1,2,3];
+				assert.deepEqual(arr1.reverse(),[3,2,1],"返回反转后的数组");	
+				assert.deepEqual(arr1,[3,2,1],"改变原来的数组");	
+			});
+			test("shift()",function(assert){
+				var arr1 = [1,2,3];
+				assert.deepEqual(arr1.shift(),1,"删除第一个元素");	
+				assert.deepEqual(arr1,[2,3],"修改原数组");	
+			});
+			test("slice(start[,end])",function(assert){
+				var arr1 = [1,2,3,4,5];
+				assert.deepEqual(arr1.slice(),[1,2,3,4,5],"star默认值是0,end默认值是数组长度");
+				assert.deepEqual(arr1.slice(0),[1,2,3,4,5],"end默认值是数组长度");				
+				assert.deepEqual(arr1.slice(1),[2,3,4,5],"end默认值是数组长度");				
+				assert.deepEqual(arr1.slice(1,2),[2],"从下标start开始（包含），到下标end结束（不包含）。");		
+				assert.deepEqual(arr1,[1,2,3,4,5],"不修改原数组");		
+
+				
+			});
+			
+			test("splice(start,howmany[,element1,.....,elementX])用于插入、删除或替换数组的元素",function(assert){
+				var arr1 = [1,2,3,4,5];
+				assert.deepEqual(arr1.splice(),[],"一个都没删");
+				assert.deepEqual(arr1.splice(0),[1,2,3,4,5],"end默认值是数组长度");
+				assert.deepEqual(arr1,[],"修改原数组");
+				arr1 = [1,2,3,4,5];
+				assert.deepEqual(arr1.splice(1,2),[2,3],"从下标start开始（包含）,删除两个");
+				assert.deepEqual(arr1,[1,4,5],"修改原数组");
+				arr1 = [1,2,3,4,5];		
+				assert.deepEqual(arr1.splice(1,1,"new1","new1","new2","new3"),[2],"返回删除的元素的数组");
+				arr1 = [1,2,3,4,5];
+				assert.deepEqual(arr1.splice(1,2,"new1","new1","new2","new3"),[2,3],"从下标start开始（包含）,删除两个,并添加几个元素,并返回删除的元素的数组");
+				assert.deepEqual(arr1,[1,"new1","new1","new2","new3",4,5],"从下标start开始（包含）,删除两个,并添加几个元素,并返回删除的元素的数组");
+			});
+			test("toString()",function(assert){
+				var arr1 = [1,2,3,4,5];
+				assert.deepEqual(arr1.toString(),arr1.join(),"返回值与没有参数的 join() 方法返回的字符串相同:即以逗号连接");
+			});
+
+		</script>
+		
+	</body>
+</html>

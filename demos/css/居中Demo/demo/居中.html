@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<link rel = "stylesheet" href = "css/base.css"/>
+		<style>
+			.testImg{
+				height:200px;
+				width:200px;
+			}
+			.wrap .item{
+				margin:0 20px;
+			}
+			.wrap .item:first-child{
+				margin-left:0;
+			}
+			.wrap .item:last-child{
+				margin-right:0;
+			}
+
+			
+			.blockContWrap .bc{
+				width:65px;
+			}
+			.centerTableWrap,.ulWrap{
+				margin-bottom:10px;
+			}
+			.centerTableWrap li,.ulWrap li{
+				margin-right:5px;
+				padding:5px;
+				width:20px;
+				height:20px;
+				background:blue;
+				color:#000;
+			}
+			.centerTableWrap li a,.ulWrap li a{
+				color:#000;
+			}
+			.centerTableWrap li:last-child{
+				margin-right:0;
+			}
+			
+			.ulWrap{
+				left:50%;
+			}
+			.ulWrap li{
+				left:-50%;
+			}
+			.multiLineWrap td{
+				vertical-align:middle;/*默认就是这个值*/
+				height:150px;
+			}
+			.multiLineWrap2{
+				display:table-cell;
+				vertical-align:middle;/*非默认*/
+				height:150px;
+			}
+			.multiLineWrap3{
+				height:300px;
+			}
+			.multiLineWrap3 .innerWrap{
+				top:50%;
+			}
+			.multiLineWrap3 .innerWrap p{
+				top:-50%;/*为什么没有效果？？？用数字是ok的*/
+				height:30px;
+				line-height:30px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--@tag:水平居中-->
+		<!-- 行内元素的水平居中 start -->
+		<div class = "wrap tc" >center word </div>
+		<div class = "wrap tc" ><span class = "item" >1</span><span class = "item" >2</span><span class = "item" >3</span></div>
+		<div class = "wrap tc" ><span class = "item" >1</span><span class = "item" >2</span><span class = "item" >3</span><span class = "item" >4</span><span class = "item" >5</span></div>
+		<div class = "wrap tc" ><img alt = "html5 meeting" class = "testImg" src = "img/html5Meeting.jpg"/></div>	
+		<!-- 行内元素的水平居中 end-->
+		<!-- 块级元素的水平居中 start -->
+			<div class = "blockContWrap"><p class = "bc">block text</p></div>
+			<!-- 不确定宽度块级元素的水平居中 table（不是块级元素）的宽度由内部的元素撑起，不设宽度，
+				只要设margin-left:auto; margin-right:auto; 即可实现table的水平居中-->
+			<table class = "centerTableWrap bc">
+				<tr>
+					<td>
+						<ul class = "clearfix">
+							<li class = "fl tc"><a href = "javascript:void(0);">1</a></li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<table class = "centerTableWrap bc">
+				<tr>
+					<td>
+						<ul class = "clearfix">
+							<li class = "fl tc"><a href = "javascript:void(0);">1</a></li>
+							<li class = "fl tc"><a href = "javascript:void(0);">2</a></li>
+							<li class = "fl tc"><a href = "javascript:void(0);">3</a></li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<table class = "centerTableWrap bc">
+				<tr>
+					<td>
+						<ul class = "clearfix">
+							<li class = "fl tc"><a href = "javascript:void(0);">1</a></li>
+							<li class = "fl tc"><a href = "javascript:void(0);">2</a></li>
+							<li class = "fl tc"><a href = "javascript:void(0);">3</a></li>
+							<li class = "fl tc"><a href = "javascript:void(0);">4</a></li>
+							<li class = "fl tc"><a href = "javascript:void(0);">5</a></li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<!-- 用float加relative :float让其大小真好包住内容，left:来控制位置-->
+			<ul class = "clearfix ulWrap pr fl cb">
+				<li class = "fl tc pr"><a href = "javascript:void(0);">1</a></li>
+			</ul>
+			<ul class = "clearfix ulWrap pr fl cb">
+				<li class = "fl tc pr"><a href = "javascript:void(0);">1</a></li>
+				<li class = "fl tc pr"><a href = "javascript:void(0);">2</a></li>
+				<li class = "fl tc pr"><a href = "javascript:void(0);">3</a></li>
+			</ul>
+			<ul class = "clearfix ulWrap pr fl cb">
+				<li class = "fl tc pr"><a href = "javascript:void(0);">1</a></li>
+				<li class = "fl tc pr"><a href = "javascript:void(0);">2</a></li>
+				<li class = "fl tc pr"><a href = "javascript:void(0);">3</a></li>
+				<li class = "fl tc pr"><a href = "javascript:void(0);">4</a></li>
+				<li class = "fl tc pr"><a href = "javascript:void(0);">5</a></li>
+			</ul>
+		<!-- 块级元素的水平居中 end -->
+		
+		<!--@tag:竖直居中-->
+		<!-- 高度不确定的文本，图片，块级元素的竖直居中：通过给其父元素上加相同的边距来实现 start -->
+			<div class = "mt10 mb10 cb bgGreen">hello world</div>
+			<div class = "mt10 mb10 bgGreen"><img alt = "html5 meeting" class = "testImg block" src = "img/html5Meeting.jpg"/></div>
+			<div class = "pt10 pb10 bgGreen"><div  class = "h50 bgRed"></div></div>
+		<!-- 高度不确定的文本，图片，块级元素的竖直 end -->
+		
+		<!-- 父元素高度确定的单行文本的竖直居中 start-->
+		<div class = "mt10 h50 bgGreen" style = "line-height:50px;">hello world</div>
+		<!-- 父元素高度确定的单行文本的竖直居中 end-->
+		<!-- 父元素高度确定的多行文本的竖直居中: vertical-align:middle,但该样式只有在td或th上才有用
+			因此思路1：将多行文本放在th或td中,默认
+			思路2：将多行文本的父级元素的display设为table-cell(ie7及以下不支持)
+			思路3：与不定数量的块级元素水平居中的方式类似
+		start-->
+			
+			<table class = "mt10 mb10 multiLineWrap">
+				<tr>
+					<td class = "bgGreen">
+						<p> line 1</p>
+						<p> line 2</p>
+						<p> line 3</p>
+						<p> line 4</p>
+					</td>
+				</tr>
+			</table>
+			
+			<div class = "multiLineWrap2 bgGreen mt20">
+						<p> line 1</p>
+						<p> line 2</p>
+						<p> line 3</p>
+						<p> line 4</p>
+			</div>
+			
+			<div class = "multiLineWrap3 pr bgGreen mt20">	
+				<div class = "innerWrap bgGreen pa">
+						<p class = "pr"> line 1</p>
+						<p class = "pr"> line 2</p>
+						<p class = "pr"> line 3</p>
+						<p class = "pr"> line 4</p>
+				</div>
+			</div>
+			
+			<div class = "multiLineWrap3 pr bgGreen mt20">	
+				<div class = "innerWrap bgGreen pa">
+						<!--<div class = "pa">-->
+							<p class = "pr"> line 1</p>
+							<p class = "pr"> line 2</p>
+							<p class = "pr" style = "top:-60px;"> line 3</p>
+							<p class = "pr" style = "top:-50%;"> line 4</p>
+						<!--</div>-->
+				</div>
+			</div>
+		<!-- 父元素高度确定的多行文本的竖直居中 end-->
+		<script>
+			
+			
+		</script>
+	</body>
+</html>

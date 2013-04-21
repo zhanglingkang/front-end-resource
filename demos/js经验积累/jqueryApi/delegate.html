@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>委托</title>
+		<link rel = "stylesheet" href = "css/base.css"/>
+		<style>
+			li{
+				height:30px;
+				line-height:30px;
+				background:#ddd;
+			}
+			li span{
+				margin-right:50px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="clotherWrap">
+			<li><span>衣服一</span><a href="javascript:void(0);">购买</a></li>
+		</ul>
+		<input type="text" class="clotherNameInput"><a href="javascript:void(0);" class="addClotherBtn">additem</a>
+		<h2>购物车</h2>
+		<ul class="clotherCar">
+		</ul>
+			
+		<script type="text/javascript" src = "js/jquery-1.7.1.js"></script>
+		<script>
+			//$(elements).delegate(selector, events, data, handler);// jQuery 1.4.3+
+			//jquery 1.7+ on也可以做委托。。。包含在里面，否则要用delegate
+			$(function(){
+				var $clotherCar = $(".clotherCar"),
+					$clotherWrap = $(".clotherWrap");
+				//委托鸟~
+				$clotherWrap.on("click","li a",function(){
+					var $this = $(this),
+						$par = $this.parent("li"),
+						clotherName = $("span",$par).html();
+					$clotherCar.append("<li>" + clotherName +"</li>");
+				});
+				//没委托
+				$("li a",$clotherWrap).on("click",function(){
+					console.log("a clicked");
+				});
+				//没有委托。。。
+				$("li",$clotherWrap).on("mouseover","li a",function(){
+					console.log("mouseover");
+				});
+				//"没有委托"
+				$("li",$clotherWrap).hover(function(){
+					$(this).css("background","#0ff");
+				},function(){
+					$(this).css("background","#ddd");
+				});
+				var $clothNameInput = $(".clotherNameInput");
+				
+				
+				$(".addClotherBtn").click(function(){
+					var clotherName = $clothNameInput.val();
+					$clotherWrap.append('<li><span>'+clotherName+'</span><a href="javascript:void(0);">购买</a></li>');
+				});
+				$(".addClotherBtn").on("click",function(){
+					console.log("addClotherBtn added");
+				});
+				
+			});	
+		</script>
+	</body>
+</html>

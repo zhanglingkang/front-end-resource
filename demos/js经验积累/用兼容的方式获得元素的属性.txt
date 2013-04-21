@@ -1,0 +1,24 @@
+1,若该属性是dom元素的常规属性（对于a标签，常规属性包括herf,rel,title,id,class等　）
+	用元素.属性名取，如
+		var navs = document.getElementsByTagName("a"),
+			firstHref = navs[0].href;
+	用这种方式而不用getAttribute的原因是：不同浏览器对处理某种属性的值不同（目前只发现取class用问题），
+		例如：<a class = "testNav"></a>
+			var node = document.getElementsByTagName("a")[0];
+			
+		ie7中 
+			node.getAttribute("class") //null
+		firefox,ie8，chrome中
+			node.getAttribute("class") //testNav
+			
+		ie7中 
+			node.getAttribute("className") //testNav
+		firefox,ie8，chrome中
+			node.getAttribute("className") //null
+		而 node.className //ie ff 均为 testNav
+
+2,若该属性是用户添加的属性用getAttribute
+	例如：<a class = "testNav" data-index = "1"></a>
+			var node = document.getElementsByTagName("a")[0];
+			node["data-index"] //undefined
+			node.getAttribute("data-index") //1

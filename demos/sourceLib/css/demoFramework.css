@@ -1,0 +1,14 @@
+dt,dd{
+	display: inline;
+}
+.demoWrap .demo{
+	border:4px dashed #0ff;
+	border-radius: 35px;
+	padding: 20px;
+}
+.workSteps{
+	list-style: decimal inside;
+}
+.moreInfo{
+	color:#31ED18;
+}

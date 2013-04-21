@@ -1,0 +1,56 @@
+/* defining the animation */
+@keyframes fadeInAnimation {
+    /* starting state */
+    from {
+        opacity: 0;
+    }
+    /* ending state */
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeInAnimation {
+    /* starting state */
+    from {
+        opacity: 0;
+    }
+    /* ending state */
+    to {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeInAnimation {
+    /* starting state */
+    from {
+        opacity: 0;
+    }
+    /* ending state */
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInAnimation {
+    /* starting state */
+    from {
+        opacity: 0;
+    }
+    /* ending state */
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeInAnimation {
+    /* starting state */
+    from {
+        opacity: 0;
+    }
+    /* ending state */
+    to {
+        opacity: 1;
+    }
+}
+

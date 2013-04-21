@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>绘制路径api</title>
+		<link rel = "stylesheet" href = "css/base.css"/>
+		<style>
+			canvas{
+				border:2px solid #00f;
+				margin: 50px auto;
+				width: 500px;
+				display: block;
+
+			}
+		</style>
+	</head>
+	<body>
+		<div class ="content clearfix">
+			<canvas id = "cav1" height = "500" width = "500"></canvas> 
+			<canvas id = "colorPanel" height = "500" width = "500"></canvas> 
+			
+		</div>
+		<script type="text/javascript" src = "js/jquery-1.7.1.js"></script>
+		<script>
+			/*
+				//控制路径
+				beginPath()
+				closePath()//闭合到目前为止的所有路径
+				moveTo(x,y)
+				lineTo(x,y)
+				
+				//绘制路径
+				stroke()
+				fill()
+
+				//指定路径样式
+				fillStyle
+				strokeStyle
+				lineWidth
+
+			*/
+			var canvas1 = $("#cav1"),
+				ctx = canvas1[0].getContext('2d'),
+				canvasOffset = canvas1.offset(),
+				canvasLeft = canvasOffset.left,
+				canvasTop = canvasOffset.top;
+			
+			//在canvas上点击时，画一个空心的三角形
+			canvas1.bind("click",function(event){
+				//var $event = 
+				//console.log($(event));
+				var x = event.clientX - canvasLeft + $(window).scrollLeft(),
+					y = event.clientY - canvasTop + $(window).scrollTop();
+				drawtRandomTriangle(ctx,x,y);
+			});
+			/*
+				ctx:canvas context
+				x:triangle start point x
+				y:triangle start point y
+			*/
+			function drawtRandomTriangle(ctx,x,y){
+				var width = getRandomInt(5,10),
+					height = getRandomInt(5,10);
+				//console.log(width,height);
+				ctx.beginPath();
+				ctx.moveTo(x,y);
+				ctx.lineTo(x,y+height);
+				ctx.lineTo(x+width,y+height);
+				//ctx.lineTo(x,y);<==>ctx.closePath();
+				ctx.strokeStyle = "red";
+				ctx.closePath();
+				ctx.stroke();
+				
+			}
+			function getRandomInt(min,max){
+				if(isNaN(min)){
+					min = 0;
+				}else{
+					min = parseInt(min);
+				}
+				if(isNaN(max)){
+					max = 50;
+				}else{
+					max = parseInt(max);
+				}
+				return parseInt(min + (max-min)*Math.random());
+			}
+
+			
+
+			var	colorPanel = $("#colorPanel"),
+				colorPanelCtx = colorPanel[0].getContext("2d");
+
+			//圆一
+			drawCircle(150,45,35,"rgba(255,0,0,0.7)",colorPanelCtx);
+			//圆二
+			drawCircle(125,95,35,"rgba(0,255,0,0.7)",colorPanelCtx);
+			//圆三
+			drawCircle(175,95,35,"rgba(0,0,255,0.7)",colorPanelCtx);
+
+			//完全不透明的颜色不能到达颜色叠加的效果
+			//圆一
+			drawCircle(150,300,35,"rgba(255,0,0,1)",colorPanelCtx);
+			//圆二
+			drawCircle(125,350,35,"rgba(0,255,0,1)",colorPanelCtx);
+			//圆三
+			drawCircle(175,350,35,"rgba(0,0,255,1)",colorPanelCtx);
+
+
+			function drawCircle(x,y,radious,color,ctx){
+				ctx.beginPath();
+				ctx.arc(x,y,radious,0,2*Math.PI,false);
+				ctx.fillStyle = color;
+				ctx.fill();
+
+			}
+
+		
+		</script>
+	</body>
+</html>
