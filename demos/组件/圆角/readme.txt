@@ -1,1 +1,0 @@
-滑动门 制作带圆角的可自适应（注1）box	用四张图片制作，图片名分别记为 top-left,top-right,btm-left,btm-right	-------------

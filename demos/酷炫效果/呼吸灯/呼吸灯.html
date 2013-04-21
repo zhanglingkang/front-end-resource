@@ -1,0 +1,82 @@
+﻿<html>
+<head>
+<title>jquery制作的呼吸灯效果演示</title>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://js.40017.cn/cn/public/fish.1.3.1.js?v=20120917"></script>
+
+
+
+
+<style>
+body{margin:0px;padding:0px;font-family: "Microsoft YaHei","微软雅黑" !important;}
+h1{margin:0;padding:0;top: 0;line-height:70px;}
+#logo{
+   background: url("img/logo.jpg") no-repeat scroll left top transparent;
+    display: block;
+    height: 70px;
+    left: 50%;
+    margin-left: -642px;
+    position: absolute;
+    text-indent: -999em;
+    top: 70px;
+    width: 119px;
+}
+#logo .hover{
+ background: url("img/logo.jpg") no-repeat scroll left bottom transparent;
+    display: block;
+    height: 70px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 119px;
+}
+.discribute{
+	margin-top: 59px;
+    text-indent: 2em;
+    width: 600px;
+}
+
+</style>
+</head>
+<body>
+<h1>Jquery制作的呼吸灯效果演示</h1>
+<p style="">hover-&gt;</p>
+<a href="#" id="logo">
+	logo
+	<span class="hover" style="opacity: 0;"></span>
+</a>
+
+<p class="discribute">
+	简要说明：外部元素a的背景是没移hover的背景。内部span的背景是hover时的背景。
+	未hover时，span是完全透明的。hover时，span的由透明变为不透明。
+</p>
+<p class="discribute">
+	动画的变化效果demo：<a href="http://james.padolsey.com/demos/jquery/easing/" title="请点击" target="_blank">猛击这里</a>
+</p>
+
+<script type="text/javascript">
+/*在该demo的情景中： swing的动画效果比用fish anim默认的动画效果好。
+    fish.one("#logo").hover(function () {
+        fish.one(".hover").anim("opacity:1", 2000);
+    },
+	function () {
+	    fish.one(".hover").anim("opacity:0", 4000);
+	})
+*/
+$(function(){
+	$("#logo").hover(
+		function(){
+			$(".hover",this).fadeTo(1000,1);
+			//$(".hover",this).fadeIn(1000);
+		},
+		function(){
+			$(".hover",this).fadeTo(2000,0);
+			//$(".hover",this).fadeOut(2000);
+		}
+	);
+});
+
+</script>
+</body>
+</html>

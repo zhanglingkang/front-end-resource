@@ -1,2 +1,0 @@
-parentNode.insertBefore(insertNode,参考节点)
-	若参考节点为null 则等同于 parentNode.appendChild(insertNode)

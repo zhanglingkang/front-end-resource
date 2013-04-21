@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+		<title>数据电台</title>
+		<link rel = "stylesheet" href = "../../sourceLib/css/base.css"/>
+		<link rel = "stylesheet" href = "../../sourceLib/css/demoFramework.css"/>
+        <style>
+            .demoWrap .demoTitle{
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+            .demoWrap .line{
+                height: 50px;
+                line-height:50px ;
+            }
+
+        </style>
+	</head>
+	<body>
+        <p>
+            该demo实现的功能：当儿童票数量变化时，改变儿童票总价，总价，儿童保险份数；当成人票数量变化时，做相应的变化。
+        </p>
+        <p class="mt30">
+            数据电台：是对订阅发布模式的实现。订阅发布模式定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己的状态。
+            查看<a href="http://blog.csdn.net/tjvictor/article/details/5223309" title="更多">更多</a>
+        </p>
+        <div class="demoWrap mt50">
+
+            <div class="demo">
+                <h2 class="demoTitle">demo: </h2>
+                <div class="line">儿童票
+                    <span class="price mr10">100</span>
+                    <select id="childTicNum">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="line">成人票
+                    <span class="price mr10">1000</span>
+                    <select id="adultTicNum">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="priceWrap line">
+                    儿童票总价：<span class="childTolPrice">100</span>
+                    成人票总价：<span class="adultTolPrice">1000</span>
+                    总价:<span class="tolPrice">1100</span>
+                </div>
+                <div class="insureWrap line">
+                    儿童保险份数：
+                    <select id="childInsureNum">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+
+                    成人保险份数：
+                    <select id="adultInsureNum">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+		<!--<script type="text/javascript" src = "http://js.40017.cn/cn/public/fish.1.2.3.js"></script>-->
+		<script type="text/javascript" src = "../../sourceLib/js/fish.1.3.1.fwd.js"></script>
+		<script>
+			(function(ctx,win){
+               var __topics={};
+
+               function publish(name,data){
+                    var topic = __topics[name];
+                    if(!topic){
+
+                         return false;
+                    }
+                    topic.fire(data);
+               };
+
+               function subscribe(name,fn,ctx){
+                    var topic =__topics[name],
+                         fnId;
+                    if(!topic){
+                         topic = __topics[name] = new Topic(name);
+                    }
+                    fnId = topic.addSubsrcibute(fn,ctx);
+                    return fnId;
+               };
+
+               function unsubscribe(name,fnId){
+                    var topic =__topics[name]
+                    if(topic){
+                         topic.removeSubsrcibute(fnId);
+                    }
+               };         
+               function Topic(name,param){
+                    this.name = name;
+                    this.subscribeArr = [];
+                    this.uid=0;//回调
+                    this.param = param;
+               }
+               Topic.prototype = {
+                    addSubsrcibute:function(fn,ctx){
+                         var needCtx = false,
+                              fnId = this.uid;
+                         if(fn){
+                              if(typeof(fn) === "string"){
+                                   needCtx = true;
+                              }else if(typeof(fn) !== "function"){
+                                   throw "type error! Topic.addSubsrcibute"
+                              }
+                         }else{
+                              throw "Miss param:fn! Topic.addSubsrcibute";
+                         }
+                         if(needCtx){
+                              ctx = ctx || win;
+                              if(typeof(ctx) ==="string"){
+                                   ctx = win[ctx];
+                              }
+							  this.subscribeArr[fnId] = {};
+                              this.subscribeArr[fnId].fn = ctx[fn];
+							  this.subscribeArr[fnId].ctx = ctx;
+                              if(!ctx[fn]){
+                                   throw "fn or ctx is error!";
+                              }
+							  
+							  //console.dir(this.subscribeArr);
+                         }else{
+							this.subscribeArr[fnId] = {};
+                              this.subscribeArr[fnId].fn = fn;
+							  this.subscribeArr[fnId].ctx = window;
+                         }
+                         this.uid++;
+                         return fnId;                                                      
+                    },
+                    removeSubsrcibute:function(fnId){
+						fnId = parseInt(fnId);
+                         if(this.subscribeArr[fnId]){
+                              delete this.subscribeArr[fnId];
+                         }
+                    },
+                    fire:function(data){
+                         var i=0,
+                              length = this.uid,
+                              eachSubscribe;
+                         for(;i<length;i++){
+                              eachSubscribe = this.subscribeArr[i];
+                              if(eachSubscribe && typeof(eachSubscribe).fn ==="function"){
+                                   eachSubscribe.fn.call(eachSubscribe.ctx,data);
+                              }
+                         }
+                    }
+               };
+			if(ctx.extend&& typeof(ctx.extend) === "function"){
+				ctx.extend({
+                    publish:publish,
+                    subscribe:subscribe,
+                    unsubscribe:unsubscribe
+               });
+			}else{
+				ctx.publish = publish;
+				ctx.subscribe = subscribe;
+				ctx.unsubscribe = unsubscribe;
+			}
+              
+          })(window,window);
+		</script>
+		<script>
+			(function(){
+               init();
+               function init(){
+                  initRadio();
+                  registerEvent();
+
+               };
+                function initRadio(){
+                    subscribe("childTicNumChange",updateChildTolPrice);
+                    subscribe("childTicNumChange",updateChildInsureNum);
+
+                    subscribe("adultTicNumChange",updateAdultTolPrice);
+                    subscribe("adultTicNumChange",updateAdultInsureNum);
+
+                    subscribe("totalPriceChange",updateTolPrice);
+
+                };
+                function registerEvent(){
+                    var uChildTicSel  = fish.one("#childTicNum");
+                    uChildTicSel.on("change",function(){
+                        var ticNum = parseInt(this.value),
+                           price = 100;
+                        publish("childTicNumChange",{
+                            "ticNum":ticNum,
+                            "price":price
+                        })
+                    });
+
+                    var uAdultTicSel  = fish.one("#adultTicNum");
+                    uAdultTicSel.on("change",function(){
+                        var ticNum = parseInt(this.value),
+                                price = 1000;
+                        publish("adultTicNumChange",{
+                            "ticNum":ticNum,
+                            "price":price
+                        })
+                    });
+
+                };
+
+            })();
+            //更新儿童总价
+            function updateChildTolPrice(data){
+                var tolPrice = calTicPrice(data.ticNum,data.price);
+                fish.one(".priceWrap .childTolPrice").html(tolPrice);
+                //通知总价变化
+                publish("totalPriceChange");
+
+            };
+            //更新成人童总价
+            function updateAdultTolPrice(data){
+                var tolPrice = calTicPrice(data.ticNum,data.price);
+                fish.one(".priceWrap .adultTolPrice").html(tolPrice);
+                //通知总价变化
+                publish("totalPriceChange");
+            };
+            //更新总价
+            function updateTolPrice(ticNum,price){
+                var  tolPrice =  parseFloat(fish.one(".priceWrap .childTolPrice").html())+ parseFloat(fish.one(".priceWrap .adultTolPrice").html());
+                fish.one(".priceWrap .tolPrice").html(tolPrice);
+            };
+
+            //更新儿童保险份数
+            function updateChildInsureNum(data){
+                fish.dom("#childInsureNum").value = data.ticNum;
+            };
+            //更新成人保险份数
+            function updateAdultInsureNum(data){
+                fish.dom("#adultInsureNum").value = data.ticNum;
+            };
+
+
+            function calTicPrice(ticNum,price){
+                ticNum = parseInt(ticNum);
+                price = parseFloat(price);
+                return ticNum*price;
+            }
+
+		</script>
+	</body>
+</html>

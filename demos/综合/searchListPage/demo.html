@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>搜索景区</title>
+		<link rel = "stylesheet" href = "../../sourceLib/css/base.css"/>
+		<link rel = "stylesheet" href = "css/demo.css"/>
+		<script type="text/javascript" src="../../sourceLib/js/jquery-1.7.1.js"></script>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<div id= "searchWrap">
+			<ul class="searchCondition clearfix">
+				<li><label>价格:</label><input id="priceMin" type="input"/>到<input id="priceMax" type="input"/></li>
+				<li><label>按价格排序:</label>
+					<input name="priceSort" type="radio" value="default" checked="checked"/>默认
+					<input name="priceSort" type="radio" value="upToDown"/>从高到低
+					<input name="priceSort" type="radio" value="downToUp"/>从低到高
+				</li>
+				<li><label>按热度排序:</label>
+					<input name="hashSort" type="radio" value="default"  checked="checked"/>默认
+					<input name="hashSort" type="radio" value="upToDown"/>从高到低
+					<input name="hashSort" type="radio" value="downToUp"/>从低到高
+				</li>
+				<li>
+                    <div class="clearfix btnWrap">
+                        <a href="javascript:void(0);" class="searchBtn" title="">搜索</a>
+                        <a href="javascript:void(0);" class="randomRecBtn" title="">随机推荐</a>
+                    </div>
+
+                </li>
+
+			</ul>
+			<div class="searchResWrap">
+				<div class="searchResHead clearfix">
+					<span class="lineName">线路名称</span>
+					<span class="linePri">价格</span>
+					<span class="lineHash">热度</span>
+				</div>
+				<div class="searchResCont clearfix none">
+					<ul class="someData clearfix">
+					</ul>
+					<ul class="moreData clearfix none">
+					</ul>
+					<a class="searchResCtrlBtn hideMore" title="" href="javascript:void(0);">显示更多</a>
+				</div>
+			</div>
+			
+		</div>
+		<div id="templateWrap">
+			<div class="resItemWrap">
+				<li class="clearfix">
+					<span class="lineName">{lineName}</span>
+					<span class="linePri">{linePrice}</span>
+					<span class="lineHash">{lineHash}</span>
+				</li>
+			</div>
+		</div>
+
+		<div id="dataWrap">
+			<div id="searchConditonLib" 
+				data-minPrice = "all" 
+				data-maxPrice = "all" 
+				data-sortPriType="default" 
+				data-sortHashType="default"
+				data-isRecommand="false"
+			>
+			</div>
+		</div>
+		<script src="data.js"></script>
+		<script>
+			//document ready
+			$(function(){
+				//
+				var gSearchConditonLib = $("#searchConditonLib"),
+					$minPrice = $("#searchWrap #priceMin"),
+					$maxPrice = $("#searchWrap #priceMax"),
+					$priceSort = $("#searchWrap [name=priceSort]"),
+					$hashSort = $("#searchWrap [name=hashSort]"),
+					$searchResCont = $("#searchWrap .searchResCont"),
+					$moreData = $(".moreData",$searchResCont),
+					$someData = $(".someData",$searchResCont),
+					$searchResCtrlBtn = $(".searchResCtrlBtn"),
+					SHOW_LINENUM = 5;
+				
+				init();
+				
+				function init(){
+					updateView();
+					registerEvent();
+
+				};
+				function updateView(){
+					var allSearchCondition = getAllSearchCondition();
+					$minPrice.val(allSearchCondition.minPrice == "all"?"":allSearchCondition.minPrice);
+					$maxPrice.val(allSearchCondition.maxPrice == "all"?"":allSearchCondition.maxPrice);
+
+					$priceSort.each(function(){
+						var $this = $(this);
+						if($this.val() == allSearchCondition.sortPriType){
+							$this.click();
+							return;
+						}
+
+					});
+
+					$hashSort.each(function(){
+						var $this = $(this);
+						if($this.val() == allSearchCondition.sortHashType){
+							$this.click();
+							return;
+						}
+
+					});
+
+
+				};
+				function registerEvent(){
+					//搜索按钮
+					$(".searchBtn").click(function(){
+						upDateAllSearchConditionFromUserInput();
+						updateResCont(updateResContView);
+					});
+                    //显示，隐藏更多的控制按钮
+					$(".searchResCtrlBtn").click(function(){
+						var $this = $(this);
+						if($this.hasClass("hideMore")){//处于隐藏状态
+							$this.removeClass("hideMore");
+							$this.html("隐藏更多");
+							$moreData.removeClass("none");
+						}else{
+							$this.addClass("hideMore");
+							$this.html("显示更多")
+							$moreData.addClass("none");
+						}
+					});
+
+                    //选项的互斥
+                    $("[name=priceSort],[name=hashSort]").click(function(){
+                       var $this = $(this);
+                        if($this.val()!=="default"){
+                            if($this.attr("name") == "priceSort"){
+                                $("[name=hashSort][value=default]")[0].checked = true;
+                            }else{
+                                $("[name=priceSort][value=default]")[0].checked = true;
+                            }
+                        }
+
+                    });
+				};
+
+				function updateResCont(callback){
+					var allData = window.searchData,
+						notFilterData,
+						notSortData =[],
+						resData,
+						allSearchCondition = getAllSearchCondition(),
+						minPrice = allSearchCondition.minPrice == "all" ? 0 :parseFloat(allSearchCondition.minPrice),
+						maxPrice = allSearchCondition.maxPrice == "all" ? 99999999999999 :parseFloat(allSearchCondition.maxPrice);
+
+					if(allSearchCondition.isRecommand == "true"){
+						notFilterData = allData.recData;
+					}else{
+						notFilterData =allData.allData;
+					}
+					//寻找符合条件的数据
+					notFilterData.forEach(function(each){
+						if(each.price >= minPrice && each.price <= maxPrice ){
+							notSortData.push(each);
+						}
+
+					});
+
+					if(allSearchCondition.sortPriType != "default"){
+						resData = sortData(notSortData,"price",allSearchCondition.sortPriType);
+					}else if(allSearchCondition.sortHashType != "default"){
+						resData = sortData(notSortData,"hash",allSearchCondition.sortHashType);
+					}else{
+						resData = notSortData;
+					}
+					if(callback && typeof(callback) == "function"){
+						callback(resData);
+					}
+
+				};
+				function updateResContView(data){
+					var someHtmlArr = [],
+						moreHtmlArr = [],
+						tempItemHtml = $("#templateWrap .resItemWrap").html();
+					data.forEach(function(each,index){
+						itemHtml = tempItemHtml;
+						itemHtml = itemHtml.replace("{lineName}",each.name);
+						itemHtml = itemHtml.replace("{linePrice}",each.price);
+						itemHtml = itemHtml.replace("{lineHash}",each.hash);
+						if(index < SHOW_LINENUM){
+							someHtmlArr.push(itemHtml);
+						}else{
+							moreHtmlArr.push(itemHtml);
+						}
+						
+					});
+					$moreData.addClass("none");
+					$searchResCtrlBtn.addClass("hideMore").html("显示更多");
+                    if(moreHtmlArr.length == 0){//若没有更多的条目，隐藏那按钮
+                        $searchResCtrlBtn.addClass("none");
+                    }else{
+                        $searchResCtrlBtn.removeClass("none");
+                    }
+					$someData.html(someHtmlArr.join(""));
+					$moreData.html(moreHtmlArr.join(""));
+                    $searchResCont.removeClass("none");
+
+				}
+
+
+				function upDateAllSearchConditionFromUserInput(){
+					var minPrice = $minPrice.val(),
+						maxPrice = $maxPrice.val(),
+						priceSort= $("#searchWrap [name=priceSort]:checked").val(),
+						hashSort= $("#searchWrap [name=hashSort]:checked").val();
+					if($.trim(minPrice) == ""){
+						minPrice ="all";
+					}
+					if($.trim(maxPrice) == ""){
+						maxPrice ="all";
+					}
+					setSearchCondition("minPrice",minPrice);
+					setSearchCondition("maxPrice",maxPrice);
+					setSearchCondition("sortPriType",priceSort);
+					setSearchCondition("sortHashType",hashSort);
+				};
+
+				function sortData(data,sortKey,type){
+					var resData = [];
+					data.forEach(function(each,index){
+						resData[index] =data[index];
+					});
+					resData.sort(function(a,b){
+						if(type == "downToUp") {
+							return parseFloat(a[sortKey]) - parseFloat(b[sortKey]);
+						}else{
+                            return parseFloat(b[sortKey]) - parseFloat(a[sortKey]) ;
+                        }
+					});
+					return resData;
+				}
+				function getAllSearchCondition(){
+					var res = {},
+						conditions = ["minPrice","maxPrice","sortPriType","sortHashType","isRecommand"];//所有条件
+
+					conditions.forEach(function(each,index){
+						res[each] = getSearchCondition(each);
+					});
+					return res;
+				}
+				function getSearchCondition(key){
+					return gSearchConditonLib.attr("data-"+key);
+
+				};
+				function setSearchCondition(key,val){
+					gSearchConditonLib.attr("data-"+key,val);
+				};
+			});
+
+		
+			
+		</script>
+	</body>
+</html>

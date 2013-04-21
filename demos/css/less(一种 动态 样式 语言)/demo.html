@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>less demo</title>
+        <link rel = "stylesheet" href = "../../sourceLib/css/base.css"/>
+        <link rel = "stylesheet" href = "../../sourceLib/css/demoFramework.css"/>
+        <link rel="stylesheet/less" href="css/demo.css"/>
+		<script src="../../sourceLib/js/less-1.3.3.min.js"></script>
+
+	</head>
+	<body>
+        <div class="useTip">
+            <h2>注意点</h2>
+            <ul>
+                <li>引入 .less 样式文件的时候要设置 rel 属性值为 “stylesheet/less”:</li>
+                <li>less样式文件一定要在引入less.js前先引入。</li>
+                <li>请在服务器环境下使用！本地直接打开可能会报错！</li>
+            </ul>
+        </div>
+        <div class="demoWrap">
+            <h2>继承</h2>
+            <div class="box">
+                <h3 class="box-head">盒子title</h3>
+                <div class="box-cont">
+
+                </div>
+            </div>
+            <div class="blueBox">
+                <h3 class="box-head">蓝盒子title</h3>
+                <div class="box-cont">
+                    <a href="#">sth</a>
+                </div>
+            </div>
+            <div class="lightBlueBox">
+                <h3 class="box-head">淡蓝盒子title</h3>
+                <div class="box-cont">
+
+                </div>
+            </div>
+            <div class="smallBox">
+                <h3 class="box-head">小盒子title</h3>
+                <div class="box-cont">
+
+                </div>
+            </div>
+        </div>
+        <a href="http://www.lesscss.net/#docs">更多》》</a>
+		<script>
+			
+			
+		</script>
+	</body>
+</html>

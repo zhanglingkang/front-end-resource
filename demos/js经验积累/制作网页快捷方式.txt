@@ -1,6 +1,0 @@
-<noscript>
-<META HTTP-EQUIV="Refresh" CONTENT="0;URL=http://baidu.com">
-</noscript>
-<script language="JavaScript">
-    window.top.location.replace ( "http://baidu.com" ) ;//∑¿µ¡”√
-</script>

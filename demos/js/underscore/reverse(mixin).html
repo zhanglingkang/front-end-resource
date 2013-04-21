@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+		<title>reverse</title>
+		<link rel = "stylesheet" href = "../../sourceLib/css/base.css"/>
+        <style>
+          
+
+        </style>
+	</head>
+	<body>
+      
+
+	
+			
+		<script type="text/javascript" src="../../sourceLib/js/underscore.js"></script>
+		<script type="text/javascript">
+			
+			//给数字加逗号 1,123,456,789
+			//反转数组
+			_.mixin({
+				reverse:function(arr,fun){
+					var resArr = _.clone(arr),
+						arrLen = resArr.length,
+						changeTimes = arrLen / 2 ;
+					_(changeTimes).times(function(index){
+						var temp = resArr[index];
+						resArr[index] = resArr[arrLen - index - 1];
+						resArr[arrLen - index - 1] = temp;
+					});
+					return resArr;
+						
+				}
+			});
+			var orginArr = [1,2,3,4,5],
+				reverseArr = _.reverse(orginArr);
+			console.log(orginArr,reverseArr);
+		</script>
+		
+	</body>
+</html>
