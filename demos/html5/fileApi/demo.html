@@ -1,0 +1,58 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		output{
+			display:block;
+		}
+	</style>
+</head>
+<body>
+	<input type="file" name="textFileInput" id = "textFileInput" multiple/>
+	<output id="textFileOutput"></output>
+	<input type="file" id="imgFileInput" />
+	<img id="imgFileOutput"/>
+	<script type="text/javascript" src="../../sourceLib/js/jquery-1.7.1.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $textFileOutput = $("#textFileOutput"),
+				$imgFileOutput= $("#imgFileOutput");
+			$("#textFileInput").bind("change",function(evt){
+				var files = this.files,
+					reader,
+					res = "",
+					fileLength = files.length,
+					i;
+				
+				for(i=0;i<fileLength;i++){
+					reader = new FileReader();
+					reader.onload = function(e){
+						res+= e.target.result;
+						res+="--------------------";
+						//if(i == fileLength){
+							$textFileOutput.html(res);
+						//}
+						
+					};
+					//file 对象上有 name,size,lastModifiedDate,mine-type
+					reader.readAsText(files[i]);
+					
+				
+				}
+			});
+			$("#imgFileInput").bind("change",function(evt){
+				var files = this.files,
+					reader = new FileReader();
+				reader.onload = function(e){
+					$imgFileOutput.attr("src",e.target.result);
+				};
+				//file 对象上有 name,size,lastModifiedDate,mine-type
+				reader.readAsDataURL(files[0]);
+			});
+		});
+		
+	</script>
+</body>
+</html>
