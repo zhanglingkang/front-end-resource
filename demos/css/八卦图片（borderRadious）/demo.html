@@ -66,6 +66,33 @@
 				 left: -25px;
 			    top: 25px;
 			}
+			
+			.baguaWrap{
+				animation: circle 4s infinite linear; 
+				-webkit-animation: circle 4s infinite linear; 
+			}
+			/*
+				transform: rotate(90deg);
+				-ms-transform: rotate(90deg);		/* IE 9 */
+				-webkit-transform: rotate(90deg);	/* Safari and Chrome */
+				-o-transform: rotate(90deg);		/* Opera */
+				-moz-transform: rotate(90deg);		/* Firefox */
+			*/
+			@keyframes circle
+			{
+				from {transform: rotate(0deg);}
+				to {transform: rotate(90deg);}
+			}
+			@-moz-keyframes circle /* Firefox */
+			{
+				from {transform: rotate(0deg);}
+				to {transform: rotate(360deg);}
+			}
+			@-webkit-keyframes circle /* webkit */
+			{
+				from {-webkit-transform: rotate(0deg);}
+				to {-webkit-transform: rotate(360deg);}
+			}
 			/* demo css end */
 		</style>
 	</head>
