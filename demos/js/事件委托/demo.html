@@ -1,0 +1,43 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+     <meta charset="UTF-8">
+     <title></title>
+     <style type="text/css">
+          #zoo span{
+               padding-right:10px;
+          }
+     </style>
+</head>
+<body>
+     <div id="zoo"></div>
+     <a href= "javascript:void(0)" id="addAnim">add animal</a>
+     <script type="text/javascript" src="../../sourceLib/js/fish.1.3.1.fwd.js"></script>
+     <script type="text/javascript">
+          fish.ready(function(){
+               var uZoo = fish.one("#zoo");
+               uZoo.on("click",function(evt){
+                    var uAnim = fish.one(fish.getTarget(evt));
+                    if(uAnim.hasClass("animal")){
+                         alert(uAnim.html()+" choosed!");
+                    }
+               });
+               fish.one("#addAnim").on("click",function(){
+                    addAnimal();
+               });
+               function addAnimal(){
+                    var uAnim = fish.one(document.createElement("span"));
+                    uAnim.addClass("animal");
+                    uAnim.html(getRandomAnim());
+                    uZoo.html("bottom",uAnim);
+               };
+               function getRandomAnim(){
+                    var animals = ["tiger","panda","monkey","cat","dog","pig","stranger","hippo"],
+                         randomIndex = parseInt(Math.random()*animals.length,10);
+                    return animals[randomIndex];
+               }
+              
+          });
+     </script>
+</body>
+</html>

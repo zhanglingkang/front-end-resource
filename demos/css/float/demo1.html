@@ -1,0 +1,43 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		.wrap div{
+			width: 100px;
+		   height: 100px;
+		   background-color: green;
+		   color: white;
+		   margin: 10px 0; 
+		}
+	</style>
+</head>
+<body>
+	<p>float只适用于生成非绝对定位框的元素。</p>
+	<div style="width:500px; height:150px; border:1px solid green; position:relative;">
+		<div style="width:100px; height:100px; float:right; position:absolute; border:1px solid red;">absolute</div>
+		<div style="width:100px; height:100px; float:right; position:relative; border:1px solid red;">relative</div>
+	</div>
+	<h2>浮动细则</h2>
+	<ul>
+		<li>浮动元素的位置不会超出其父类的左右边界</li>
+		<li>浮动元素的定位受先前生成的浮动框的影响。后面的浮动元素，需要紧挨着先前同向浮动元素的 margin 边进行定位，如果空间不足，则折行，放置到它之前元素的下面。</li>
+		<li>同一行中，左浮元素在右浮元素左边（与dom元素在html文档出现的位置无关）</li>
+		<li>浮动框的顶边不可以高于源文档中先前元素产生的块框或浮动框的顶(包括margin) (见下的demo2)</li>
+		<li></li>
+	</ul>
+	<h2>demo2</h2>
+	<div style="width:180px; height:auto; overflow:hidden; background:white; border:1px solid gold;" class="wrap">
+		<div style="float:left;">O</div>
+		<div style="float:left; background-color: blue;margin-top: 40px;">A</div>
+		<div style="float:right; width:50px; background-color: red;">B</div>
+	</div>
+	<div style="width:180px; height:auto; overflow:hidden; background:white; border:1px solid gold;" class="wrap">
+		<div style="float:left;">O</div>
+		<div style="float:right; width:50px; background-color: red;">B</div>
+		<div style="float:left; background-color: blue;">A</div>
+		
+	</div>
+</body>
+</html>

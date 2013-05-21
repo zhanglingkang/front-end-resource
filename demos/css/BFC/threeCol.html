@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>	<style type="text/css">
+		.wrap{
+			width:960px;
+			margin:50px auto;
+		}
+		.leftPart,.middlePart,.rightPart{
+			height:100px;
+		}		.leftPart{
+			float:left;
+			width:50px;
+			background:red;
+		}
+		.middlePart{
+			overflow:hidden;
+			zoom:1;
+			background:green;
+		}
+		.rightPart{
+			float:right;
+			width:300px;
+			background:blue;
+		}
+			</style>
+</head>
+<body>
+	<div class="wrap mb50 clearfix">
+		<div class="leftPart"></div>
+		<div class="rightPart"></div>
+		<div class="middlePart"></div><!-- middlePart 必须放在最后 -->
+	</div>
+	</body>
+</html>
