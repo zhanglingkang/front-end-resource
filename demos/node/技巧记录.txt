@@ -1,0 +1,1 @@
+1,在命令行中 用control + c 来node 服务器

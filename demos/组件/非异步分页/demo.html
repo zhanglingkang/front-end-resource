@@ -1,0 +1,33 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>非异步分页</title>
+	<link rel="stylesheet" href="css/staticPager.css" />
+</head>
+<body>
+	<div id="pageWrap">
+	</div>
+	<div id="pageWrap2">
+	</div>
+	<script type="text/javascript" src="http://js.40017.cn/cn/public/fish.1.3.1.js?v=20120917"></script>
+	<script type="text/javascript" src="js/staticPager.js"></script>
+	<script type="text/javascript">
+	(function(){
+		fish.ready(function(){
+			var pager = new StaticPager({pageSize:10,output:"#pageWrap"});
+            pager.addEventListener("itemClick",function(nowIndex){
+                    console.log(nowIndex);
+					//fish.ajax()
+            });
+			//pager.pageTo(5);
+			var pager2 = new StaticPager({pageSize:5,output:"#pageWrap2"});
+            pager2.addEventListener("itemClick",function(nowIndex){
+                    console.log(nowIndex);
+            });
+		});
+	})();
+	
+	</script>
+</body>
+</html>
