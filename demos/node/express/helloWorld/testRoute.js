@@ -27,6 +27,7 @@ app.get("/stu*",function(req,res){//*表示0个及以上的字符。
 	res.send("hi,other student~");
 });
 app.get("*",function(req,res){
+	console.log(req.headers);//请求头
 	res.send("oh,shit,not Found",404);
 });
 
