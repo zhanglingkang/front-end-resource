@@ -1,0 +1,54 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../sourceLib/css/base.css">
+	
+	<script type="text/javascript" src="avalon.0.7.js"></script>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<!-- ms-attr-data-userName未被绑定成功，其他的均成功了。 ms-data-*->不支持{{}}插值 -->
+	 <div ms-controller="userCtrler" > 
+			<label>第一位用户姓名</label><input type="text" ms-model="userName"/>
+			<p  ms-data-userName = "userName" ms-title = "{{userName}}" 
+			ms-attr-data-userName = "{{userName}}"> hello {{userName}}</p>
+	</div> 
+	<a id="addUserInputBtn" href="javascript:void(0);"> 添加用户输入</a>
+	<div id="userCtrlerWrap">
+	</div>
+	<script id="userInfoTemplate" type="text/template">
+		<div ms-controller="userCtrler" >
+			<label>姓名</label><input type="text" ms-model="userName"/>
+			<p ms-data-userName = "userName" ms-title = "{{userName}}"> hello {{userName}}</p>{{userName}}<!-- 为什么没有userName没被赋值成功？ ms-title，ms-data-userName的可以成功赋值。。。-->
+		</div>
+	</script>
+	<script type="text/javascript">
+		/*
+		    	开始扫描DOM树，抽取绑定。
+		    	若avalon.define 在avalon.ready中执行，则需要执行 .scan操作
+		*/
+		(function(){
+			avalon.ready(function() {
+				document.getElementById("addUserInputBtn").onclick = function(){
+					if(this.getAttribute("data-hasAdd") != "true"){
+						document.getElementById("userCtrlerWrap").innerHTML = document.getElementById("userInfoTemplate").innerHTML;
+						this.setAttribute("data-hasAdd","true");
+						avalon.scan();
+					}
+				};
+			    avalon.define("userCtrler", [], function(vm) {
+			        vm.userName = "请输入姓名";
+			       
+			    });
+			     
+			    avalon.scan();
+			});
+		})();
+		
+	</script>
+</body>
+</html>

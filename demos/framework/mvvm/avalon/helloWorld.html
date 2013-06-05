@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../sourceLib/css/base.css">
+	<style>
+		dt,dd{
+			float: left;
+		}
+		dt{
+			margin-right: 3px;
+		}
+	</style>
+	<script type="text/javascript" src="avalon.0.7.js"></script>
+</head>
+<body>
+	<fieldset ms-controller="nameInputController">
+		<legend>例子</legend>
+		<dl class="clearfix">
+			<dt><label>姓:</label> </dt>
+			<dd><input type="text" ms-model="firstName"/></dd>
+		</dl>
+		<dl class="clearfix">
+			<dt><label>名:</label> </dt>
+			<dd><input type="text"  ms-model="lastName"/></dd>
+		</dl>
+		<dl class="clearfix">
+			<dt><label>你好:</label> </dt>
+			<dd><input type="text" ms-model="fullName"/></dd>
+		</dl>
+		<p> 欢迎：{{fullName}}</p>
+
+	</fieldset>
+	<script type="text/javascript">
+		(function(){
+			avalon.define("nameInputController",function(vm){
+				vm.firstName = "司徒";
+		    	vm.lastName = "正美";
+			    vm.fullName = {//一个包含set或get的对象会被当成PropertyDescriptor，
+			        set: function(val) {
+			        	/*
+			        	* 里面必须用this指向scope，不能使用vm
+			        	* fullName改变时，对其他与之关联的属性也随之改变的规则
+			        	* 
+			        	*/
+			            var array = (val || "").split(" ");
+			            this.firstName = array[0] || "";
+			            this.lastName = array[1] || "";
+			            //console.log("set other prop");
+			        },
+			        get: function() {
+			        	//console.log("set fullName");
+			            return this.firstName + " " + this.lastName;
+			        }
+			    };
+			    //vm.$id; 该viewmodel的id
+			});
+			console.log(avalon.models["nameInputController"]);
+		})();
+		
+	</script>
+</body>
+</html>

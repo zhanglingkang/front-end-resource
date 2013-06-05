@@ -1,0 +1,48 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../sourceLib/css/base.css">
+	
+	<script type="text/javascript" src="avalon.0.7.js"></script>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div ms-controller="simple">
+	    <div style="width:200px; height:50px" ms-css-background="sbackground">
+	 
+	    </div>
+	    <select ms-model="background">
+	        <option value="red">红</option>
+	        <option value="yellow">黄</option>
+	        <option value="green">绿</option>
+	    </select>
+	</div>
+
+      
+	<script type="text/javascript">
+		/*
+			用法为ms-css-样式名="样式值"，如ms-css-width="200"(会自动补px)， ms-css-color="red", ms-background="blue", ms-css-font-size="14px"。
+		*/
+		(function(){
+			var model = avalon.define("simple", function(vm) {
+			    vm.background = "red";
+			    vm.sbackground = "red";
+			    /*vm.sbackground = {//ok，it can work
+			    	get:function(){
+			    		return this.background;
+			    	}
+			    };*/
+			    //return;
+			    vm.$watch("background", function(v) {
+			        vm.sbackground = vm.background;
+			    });
+			});
+		})();
+		
+	</script>
+</body>
+</html>

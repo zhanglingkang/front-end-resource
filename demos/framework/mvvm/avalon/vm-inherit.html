@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../sourceLib/css/base.css">
+	<style>
+		dt,dd{
+			float: left;
+		}
+		dt{
+			margin-right: 3px;
+		}
+	</style>
+	<script type="text/javascript" src="avalon.0.7.js"></script>
+</head>
+<body>
+	<div ms-controller="AAA">
+	    <div>{{name}} :  {{color}}</div>
+	    <div ms-controller="BBB">
+	        <div>{{name}} :  {{color}}</div>
+	        <div ms-controller="CCC">
+	            <div>{{name}} :  {{color}}</div>
+	        </div>
+	        <div ms-important="DDD">
+	            <div>{{name}} :  {{color}}</div>
+	        </div>
+	    </div>
+	</div>
+	<script type="text/javascript">
+		(function(){
+			/*
+				当前ViewModel没有此字段 就找上一级ViewModel的同名字段
+				而ms-important 强制这个区域使用此ViewModel，没有也不往上找，
+			*/
+			avalon.ready(function() {
+			    avalon.define("AAA", function(vm) {
+			        vm.name = "liger"
+			        vm.color = "green"
+			    });
+			    avalon.define("BBB", function(vm) {
+			        vm.name = "sphinx"
+			        vm.color = "red"
+			    });
+			    avalon.define("CCC", function(vm) {
+			        vm.name = "dragon"
+			    });
+			    avalon.define("DDD", function(vm) {
+			        vm.name = "sirenia"
+			    });
+			    avalon.scan()
+			})
+		})();
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../sourceLib/css/base.css">
+	
+	<script type="text/javascript" src="avalon.0.7.js"></script>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<a ms-click="check" ms-controller="clickHandler" href="javascript:void(0);"><span>请点我</span></div>
+	<script type="text/javascript">
+		/*
+			e.target:事件源
+			this.$scope 所在的viewModel
+		*/
+		(function(){
+			avalon.ready(function(){
+               avalon.define("clickHandler", [], function(vm) {
+                   vm.me = "ViewModel";
+                   vm.check = function(e) {
+                       this.innerHTML = [new Date - 0, e.target.tagName,
+						this.tagName, this.$scope.me, this.$scopes.length].join();
+                   };
+               });
+               avalon.scan();
+			}) 
+		})();
+		
+	</script>
+</body>
+</html>

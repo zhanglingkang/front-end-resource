@@ -1,0 +1,62 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../sourceLib/css/base.css">
+	
+	<script type="text/javascript" src="avalon.0.7.js"></script>
+</head>
+<body>
+	<div ms-controller="arrayController">
+	    <ul ms-each-el="array">
+	        <li>数组的第{{$index+1}}个元素为{{el}}</li>
+	    </ul>
+	    <p>对数组进行push操作，并回车<input ms-keypress="push" ms-focus="testBindEvt" ms-click="testBindEvt"></p>
+	    <p>对数组进行unshift操作，并回车<input ms-keypress="unshift"></p>
+	    <p>对数组进行ensure操作，并回车<input ms-keypress="ensure"><br/>
+	        (只有数组不存在此元素才push进去)</p>
+	    <p>对数组进行remove操作，并回车<input ms-keypress="remove"></p>
+	    <p>对数组进行removeAt操作，并回车<input ms-keypress="removeAt"></p>
+	    <p><button type="button" ms-click="sort">对数组进行sort操作</button></p>
+	    <p><button type="button" ms-click="reverse">对数组进行reverse操作</button></p>
+	    <p><button type="button" ms-click="shift">对数组进行shift操作</button></p>
+	    <p><button type="button" ms-click="pop">对数组进行pop操作</button></p>
+	    <p>当前数组的长度为{{array.size()}}</p>着
+	</div>
+	<script type="text/javascript">
+		(function(){
+			avalon.define("arrayController", function(vm) {
+			    vm.array = ["1", "2", "3", "4"];//vm内部的一个对象，并被监控
+			    //很酷的定义一组操作类似的方法的快捷方式
+			    //ms-keypress 元素的keypress绑定 keypress事件
+			    "push,unshift,remove,ensure".replace(/\w+/g, function(method) {
+			        vm[method] = function(e) {// 13->回车
+			            if (this.value && e.which == 13) {//this为input元素
+			                vm.array[method](this.value);//数组的remove和ensure操作是框架内部定义的
+			                this.value = "";
+			            }
+			        }
+			    });
+			    //return;
+			    vm.testBindEvt = function(e){//ok
+			    	console.log(e.type + " triggled!");
+			    	//vm.array.reverse();
+			    };
+			    vm.removeAt = function(e) {
+			        if (isFinite(this.value) && e.which == 13) {//this为input元素
+			            vm.array.removeAt(Number(this.value))
+			            this.value = "";
+			        }
+			    }
+			    "pop,shift,sort,reverse".replace(/\w+/g, function(method) {
+			        vm[method] = function(e) {
+			            vm.array[method]();
+			        }
+			    })
+			});
+		})();
+		
+	</script>
+</body>
+</html>

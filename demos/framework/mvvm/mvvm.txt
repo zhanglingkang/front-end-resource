@@ -1,0 +1,5 @@
+﻿各种mvvm的兼容性
+	avalon IE6,knockoutjs IE6, angularjs IE7, emberjs IE8, winJS IE9
+
+改变viewModel即会改变view
+减少对dom的直接操作

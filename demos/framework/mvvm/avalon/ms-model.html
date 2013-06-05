@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../sourceLib/css/base.css">
+	
+	<script type="text/javascript" src="avalon.0.7.js"></script>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div ms-controller="inputController">
+	    <input ms-model="textModel" ms-data-observe="radioModel"/>
+	    <input ms-model="passwordModel" type="password"/>
+	    <input type="radio" ms-model="radioModel">{{radioModel}}
+	    <select ms-model="selectModel">
+	        <option value="aaa" selected>aaa</option>
+	        <option value="bbb">bbb</option>
+	        <option value="ccc">ccc</option>
+	    </select>{{selectModel}}
+	    <input ms-model="checkboxModel" type="checkbox" value="aaa" />
+	    <input ms-model="checkboxModel" type="checkbox" value="bbb" />
+	    <input ms-model="checkboxModel" type="checkbox" value="ccc" />
+	    <div ms-visible="radioModel">
+	        ms-visible这个区域是受到radioModel控制
+	    </div>
+	    <div ms-if="!radioModel">
+	        ms-if这个区域是受到radioModel控制
+	    </div>
+	</div>
+	<script type="text/javascript">
+		/*
+			此类绑定只能用于表单元素中，即text, password, textarea, radio, checkbox, select，并且对ViewModel的属性值有严格的规则 text, password, textarea要求类型为字符串，radio要求类型为布尔，checkbox要求类型为字符串数组， select视multiple使用数组或字符串。 
+
+			ms-visible 对元素的显示，消失的控制（依靠display）
+			ms-if  决定是将此元素放出到DOM树还是移出
+		*/
+		(function(){
+			//avalon.ready(function() {//回调延迟到DOM树后才执行,会造成问题。。。
+			   avalon.define("inputController", function(vm) {
+				    window.console || (window.console = function() {
+				    });
+				    vm.textModel = "text";
+				    vm.passwordModel = "password";
+				    vm.radioModel = true;
+				    vm.selectModel = "bbb";
+				    vm.checkboxModel = ["aaa", "bbb"];
+				    //同一个事件，可以绑定多个事件回调
+				    vm.$watch("checkboxModel.length", function() {
+				       console.log(vm.checkboxModel,"watching checkboxModel.length");
+				    });
+				     vm.$watch("checkboxModel.length", function() {
+				       console.log(vm.checkboxModel,"watching checkboxModel.length another");
+				    });
+				    vm.$watch("textModel", function(val, inputType) {
+				        console.log(val + "  " + inputType,"watching textModel");
+				    });
+				    vm.$watch("passwordModel", function(val, inputType) {
+				        console.log(val + "  " + inputType,"watching passwordModel");
+				    });
+				    //vm.$events 储存watch的回调
+				});	
+			//});
+		})();
+		
+	</script>
+</body>
+</html>
