@@ -20,14 +20,18 @@
 	<a id="addUserInputBtn" href="javascript:void(0);"> 添加用户输入</a>
 	<div id="userCtrlerWrap">
 	</div>
-	<script id="userInfoTemplate" type="text/template">
-		<div ms-controller="userCtrler" >
+	<!-- script必须要 加 ms-skip = "true"，否则{userName}}会赋值不成功 -->
+	<script id="userInfoTemplate" type="text/template" ms-skip = "true">
+		<div ms-controller="userCtrler" id="userCtrler">
 			<label>姓名</label><input type="text" ms-model="userName"/>
-			<p ms-data-userName = "userName" ms-title = "{{userName}}"> hello {{userName}}</p>{{userName}}<!-- 为什么没有userName没被赋值成功？ ms-title，ms-data-userName的可以成功赋值。。。-->
+			<p ms-data-userName = "userName" ms-title = "{{userName}}"> hello {{userName}}</p>{{userName}}
+
 		</div>
 	</script>
 	<script type="text/javascript">
 		/*
+				avalon.scan(elem?, scope?) elem为要扫描的元素，scope为viewModel
+					若不传参数，则扫描所有的
 		    	开始扫描DOM树，抽取绑定。
 		    	若avalon.define 在avalon.ready中执行，则需要执行 .scan操作
 		*/
@@ -37,6 +41,9 @@
 					if(this.getAttribute("data-hasAdd") != "true"){
 						document.getElementById("userCtrlerWrap").innerHTML = document.getElementById("userInfoTemplate").innerHTML;
 						this.setAttribute("data-hasAdd","true");
+						//ms-skip = "true"
+						//avalon.scan(document.getElementById("userCtrlerWrap"));
+						//avalon.scan(document.getElementById("userCtrler")); //don't work!!!
 						avalon.scan();
 					}
 				};
