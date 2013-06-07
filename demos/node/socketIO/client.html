@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	
+	<script src="/socket.io/socket.io.js"></script><!-- 服务器端控制的，socket.io动态的去读的(通过某种路由) -->
+<script>
+  var socket = io.connect('http://localhost:8080');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });//向服务器发数据
+  });
+</script>
+</body>
+</html>

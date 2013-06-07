@@ -1,0 +1,2 @@
+process 是全局变量，是EventEmitter的一个实例。
+process.stderr是阻塞的 其他的一些流一般都是非阻塞的
