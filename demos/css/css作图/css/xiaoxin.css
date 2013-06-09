@@ -1,0 +1,20 @@
+/*
+	http://tang.jubailan.com/773
+	border-radious:x x x x/y y y y;
+	border-top-left-radius:55px 25px;
+	box-shadow
+	transform: rotate(25deg) scale(0.8);
+	-webkit-transform: rotate(25deg) scale(0.8);
+-moz-transform: rotate(25deg) scale(0.8);
+-o-transform: rotate(25deg) scale(0.8); Opera
+	transform: skew(-19deg, 10deg);
+-webkit-transform:skew(-19deg, 10deg);
+-moz-transform: skew(-19deg, 10deg);
+-o-transform: skew(-19deg, 10deg);
+*/
+.picWrap{
+	width:126px;
+	height:144px;
+	margin:50px auto;
+	background:#6DE200;
+}

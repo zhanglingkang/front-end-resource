@@ -1,0 +1,114 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+</head>
+<body>
+	<div class="time">
+		<span class = "day">1</span>
+		<span class = "hour">3</span>
+		<span class = "minute">10</span>
+		<span class = "second">5</span>
+	</div>
+	<script type="text/javascript" src="../../sourceLib/js/jquery-1.7.1.js"></script>
+	<script type="text/javascript">
+	(function(){
+		var jTimeWrap = $(".time"),
+			jDay = $(".day",jTimeWrap),
+			jHour = $(".hour",jTimeWrap),
+			jMinute = $(".minute",jTimeWrap),
+			jSecond = $(".second",jTimeWrap);
+		countDown({
+			day:jDay.html(),
+			hour:jHour.html(),
+			minute:jMinute.html(),
+			second:jSecond.html(),
+			interval:"1second"
+		},function(dayObj){
+			jDay.html(dayObj.day);
+			jHour.html(dayObj.hour);
+			jMinute.html(dayObj.minute);
+			jSecond.html(dayObj.second);
+		});
+		function countDown(param,callbackFn){
+          var defaultParam = {
+                day:0,
+                hour:0,
+                minute:0,
+                second:0,
+                interval:"1second"
+              },
+              intervalReg = /(\d+)(\w+)/,
+              intervalObj,
+              interval,
+              interFnCtrl,
+              day,
+              hour,
+              minute,
+              second;
+            param = $.extend(defaultParam,param);
+            day = parseInt(param.day,10);
+            hour = parseInt(param.hour);
+            minute = parseInt(param.minute);
+            second = parseInt(param.second);
+            intervalObj = param.interval.match(intervalReg);
+            if(intervalObj && intervalObj.length ===3){
+                switch(intervalObj[2]){
+                    case "minute":
+                        interval = parseInt(intervalObj[1],10) * 60 * 1000;
+                        break;
+                    case "second":
+                        interval = parseInt(intervalObj[1],10)*1000;
+                        break;
+                }
+            }else{
+                throw "param:interval invalid";
+            }
+            if(!callbackFn || typeof(callbackFn) !== "function"){
+                throw "param:callbackFn invalid";
+            }
+
+            interFnCtrl = setInterval(function(){
+                if(day <= 0 && hour <= 0 && minute <= 0 && second <= 0){
+                    clearInterval(interFnCtrl);
+                }else{
+                    second--;
+                    if(second<0){
+                        second = 59;
+                        minute--;
+                        if(minute < 0){
+                            minute = 59;
+                            hour --;
+                            if(hour < 0){
+                                day--;
+                            }
+                        }
+                    }
+                    callbackFn({
+                        day:day,
+                        hour:formatNumber(hour),
+                        minute:formatNumber(minute),
+                        second:formatNumber(second)
+
+                    })
+                }
+
+            },interval);
+			//将一位的数字前面补0
+			function formatNumber(number){
+				if(number < 10){
+					return "0" + number;
+				}else{
+					return "" + number;
+				}
+			};
+
+		}
+	
+	})();
+
+
+	</script>
+</body>
+</html>
