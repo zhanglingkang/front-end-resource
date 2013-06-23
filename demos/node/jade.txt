@@ -1,0 +1,22 @@
+api 文档 https://github.com/visionmedia/jade
+1,普通填充
+div#id.class1.class2(attr='a1',attr2='a2',attr3=backendAttr)
+	p 
+		|#{valFromBackend}
+		a sth
+
+{
+	backendAttr:"backAttr",
+	valFromBackend:"hello"
+}
+==> <div id="id" class="class1 class2" attr="a1" attr2="a2" attr3="backAttr">
+		<p>hello<a>sth</a></p>
+	</div>
+
+2,script 中填服务器端json对象
+script
+	data = JSON.parse('!{prodDataStr}');//!防止对""进行编码
+	
+{
+	prodDataStr:JSON.stringify({"a":1})
+}
