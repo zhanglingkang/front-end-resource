@@ -31,7 +31,8 @@
 			jPublishProdWin.close();
 		});
 		//验证
-		jPublishProdBtn.click(function  () {
+		jPublishProdBtn.click(function  (evt) {
+			evt.preventDefault();
 			var canSumbit = true,
 				jError;
 			// 非空
@@ -89,7 +90,7 @@
 			}
 			//通过验证，提交
 			if(canSumbit){
-				alert("服务器建设中。。。")
+				$("#publishProdForm")[0].submit();
 			}
 
 		});
@@ -175,11 +176,14 @@
 		
 	};
 	//搜索宝贝
+	var searchUrl = $("#jumpUrl").attr('data-serachUrl'),
+		jWord = $("#searchInput");
 	function searchProd () {
 		var jSearchBtn = $("#searchProdBtn");
 		jSearchBtn.click(function () {
-			alert("服务器建设中。。。")
-		})
+			var word = jWord.val();
+			location.href = searchUrl.replace('{word}',word);
+		});
 	}
 
 	

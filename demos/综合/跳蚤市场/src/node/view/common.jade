@@ -1,0 +1,49 @@
+!!!5
+html
+	head
+		meta(charset='UTF-8')
+		title = '九彩跳蚤市场，发现二手好东西！'
+		link(rel='stylesheet',href='/css/base.css')
+		link(rel='stylesheet',href='/css/bootstarp/bootstrap.min.css')
+		link(rel='stylesheet',href='/css/common.0.1.css')
+	
+	body
+		header
+			div.navbar.navbar-inverse.navbar-fixed-top
+				div.searchWrap.fr
+					input#searchInput(type='text')
+					a#searchProdBtn.btn.btn-small.btn-primary(href='javascript:void(0);')
+						i.icon-search.mr5.icon-white 
+						搜索
+				div.navbar-inner
+					div.container
+						ul.nav.nav-pills
+							li
+								a.publishProdHref(href='javascript:void(0);')
+									发布宝贝
+							li
+								a.aboutUsHref(href='javascript:void(0);')
+									关于我们
+				div.exploreTip.alert.none
+					button.close(data-dismiss='alert',type='button')
+						×
+					strong
+						注意!
+					为了更好的体验，请用firefox，chrome等浏览器
+		
+	
+		footer.footer
+			|Designed and coding by Joel.
+		script(type='text/javascript')
+			var data =  JSON.parse('!{prodDataStr}');//!防止对""进行编码
+		script(type='text/javascript',src='../js/holder.js')
+		script(type='text/javascript',src='../js/jquery-1.7.1.js')
+		script(type='text/javascript',src='../js/bootstrap.min.js')
+		script(type='text/javascript',src='../js/pupup.js')
+		script(type='text/javascript',src='../js/homePage.0.1.js')
+
+
+
+	
+		
+

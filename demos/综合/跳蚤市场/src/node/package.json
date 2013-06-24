@@ -2,9 +2,21 @@
   "name": "secondHandMarket",
   "description": "as title",
   "version": "0.0.1",
+	"author": "Joel <iamjoel007@gmail.com>",
+	 "contributors": [ 
+    {
+      "name": "placeHolder",
+      "email": ""
+    } 
+  ],
   "private": true,
   "dependencies": {
     "express": "3.2.5",
-	"jade": "0.30.0"
+	"jade": "0.30.0",
+	"mysql":"*",
+	"sequelize":"1.6.x"
+  },
+  "engines": {
+    "node": ">=0.8"
   }
 }
