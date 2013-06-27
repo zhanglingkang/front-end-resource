@@ -1,4 +1,5 @@
-﻿function getAllProd (connection,callback) {
+﻿//https://npmjs.org/package/mysql
+function getAllProd (connection,callback) {
 	connection.query("SELECT * FROM productinfo",function(err, prodData) {
 		var data = {},
 			hasData = false;

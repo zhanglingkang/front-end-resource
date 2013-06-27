@@ -78,16 +78,16 @@
 				}
 			}
 			//手机号验证
-			if(canSumbit && !jMobileInput[0].disabled){
-				if(!/^0{0,1}(13[0-9]|15[0-9])[0-9]{8}$/.test(jMobileInput.val())){
-					$(".phoneErr").html("手机格式有误");
-					$(".phoneErr").removeClass("none");
-					canSumbit = false;
-				}else{
-					$(".phoneErr").addClass("none");
-				}
+			// if(canSumbit && !jMobileInput[0].disabled){
+			// 	if(!/^0{0,1}(13[0-9]|15[0-9])[0-9]{8}$/.test(jMobileInput.val())){
+			// 		$(".phoneErr").html("手机格式有误");
+			// 		$(".phoneErr").removeClass("none");
+			// 		canSumbit = false;
+			// 	}else{
+			// 		$(".phoneErr").addClass("none");
+			// 	}
 				
-			}
+			// }
 			//通过验证，提交
 			if(canSumbit){
 				$("#publishProdForm")[0].submit();
@@ -181,7 +181,7 @@
 	function searchProd () {
 		var jSearchBtn = $("#searchProdBtn");
 		jSearchBtn.click(function () {
-			var word = jWord.val();
+			var word = encodeURIComponent(jWord.val());
 			location.href = searchUrl.replace('{word}',word);
 		});
 	}

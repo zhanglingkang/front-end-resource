@@ -6,6 +6,7 @@ html
 		link(rel='stylesheet',href='/css/base.css')
 		link(rel='stylesheet',href='/css/bootstarp/bootstrap.min.css')
 		link(rel='stylesheet',href='/css/common.0.1.css')
+		block styles
 	
 	body
 		header
@@ -19,6 +20,9 @@ html
 					div.container
 						ul.nav.nav-pills
 							li
+								a(href='/homePage')
+									首页
+							li
 								a.publishProdHref(href='javascript:void(0);')
 									发布宝贝
 							li
@@ -30,17 +34,16 @@ html
 					strong
 						注意!
 					为了更好的体验，请用firefox，chrome等浏览器
-		
-	
+		//发布的宝贝信息
+		block products
+
 		footer.footer
 			|Designed and coding by Joel.
-		script(type='text/javascript')
-			var data =  JSON.parse('!{prodDataStr}');//!防止对""进行编码
+		block productData
 		script(type='text/javascript',src='../js/holder.js')
 		script(type='text/javascript',src='../js/jquery-1.7.1.js')
 		script(type='text/javascript',src='../js/bootstrap.min.js')
-		script(type='text/javascript',src='../js/pupup.js')
-		script(type='text/javascript',src='../js/homePage.0.1.js')
+		block scripts
 
 
 
