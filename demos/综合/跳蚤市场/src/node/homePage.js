@@ -10,7 +10,9 @@ app.configure(function(){
 	app.use(express.cookieParser('keyboard cat'));
 	app.use(express.session());
 	app.set('views', __dirname + '/view'); //设置模板路径，比如index.jade
-  	app.set('view engine', 'jade');  //配置模板解析引擎
+  	// app.set('view engine', 'jade');  //配置模板解析引擎
+  	app.engine('.html', require('ejs').__express);
+  	app.set('view engine', 'html');  //配置模板解析引擎
  	app.use(express.limit('10mb'));    //限制用户提交内容的大小，防止DOS攻击
  	app.use(express.bodyParser({
  		keepExtensions: true, //后缀名开启

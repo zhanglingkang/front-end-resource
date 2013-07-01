@@ -33,7 +33,7 @@ function filterObj(obj,omit){
 };
 //防止sql注入
 function filterSQLInjection (str) {
-	var rHarm = /select|union|update|delete|exec|count|TURNCATE|'|"|=|;|>|<|%/ig;
+	var rHarm = /select|union|update|delete|exec|count|TURNCATE|'|"|=|;|>|</ig;
 	if(!str || typeof(str) !== "string"){
 		return "";
 	}else{
@@ -42,7 +42,21 @@ function filterSQLInjection (str) {
 	return str;
 }
 
+//模糊匹配 like中的通配符的替代
+function replaceComonStrInLike (str) {
+	if(!str || typeof(str) !== "string"){
+		return "";
+	}else{
+		str = str.replace(/\[/g,"[[]");
+		str = str.replace(/%/g,"[%]");
+		str = str.replace(/_/g,"[_]");
+	}
+	return str;
+}
+
+
 
 exports.filterInput = filterInput;
 exports.filterObj = filterObj;
 exports.filterSQLInjection = filterSQLInjection;
+exports.replaceComonStrInLike = replaceComonStrInLike;

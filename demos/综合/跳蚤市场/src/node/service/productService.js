@@ -29,6 +29,7 @@ function getAllProd (connection,callback) {
 
 function getProdByWord(connection,word,callback) {
 	word = filterSQLInjection(word);//防止sql注入
+	word = util.replaceComonStrInLike(word);
 	var sql = 'SELECT * FROM productinfo where searchStr like \'%' + word + '%\'';
 	getProd (connection,sql,callback);
 	console.log(sql);
@@ -36,6 +37,7 @@ function getProdByWord(connection,word,callback) {
 // 	FROM
 // 	productinfo
 // where name like '%4' union SELECT * FROM productinfo;#%'
+
 };
 //从产品中找关键字
 function isTarProd (prod,word) {

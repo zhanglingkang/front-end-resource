@@ -1,7 +1,7 @@
 {
   "name": "secondHandMarket",
   "description": "as title",
-  "version": "0.0.3",
+  "version": "0.0.4",
 	"author": "Joel <iamjoel007@gmail.com>",
 	 "contributors": [ 
     {
@@ -12,7 +12,8 @@
   "private": true,
   "dependencies": {
     "express": "3.2.5",
-	"jade": "0.30.0",
+  "jade": "0.30.0",
+	"ejs": "0.8.4",
 	"mysql":"*",
 	"underscore":"1.4.4"
   },

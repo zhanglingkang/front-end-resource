@@ -20,7 +20,7 @@ function getAllProd(req,res){
 		}
 		req.session.saveSucc = NOT_FROM_SAVEPAGE;
 		req.session.fromPublidPage = false;
-		res.render('product.jade',
+		res.render('product',//后缀名可以省略,自动会根据view engin来找对应的后缀名的文件
 		{
 			'prodDataStr':JSON.stringify(prods),//将json给scirpt的变量的内容的变通之法
 			'prodData': prods,
@@ -33,7 +33,7 @@ function searchProd(req,res){
 	var keyWrod = req.query.keyword;
 	req.session.saveSucc = NOT_FROM_SAVEPAGE;
 	prodService.getProdByWord(connection,keyWrod,function (prods) {
-		res.render('product.jade',
+		res.render('product',
 		{
 			'prodDataStr':JSON.stringify(prods),//将json给scirpt的变量的内容的变通之法
 			'prodData': prods,
@@ -72,7 +72,7 @@ function publishProd(req,res){
 		delete product.picType;
 		delete product.contractType;
 		prodService.addProd(connection,product,function (isSave,err) {
-			if(!isSave){
+			if(isSave){
 				console.log(err);
 				req.session.saveSucc = SAVE_FAI;
 				res.redirect('/homePage');
