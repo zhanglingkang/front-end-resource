@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>QUnit</title>
+		<link  rel="stylesheet" href="resource/qunit-1.10.0.css">
+	</head>
+	<body>
+		<div id="qunit"></div><!-- 必须有 -->
+		<script src="resource/qunit-1.10.0.js"></script>
+		<script>
+		//http://api.qunitjs.com/
+		 /* Assert start */
+			//test不通过时，才会显示message
+			test("ok(state, message)",function(){
+				ok(1 =="1","通过!");
+				ok(1 ==="1","不通过!");
+			});
+			test("equal( actual, expected, message )",function(){
+				//==   和notDeepEqual方法一模一样
+				 equal( 0, 0, "Zero; equal succeeds" );
+				equal( "", 0, "Empty, Zero; equal succeeds" );
+				equal("",false,"Empty, false; equal succeeds");
+				equal( null, false, "null, false; equal fails" );
+				
+				var obj = {"foo":"bar"};
+				//equal( {"foo":"bar"}, obj, "Different object, same key, different value, not equal" );
+			});
+			test("strictEqual( actual, expected, message )",function(){
+				//===
+				strictEqual( 0,"0", "Zero; zero failed" );
+			});
+			test("deepEqual( actual, expected, message )",function(){
+				var obj = {"foo":"bar"};
+				deepEqual( {"foo":"bar"}, obj, "Two objects can be the same in value" );
+			});
+			test( "notEqual( actual, expected, message )", function() {
+				//!=
+				var arr1 =[1,2,4],
+					arr =[1,2,4];
+					arr.slice(0,1);
+				notEqual(arr , arr1,"arr is not equal arr1" );
+				deepEqual(arr , arr1,"arr is deepEqual arr1" );
+				notStrictEqual(arr , arr1,"arr is not notStrictEqual arr1" );
+				notEqual(arr , arr1,"arr is not equal arr1" );
+			});
+			test( "notStrictEqual( actual, expected, message )", function() {
+				//!==
+				notStrictEqual( 1, "1", "String '1' and number 1 don't have the same value" );
+			});
+			/* Assert end */
+			
+			test( "expect( amount )", function() {
+				expect( 2 );
+				equal( 4, 4, "4 equals 4" );
+			});
+			test( "expect( amount )", function() {
+				expect( 2 );
+				equal( 4, 4, "4 equals 4" );
+				equal( 4, 4, "4 equals 4" );
+			});
+			test( "expect( amount )", function() {
+				expect( 2 );
+				equal( 4, 4, "4 equals 4" );
+				equal( 4, 4, "4 equals 4" );
+				equal( 4, 4, "4 equals 4" );
+			});
+			test( "test( title [, expected ], test )", 2,function(assert) {
+				console.log(assert);
+				equal(assert.equal,equal,"the same function");
+				equal( 4, 4, "4 equals 4" );
+				equal( 4, 4, "4 equals 4" );
+			});
+			
+			// module
+			module( "group a" );
+			test( "a basic test example", function() {
+			ok( true, "this test is fine" );
+			});
+			test( "a basic test example 2", function() {
+			ok( true, "this test is fine" );
+			});
+
+			module( "group b" );
+			test( "a basic test example 3", function() {
+			ok( true, "this test is fine" );
+			});
+			test( "a basic test example 4", function() {
+			ok( true, "this test is fine" );
+			}); 
+			//callbacks QUnit.begin() QUnit.done() QUnit.log() QUnit.moduleStart() QUnit.moduleDone() QUnit.testDone() QUnit.testStart()
+			//在后台打印所有测试结果
+			QUnit.log(function( details ) {
+				console.log( "Log: ", details.result, details.message );
+			});
+			
+			//QUnit.config: autostart (default: true):在异步加载完资源才能测试时，很有用
+			//start() Start running tests again after the testrunner was stopped
+			//stop() the testrunner to wait for async tests to run
+		</script>
+		
+	</body>
+</html>

@@ -1,4 +1,4 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
 Source Server         : MySql
@@ -40,3 +40,4 @@ INSERT INTO `productinfo` VALUES ('4', '咪兔公仔', 'http://ww1.sinaimg.cn/sm
 INSERT INTO `productinfo` VALUES ('5', '玄机盒', '/uploadImg/e647637459aa68a3abb80c2dff32cc95.jpg', '八成新,玩具,藏秘密', null, '13812660377', 'Joel', '外表看，只是普通的盒子，内部其实是可以打开的哦~即，所谓玄机', '2013-06-24 14:27:57');
 INSERT INTO `productinfo` VALUES ('6', 'Mp3套', '', '电子产品配件', '570491525', null, 'Joel', '橘色的套子，外面有绒毛', '2013-06-24 14:54:54');
 -- DELETE  FROM `productinfo` WHERE prodId > 6;
+-- UPDATE productinfo as p set searchStr = CONCAT(name,'|',label,'|',p.describe)

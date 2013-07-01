@@ -1,6 +1,8 @@
-﻿//https://npmjs.org/package/mysql
-function getAllProd (connection,callback) {
-	connection.query("SELECT * FROM productinfo",function(err, prodData) {
+﻿var util = require("../service/util"),
+	filterSQLInjection = util.filterSQLInjection;
+//https://npmjs.org/package/mysql
+function getProd (connection,sql,callback) {
+	connection.query(sql,function(err, prodData) {
 		var data = {},
 			hasData = false;
 		if(err){
@@ -19,30 +21,21 @@ function getAllProd (connection,callback) {
 		}
 		
 	});
+}
+function getAllProd (connection,callback) {
+	var sql = 'SELECT * FROM productinfo';
+	getProd (connection,sql,callback)
 };
 
 function getProdByWord(connection,word,callback) {
-	getAllProd (connection,function (prodData) {
-		var tarData = {},
-			hasData = false;
-		if(prodData){
-			for(var key in prodData){
-				if(isTarProd(prodData[key],word)){
-					tarData[prodData[key].prodId] = prodData[key];
-					hasData = true;
-				}
-			}
-			if(!hasData){
-				tarData = null;
-			}
-			callback(tarData);
-		}else{
-			callback(null);
-		}
-		
-		
-		
-	});
+	word = filterSQLInjection(word);//防止sql注入
+	var sql = 'SELECT * FROM productinfo where searchStr like \'%' + word + '%\'';
+	getProd (connection,sql,callback);
+	console.log(sql);
+// 	SELECT *
+// 	FROM
+// 	productinfo
+// where name like '%4' union SELECT * FROM productinfo;#%'
 };
 //从产品中找关键字
 function isTarProd (prod,word) {
@@ -66,6 +59,7 @@ function addProd (connection,prod,callback) {
 		}
 	});
 };
+
 
 function updateProd (connection) {
 };

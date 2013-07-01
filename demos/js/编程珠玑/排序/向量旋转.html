@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<dl>
+		<dt>向量旋转：</dt>
+		<dd>例如abcdef向左旋转2 结果 cdefab</dd>
+	</dl>
+	<script type="text/javascript">
+		
+		var nativeIsArray = Array.isArray,
+			nativeReverse = Array.prototype.reverse;
+		var isArray = nativeIsArray || function(obj) {
+			return toString.call(obj) == '[object Array]';
+		}
+		
+		//牛的算法：向量ab,a是要旋转的。对a求逆，对b求逆，再对ab求逆
+		 function reverseArr(arr,startI,endI){
+			if(!arr){
+				return;
+			}
+			startI = startI ===undefined ? startI = 0 : startI;
+			endI = endI ===undefined ? endI = arr.length - 1  : endI;
+			var midI = (startI + endI)%2 == 0?(startI + endI)/2:(startI + endI - 1)/2,
+				temp;
+			//包括start,end
+			for(var i = startI,times = 0;i <= midI;i++,times++){
+				temp = arr[i];
+				arr[i] = arr[endI-times];
+				arr[endI-times] = temp;
+			}
+			return arr;
+		};
+		
+		function rotateArr(arr,rotateLen){
+			arrLen = arr.length;
+			if(rotateLen >= arrLen){
+				rotateLen %= arrLen;
+			}
+			reverseArr(arr,0,rotateLen-1);
+			reverseArr(arr,rotateLen,arrLen);
+			reverseArr(arr);
+			return arr;
+		}
+		//向左旋转两个
+		console.log(rotateArr("abcdefgh".split(""),2).join(""));
+		console.log(rotateArr("abcdefg".split(""),2).join(""));
+		console.log(rotateArr("abcdefg".split(""),20).join(""));
+			
+		
+	</script>
+</body>
+</html>

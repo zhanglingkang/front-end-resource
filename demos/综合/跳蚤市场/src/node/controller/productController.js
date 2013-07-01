@@ -65,6 +65,7 @@ function publishProd(req,res){
 			console.log("无图片");
 		}
 		product.updateTime = new Date();
+		product.searchStr =  product.name + '|' + product.describe + '|' + product.label;
 		filterObj(product);
 		delete product.productImgFile;
 		delete product.productImgUrl;

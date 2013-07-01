@@ -1,5 +1,5 @@
 ﻿var _ = require("underscore");
-//过滤用户输入的有害字符
+//过滤用户输入的有害字符 防XSS攻击
 function filterInput (str) {
 	if(!str || typeof(str) !== "string"){
 		return str;
@@ -31,7 +31,18 @@ function filterObj(obj,omit){
 		}
 	}
 };
+//防止sql注入
+function filterSQLInjection (str) {
+	var rHarm = /select|union|update|delete|exec|count|TURNCATE|'|"|=|;|>|<|%/ig;
+	if(!str || typeof(str) !== "string"){
+		return "";
+	}else{
+		str = str.replace(rHarm,"");
+	}
+	return str;
+}
 
 
 exports.filterInput = filterInput;
 exports.filterObj = filterObj;
+exports.filterSQLInjection = filterSQLInjection;
