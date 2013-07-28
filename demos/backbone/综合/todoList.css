@@ -1,0 +1,27 @@
+li{
+	list-style: none;
+}
+li:hover .todoItem .deleteItemBtn{
+	display: block;
+}
+li.done label {
+    color: #777777;
+    text-decoration: line-through;
+}
+.todoItem .deleteItemBtn{
+	float: right;
+	display: none;
+
+}
+.done .todoItem .deleteItemBtn{
+	display: none;
+}
+.todoItem .todoEditVal{
+	display: none;
+}
+li.edit .itemCont{
+	display: none;
+}
+li.edit .todoEditVal{
+	display: block;
+}
