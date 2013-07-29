@@ -87,7 +87,7 @@
 				    },
 				    updateTodo:function(){
 				    	this.$el.removeClass("edit");
-				    	var todoTitle = $.trim(this.$el.find(".todoEditVal").val());
+				    	var todoTitle = $.trim(this.$(".todoEditVal").val());
 				    	if(todoTitle === ""){
 				    		this.clear();
 				    	}else{
@@ -112,7 +112,7 @@
 						"click #addTodoBtn":"addToDo"
 					},
 					addToDo:function(){
-						var val = this.$el.find("#todoVal").val(),
+						var val = this.$("#todoVal").val(),
 							todoItem,
 							todoItemView;
 						if($.trim(val) !== ""){
@@ -127,10 +127,10 @@
 						var todoItemView = new TodoItemView({
 							model:this.model.last()
 						});
-						this.$el.find("#todoList").append(todoItemView.render().el);
+						this.$("#todoList").append(todoItemView.render().el);
 					},
 					updateUndoSize : function(){
-						this.$el.find("#itemNum").html($("[type=checkbox]").not(":checked").length);		
+						this.$("#itemNum").html($("[type=checkbox]").not(":checked").length);		
 						
 					}
 				});
