@@ -15,14 +15,14 @@
 		$(function(){
 			var doorCtrlRouter = Backbone.Router.extend({
 				routes : {
-					openTheDoor:"openTheDoor",
+					"openTheDoor":"openTheDoor",
 					"openTheDoor/:name":"openTheDoor",
-					closeTheDoor:"closeTheDoor",
+					"closeTheDoor":"closeTheDoor",
 					"closeTheDoor/:name":"closeTheDoor"
 
 				},
 				initialize:function(){
-					this.route(/^master(\w+)$/, "masterBacking");
+					this.route(/^master(\w+)$/, "masterBacking");//用正则来匹配路径，正则中括号匹配的值会作为参数传给处理函数 匹配maskerbalabalba
 				},
 				openTheDoor : function(name){
 					name = name || "maskman";
@@ -43,7 +43,7 @@
 
 			var router = new doorCtrlRouter();
 			Backbone.history.start();
-			//router.navigate("openTheDoor",{trigger: true});
+			//router.navigate("openTheDoor",{trigger: true});//会覆盖原来的hash
 		});
 		
 
