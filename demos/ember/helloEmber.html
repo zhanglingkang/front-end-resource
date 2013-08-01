@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<!-- 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js"></script>
+	<script type="text/javascript" src="http://cloud.github.com/downloads/emberjs/ember.js/ember-1.0.0-pre.2.min.js"></script> -->
+	<script src="js/libs/jquery-1.9.1.js"></script>
+	<script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+	<script src="js/libs/ember-1.0.0-rc.6.1.js"></script>
+	<script type="text/x-handlebars">
+		<span>请输入待办事项：</span>{{view App.AddItemView}}<br/>
+		
+		<span>请选择优先级：</span>
+			{{view Ember.Select contentBinding="App.selectController.content" selectionBinding="App.selectController.selected"}}
+
+                               
+		{{view App.ListView}}
+	</script>
+	<script type="text/x-handlebars" data-template-name="itemTemplate">
+		{{view.content.title}}<a href="#" {{#if view.hover}}<a href="#" {{action removeItem }} >X</a>{{/if}} 
+	</script>
+	<script type="text/javascript">
+		//先在view上找，找不到再到controller上找，找不到再到model上找
+		$(function(){
+			window.App = Ember.Application.create(
+			{
+				ready:function(){
+				Em.Logger.info('欢迎使用待办事项应用');
+				}
+			}
+			);
+			App.AddItemView = Ember.TextField.extend({
+				placeholder:'输入待办事项',
+				insertNewline:function(){//回车时的处理事件，系统提供
+					 var item = App.TodoModel.create({
+						status:App.selectController.get('selected'),
+						value:this.get('value')
+					});
+					App.todoStore.pushObject(item);
+					this.set('value','');
+				}
+				
+			});
+			App.ListView = Ember.CollectionView.extend({
+				contentBinding:'App.todoStore',//属性名content 会从上读 App.todoStore 上的content读（默认从content上读,等价于App.todoStore.content）
+				tagName:'ul',
+				itemViewClass: Ember.View.extend({
+					templateName:'itemTemplate',//找script中找 data-template-name="itemTemplate"的script，并渲染之
+					removeItem:function(){//删除那一个
+						this.getPath( 'contentView.content').removeObject(this.get( 'content' ));
+					},
+					mouseEnter:function(){this.set('hover',true);},
+					mouseLeave:function(){this.set('hover',false);}
+				})
+			});
+
+			App.todoStore = Ember.ArrayController.create({
+				content:[]
+			});
+			App.selectController = Ember.Object.create({
+				selected:'低',
+				content:['高','中','低']
+			});
+			
+			
+			 App.TodoModel = Em.Object.extend({  //Em 是 Ember的简写
+				status:'',
+				value:'',
+				title:function(){
+					return '['+this.get('status')+']'+this.get('value');
+				}.property('status','value')
+			});
+		});
+		
+	</script>
+</body>
+</html>
