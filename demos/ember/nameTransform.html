@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<!-- 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js"></script>
+	<script type="text/javascript" src="http://cloud.github.com/downloads/emberjs/ember.js/ember-1.0.0-pre.2.min.js"></script> -->
+	<script src="js/libs/jquery-1.9.1.js"></script>
+	<script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+	<script src="js/libs/ember-1.0.0-rc.6.1.js"></script>
+	<script type="text/x-handlebars">
+		{{#linkTo "favFruit"}}link{{/linkTo}}
+		
+	</script>
+	{{view App.FavFruitView}}
+	<script type="text/x-handlebars" data-template-name="favFruite">
+		{{view.title}}aaaaa {{title}}
+	</script>
+	<script type="text/x-handlebars" data-template-name="favFruitView">
+		{{view.title}}aaaaa {{title}}
+	</script>
+	<script type="text/javascript">
+		//先在view上找，找不到再到controller上找，找不到再到model上找
+		$(function(){
+			window.App = Ember.Application.create({
+				// Router: Ember.Router.extend({
+				//     root: Ember.Route.extend({
+				//       aRoute: Ember.Route.extend({
+				//         route: '/'
+				//       }),
+				//       bRoute: Ember.Route.extend({
+				//         route: '/alphabeta'
+				//       })
+				//     })
+				// })
+			});
+			App.Router.map(function() {//定义route
+				this.route("favFruit");
+				// this.route("favorites", { path: "/favs" });
+			});
+			App.IndexRoute = Ember.Route.extend({
+			  redirect: function() {
+			    // this.transitionTo('favFruite');//#/favFruite    //进入该route后，直接进入favFruite
+			  }
+			});
+			// App.FavFruitController = Ember.Controller.extend({
+			// });
+			App.FavFruitRoute = Ember.Route.extend({
+			  setupController: function(controller) {
+			    controller.set('title', "myFruits");
+			  },
+			  renderTemplate:function(controller, model){
+			  	Em.Logger.info("render the temp");
+			  	this.render('favFruitView',{
+
+			  	});
+
+			  }
+			});
+			App.FavFruitController = Em.Controller.extend({
+				title : "controllerTitle"
+			});
+			App.FavFruitView = Em.View.extend({
+				templateName: 'favFruite',
+				// title : "viewTitle" //可以取到
+			});
+		});
+			
+	</script>
+</body>
+</html>
