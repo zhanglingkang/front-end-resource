@@ -2,222 +2,78 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>蜡笔画图</title>
 	<link rel="stylesheet" href="css/spectrum.css" />
 	<link rel="stylesheet" href="css/nouislider.fox.css" />
 	<link rel="stylesheet" href="css/nouislider.space.css" />
-	<style type="text/css">
-		canvas {
-			margin:10px;
-			border:1px solid #0f0;
-		}
-		
-
-	</style>
+	<link rel="stylesheet" href="css/index.css" />
+	
 </head>
 <body>
-	<div class = "noUiSliderTheme-fox">
-		<span class="highlight">Choose a size: </span>
-		<span id="slectSizeShow"></span>
-		<div id = "selectSize" class="noUiSlider"></div>
-	</div>
-	<div><span class="highlight">Choose a color: </span>
-		<input id = "colorPicker" color="#f00"/>
+	<div class="toolBar">
+		<div class="col-left noUiSliderTheme-fox">
+			<h2 class="">画笔</h2>
+			<div class="toolBar-each">
+				<div class="line">
+					<label>粗细</label>
+					<span id="slectSizeShow"></span>
+					<div id = "selectSize" class="noUiSlider"></div>
+				</div>
+				<div class="pen-color line">
+					<label>颜色</label>
+					<input id = "colorPicker" color="#f00"/>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div class="col-middle">
+			<h2 class="">操作</h2>
+			<div class="toolBar-each operaterWrap">
+				<ul>
+					<li><a href="javascript:void(0);" class="undoBtn">撤销</a></li>
+					<li><a href="javascript:void(0);" class="redoBtn">反撤销</a></li>
+					<li><a href="javascript:void(0);" class="resetDrawBtn">重画</a></li>
+					<li><a href="javascript:void(0);" class="selectPicBtn">选图</a></li>
+					<li><a href="#outputImg" class="saveAsBtn">另存为</a></li>
+					<li><a href="javascript:void(0);" class="helpBtn">帮助</a></li>
+				</ul>
+			</div>
+			
+		</div>
+		<div class="col-right">
+			<h2 class="">工具</h2>
+			<div class="toolBar-each">
+				<label>
+					蜡笔<input type= "radio" name="penType" value = "labi" checked="checked">
+				</label>
+				<label>
+					橡皮擦<input type= "radio" name="penType" value = "eraser">
+				</label>
+			</div>
+			
+		</div>
+		
 	</div>
 	
 	
-	<div id="canvasDiv"></div>
-	<button id = "save">保存(另存为下面的图片)</button>
-	<br/>
-	<img id= "outputImg"/>
+	
+	
+	
+	<div id = "canvasDiv"></div>
+	<div id = "outputWrap">
+		<h2>作品生成区</h2>
+		<div class="cont-wrap">
+			<img id= "outputImg" alt="点击另存为按钮，并在该图片上右击另存为，保存该图片"/>
+			<label class="saveAs-tip">在左图上右击另存为，保存你的作品^_^</label>
+		</div>
+	<div>
+	
+
 	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 	<!--[if IE]><script type="text/javascript" src="vender/excanvas.js"></script><![endif]-->
 	<script type="text/javascript" src="vender/spectrum.js"></script>
 	<script type="text/javascript" src="vender/jquery.nouislider.min.js"></script>
-	<script type="text/javascript">
-		//参考 http://www.williammalone.com/articles/create-html5-canvas-javascript-drawing-app/
-		//要改进，1，笔触的控制，用拖动的，2，颜色的控制，colorPicker 3，撤销（移除最近的5点）4，整体设计 5，找一些其他图片 6，从本地选图片
-		//在script中创建canvas是为了兼容ie
-		(function(){
-			var clickX = [],
-				clickY = [],
-				clickDrag = [],
-				clickColor = [],
-				nowColor,
-				clickSize = [],
-				nowSize,
-				context,
-				paint,
-				canvasWidth = 490,
-				canvasHeight = 220,
-				$Canvas,
-				crayonTextureImage,
-				outlineImage,
-				curLoadResNum = 0,
-				totalLoadResources = 2,
-				config = {
-					initColor: '#0f0',
-					initPenSize:10
-				};
-			 
-			
-			$(function(){
-				initPenSizeSelector();
-				initColorPicker();
-				
-				context = getCtx();
-				$Canvas = $('#canvas');
-				crayonTextureImage = new Image();
-				crayonTextureImage.onload = function() { 
-					resourceLoaded(); 
-				};
-				crayonTextureImage.src = "images/crayon-texture.png";
-				
-				outlineImage = new Image();
-				outlineImage.onload = function() { 
-					resourceLoaded(); 
-				};
-				outlineImage.src = "images/watermelon-duck-outline.png";
-				
-				$Canvas.mousedown(function(e){
-				  var mouseX = e.pageX - this.offsetLeft;
-				  var mouseY = e.pageY - this.offsetTop;
-						
-				  paint = true;//开始绘图
-				  addClick(mouseX, mouseY, false);
-				  redraw();
-				});
-				
-				$Canvas.mousemove(function(e){
-				  if(paint){
-					addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-					redraw();
-				  }
-				});
-				
-				$Canvas.mouseup(function(e){
-				  paint = false;
-				});
-				
-				
-				
-				$(".selectSizeBtn").click(function(){
-					
-				});
-				
-				$("#save").click(function(){
-					$("#outputImg").attr("src",$("#canvas")[0].toDataURL());
-				});
-				
-			});
-			function initPenSizeSelector(){
-				nowSize = config.initPenSize;
-				var $slectSizeShow = $("#slectSizeShow");
-				$("#selectSize").noUiSlider({
-					range: [1, 25],
-					start: 10,
-					handles: 1,
-					step:1,
-					slide: function(){
-					  nowSize = $(this).val();
-					  $slectSizeShow.html(nowSize);
-					}
-				});
-			};
-			function initColorPicker(){
-				nowColor = config.initColor;
-				$("#colorPicker").spectrum({
-					color:config.initColor,
-					showPaletteOnly: true,
-					showPalette: true,
-					   palette: [
-						["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)", /*"rgb(153, 153, 153)","rgb(183, 183, 183)",*/
-						"rgb(204, 204, 204)", "rgb(217, 217, 217)", /*"rgb(239, 239, 239)", "rgb(243, 243, 243)",*/ "rgb(255, 255, 255)"],
-						["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
-						"rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
-						["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
-						"rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
-						"rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
-						"rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
-						"rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
-						"rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
-						"rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
-						"rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
-						"rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
-						"rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
-					],
-					change: function(color) {
-						nowColor = color.toHexString();
-					}
-				});
-			};
-			function getCtx(){
-				var canvasDiv = document.getElementById('canvasDiv');
-					canvas = document.createElement('canvas');
-					canvas.setAttribute('width', canvasWidth);
-					canvas.setAttribute('height', canvasHeight);
-					canvas.setAttribute('id', 'canvas');
-					canvasDiv.appendChild(canvas);
-				if(typeof G_vmlCanvasManager != 'undefined') {
-					canvas = G_vmlCanvasManager.initElement(canvas);
-				}
-				context = canvas.getContext("2d");
-				return context;
-			};
-			
-			
-			function addClick(x, y, dragging)
-			{
-			  clickX.push(x);
-			  clickY.push(y);
-			  clickColor.push(nowColor);
-			  clickSize.push(nowSize);
-			  clickDrag.push(dragging);
-
-			}
-			
-			function resourceLoaded()
-			{
-				if(++curLoadResNum >= totalLoadResources){
-					redraw();
-				}
-			};
-			function redraw(){
-				var drawingAreaX = 111;
-				var drawingAreaY = 11;
-				var drawingAreaWidth = 267;
-				var drawingAreaHeight = 200;
-			  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
-			  
-			  context.strokeStyle = "#df4b26";
-			  context.lineJoin = "round";
-			  context.lineWidth = 5;
-						
-			  for(var i=0; i < clickX.length; i++) {		
-				context.beginPath();
-				if(clickDrag[i] && i){//是画一条线还是一个点
-				  context.moveTo(clickX[i-1], clickY[i-1]);
-				 }else{
-				   context.moveTo(clickX[i]-1, clickY[i]);
-				 }
-				 context.lineTo(clickX[i], clickY[i]);
-				 context.closePath();
-				if(clickColor[i]){
-					context.strokeStyle = clickColor[i];
-				}
-				 context.lineWidth = clickSize[i];
-				 context.stroke();
-			  }
-			  context.globalAlpha = 0.4;
-			  context.drawImage(crayonTextureImage, 0, 0, canvasWidth, canvasHeight);
-			  //context.globalAlpha = 1; // No IE support
-	
-			// Draw the outline image
-			  context.drawImage(outlineImage, drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
-			}
-		})();
-		
-	
-	</script>
+	<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
