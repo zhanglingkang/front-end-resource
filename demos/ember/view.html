@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ember view demo</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style type="text/css">
+	.notActive{
+		background:#ccc;
+	}
+  </style>
+</head>
+<body>
+	不好的使用view方式！！！ 
+	<script type="text/x-handlebars">
+		sth{{view App.ListingView}} 
+	</script>
+	<div class = "animList"></div>
+	
+	<button id = "switchStatus">改变状态</button>
+	
+  <script type="text/x-handlebars" data-template-name="animListTemp" >
+		<div  {{bindAttr class="view.notActive:notActive view.isGood:good"}}>
+			<h2>version:{{unbound App.config.v}}</h2>
+			<div id="logo">
+				<img {{bindAttr src="view.logoUrl"}} alt="Logo"/>
+			</div>
+			<h2>{{view.listInfo.des}}</h2>
+			<ul>
+				{{#each view.anim}}
+					<li>Hello, {{name}}!</li>
+				{{/each}}
+			</ul>
+			<a href="#" {{action "clickFn"}}>clickBtn</a>
+		</div>
+  </script>
+	
+	
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+  <script src="js/libs/ember-1.0.0-rc.6.1.js"></script>
+  <script>
+	$(function(){
+		//必须在ready里执行，不然会有问题。
+		App = Ember.Application.create();
+		App.config = Ember.Object.create({
+			v:'0.0.1'
+		});
+		App.IndexRoute = Ember.Route.extend({
+			clicked:function(name){
+				console.log('view : ' + name);	
+			}
+		});
+		App.IndexController = Ember.Controller.extend({
+			clicked:function(name){
+				console.log('view : ' + name);	
+			}
+		});
+		App.ListingView = Ember.View.extend({
+			name : "listView",
+			templateName: 'animListTemp', 
+			clickFn :function(){
+				console.log("click");
+			},
+			click: function(evt) {
+				console.log("clicked");
+				this.get('controller').send('clicked', this.get('name')); 
+			},
+			anim: [ { name: '猴子' },
+            { name: '老虎' } ]
+		});
+
+		var aList = App.ListingView.create({
+			listInfo :Ember.Object.create({
+				des:'各种动物'
+			}),
+			logoUrl:"imgs/logo.png",
+			isGood:true,
+			notActive:true
+		});
+		aList.appendTo(".animList");
+		//aList.clickFn();
+		
+		$("#switchStatus").click(function(){
+			aList.set('notActive',!aList.get('notActive'));
+		});
+	
+	});
+	
+  </script>
+
+</body>
+</html>

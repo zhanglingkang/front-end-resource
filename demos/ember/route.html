@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ember route demo</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	
+	
+  <script type="text/x-handlebars" data-template-name="routeIndex" >
+		应用名: {{name}} </br>
+		版本:{{ctrlName}} </br>
+		
+		<a href="#" {{action "changeName"}}>changeName</a>
+  </script>
+  
+   <script type="text/x-handlebars" data-template-name="sayHi" >
+		hi
+  </script>
+  <script type="text/x-handlebars" data-template-name="posts/favorites" >
+		posts/favorites {{name}}
+  </script>
+	
+	
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+  <script src="js/libs/ember-1.0.0-rc.6.1.js"></script>
+  <script>
+	$(function(){
+		//必须在ready里执行，不然会有问题。
+		App = Ember.Application.create();
+		App.Router.map(function () {
+		  this.route('routeIndex', { path: '/' });//默认去找 data-template-name="routeIndex"
+		  this.route('sayHi', { path: '/hi' });//#/hi
+		  this.resource('posts', function() {//定义多个字route
+			this.route('favorites');//#/posts/favorites
+		  });
+		});
+		App.RouteIndexRoute = Ember.Route.extend({
+			initilize:function(){
+			
+			/*  model: function () {//it worked
+				return {
+					name:"indexPage"
+				};
+			 } */
+			 
+		});
+		//return;
+		App.RouteIndexController = Ember.Controller.extend({//定义了这个之后，RouteIndexRoute的model就无效了
+			ctrlName: 'ctrl name',
+			name:'indexPage',
+			changeName :function(){//it worked
+				this.set('name',Math.random());
+			}
+		});
+		
+		App.PostsFavoritesController = Ember.Controller.extend({//worked
+			name:'PostFavoritesController'
+		});
+	});
+	
+  </script>
+
+</body>
+</html>
