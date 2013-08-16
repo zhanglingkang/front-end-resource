@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style type="text/css">
+	li {
+		list-style: none;
+	}
+  </style>
+</head>
+<body>
+	
+	
+
+
+	
+	
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+  <script src="js/libs/ember-1.0.0-rc.6.1.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  
+<script type="text/x-handlebars">    
+    <h2>Users' example</h2>
+    {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="users">
+    <div class="list">
+        <ul>
+            {{#each controller}}
+            <li>{{#linkTo 'user' this}}{{name}}{{/linkTo}}</li>
+            {{else}}
+            <li>no users yet...</li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="detail">{{outlet}}</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="user">
+    {{#if view.isEditing}}
+    <p>name: {{view Ember.TextField valueBinding="name"}}</p>
+    <p>email: {{view Ember.TextField valueBinding="email"}}</p>
+    <button type="button" {{action finishEdit target="view"}}>Save</button>
+    {{else}}
+    <button type="button" {{action edit target="view"}}>Edit</button>
+    {{/if}}
+    <p>name: {{name}}</p>
+    <p>email: {{email}}</p>
+</script>
+
+
+
+
+
+
+
+  <script>
+
+	 App = Ember.Application.create();
+
+	App.Store = DS.Store.extend({
+		revision: 12,
+		adapter: "DS.FixtureAdapter"
+	});
+
+	App.User = DS.Model.extend({
+		name: DS.attr('string'),
+		email: DS.attr('string')
+	});
+
+	App.User.FIXTURES = [
+		{ id: 1, name: 'user1', email: 'user1@example.com' },
+		{ id: 2, name: 'user2', email: 'user2@example.com' },
+		{ id: 3, name: 'user3', email: 'user3@example.com' },
+		{ id: 4, name: 'user4', email: 'user4@example.com' },
+		{ id: 5, name: 'user5', email: 'user5@example.com' }
+	];
+
+	App.Router.map(function() {
+		this.resource('users', function() {
+			this.resource('user', { path: ':user_id' });
+		});
+	});
+
+	// App.UserController = Ember.ObjectController.extend({
+	App.UserView = Ember.View.extend({
+		isEditing: false,
+		
+		edit: function() {
+			this.set('isEditing', true);
+		},
+		finishEdit: function() {
+			this.set('isEditing', false);
+			//this.get('controller.model.transaction').commit();
+		}
+	});
+
+	App.UsersRoute = Ember.Route.extend({
+		model: function() {
+			return App.User.find();
+		}
+	});
+
+
+	App.IndexRoute = Ember.Route.extend({
+		redirect: function() {
+			this.transitionTo('users');
+		}
+	});
+  </script>
+
+</body>
+</html>
