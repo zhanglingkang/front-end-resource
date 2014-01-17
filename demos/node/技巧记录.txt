@@ -1,5 +1,0 @@
-1,在命令行中 用control + c 来node 服务器
-2,用npm install时，那 package.json文件的编码必须是 ansi的。。。为什么转化成utf-8后会报错。。。
-
-3,用node-inspector调试Node.js
-http://www.noanylove.com/2011/12/node-the-inspector-debugging-node-js/

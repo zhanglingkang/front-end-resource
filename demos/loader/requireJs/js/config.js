@@ -1,1 +1,0 @@
-﻿require(["helper/underscore-min","module/pen","silblingColor"], function(_,pen,silblingColor) {    console.log(arguments);	var draw = pen.draw;	draw("red");});
