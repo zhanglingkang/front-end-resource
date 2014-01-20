@@ -12,7 +12,7 @@
 更多资源
 * [前端面试问题](https://github.com/darcyclarke/Front-end-Developer-Interview-Questions)
 * [前端开发参考](http://taitems.github.io/Front-End-Development-Guidelines/)
-* [前端开发工具](https://github.com/codylindley/frontend-tools)
+* [前端开发工具](https://githbu.com/codylindley/frontend-tools)
 * [网站优化指导(非YSlow)](http://browserdiet.com/)
 * [对web前端开发者有用的东西](https://github.com/miripiruni/frontdesk)
 * [前端编码规范参考](http://isobar-idev.github.io/code-standards/)
