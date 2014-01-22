@@ -36,6 +36,7 @@
         * always
 * 工具方法
     * 类型探测 isArray,isFunction...
+    * 字符串 trim
     * 合并 extend
 * 最佳实践
 * jquery插件
