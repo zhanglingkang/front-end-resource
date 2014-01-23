@@ -10,10 +10,13 @@
 ## 常用标签
 * div
 * span
-* a:必选属性 href，title
+* a
 * ul
 * ol
 * li
+
+a 
+> 定义了一个超链接, 指定的目标目的地一个超链接，或者两者都是
 
 ## 标签的语义化的意义
 * 对程序员来说，易于阅读和维护
@@ -62,3 +65,5 @@
     
 
 
+## 更多
+* [mozilla html element](https://developer.mozilla.org/zh-CN/docs/HTML/Element)
