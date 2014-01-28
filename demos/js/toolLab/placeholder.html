@@ -7,36 +7,8 @@
 <body>
 	<label for="useName">用户名：</label><input type="text"  id="useName" data-placeHolder="请输入6位以上的数字"/>
 	<label for="hobby">爱好：</label><input type="text"  id="hobby" data-placeHolder="如coding"/>
-	<script type="text/javascript" src="../../sourceLib/js/fish.1.3.1.fwd.js"></script>
 	<script type="text/javascript" src="../../sourceLib/js/jquery-1.7.1.js"></script>
 	<script type="text/javascript">
-	(function(){
-		//基于fish
-		function initPlaceHolder(uElem){
-			var placeHolderText = uElem.attr("data-placeHolder" );
-			uElem.on( "focus",function (){
-				var inputVal = fish.trim(uElem.val());
-				if(inputVal == placeHolderText){
-					uElem.val( "");
-				}
-				uElem.css( "color:#333;");
-			});
-			uElem.on( "blur",function (){
-				var inputVal = fish.trim(uElem.val());
-				if(inputVal == placeHolderText || inputVal==""){
-					uElem.val(placeHolderText);
-					uElem.css( "color:#999;");
-				}
-			});
-
-			var inputVal = fish.trim(uElem.val());
-			if(inputVal == placeHolderText || inputVal==""){
-				uElem.val(placeHolderText);
-				uElem.css( "color:#999;");
-			}
-		}
-		initPlaceHolder(fish.one("#useName"));
-	})();
 	(function(){
 		//基于jQuery
 		function initPlaceHolder($Elem){
