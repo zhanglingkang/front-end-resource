@@ -1,5 +1,0 @@
-www.fontsquirrel.com/fontface (免费的，均是英文的字体)
-下载了ttf格式的文件后
-在 根据ttf格式的文件 http://www.fontsquirrel.com/tools/webfont-generator 来生成字体的其他格式（兼容多浏览器）。
-
-http://www.google.com/fonts
