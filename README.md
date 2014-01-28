@@ -1,7 +1,7 @@
-## 该项目是前端资源收集整理以及一些前端是学习demo
+## 前端知识整理
 
 个人整理资源
-* [创建网站参考](https://github.com/iamjoel/frontEndResource/wiki/create-website-guildline)
+* [创建网站参考](https://github.com/iamjoel/front-end-resource/wiki/create-website-tips)
 * [css框架](https://github.com/iamjoel/frontEndResource/wiki/CSS-frameworks)
 * [css Hack](https://github.com/iamjoel/frontEndResource/wiki/css-hack)
 * [js插件](https://github.com/iamjoel/frontEndResource/wiki/javascript-plugins)
