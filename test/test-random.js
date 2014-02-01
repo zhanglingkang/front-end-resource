@@ -14,7 +14,7 @@ var isInt = function(str) {
 }
 describe('random', function() {
     describe('#makeRandomAlpha', function() {
-        it('alpha different cases', function() {
+        it('should equal to the given cases default lowerCase', function() {
             for (var i = 0; i < 10; i++) {
                 isLowerAlpha(tool.makeRandomAlpha()).should.be.true;
             }
@@ -35,7 +35,7 @@ describe('random', function() {
 
         });
 
-        it('alpha length', function() {
+        it('should be equal to the given length default 1', function() {
             tool.makeRandomAlpha().split('').length.should.equal(1); // use split because Ie6 not support String.prototype.length
             tool.makeRandomAlpha(-1).split('').length.should.equal(1);
             tool.makeRandomAlpha(0).split('').length.should.equal(1);
@@ -44,14 +44,14 @@ describe('random', function() {
     });
 
     describe('#randomItemInArr', function(){
-        it('item in arr', function(){
+        it('should in given array', function(){
             var arr = [1,2,3,4];
             for(var i = 0; i < 10; i++) {
                 arr.indexOf(tool.randomItemInArr(arr)).should.greaterThan(-1);
             }
         });
 
-        it('param error', function(){
+        it('should throw a error if param is not array', function(){
             var obj = {};
             tool.randomItemInArr.bind(obj).should.throw();
         });
@@ -59,7 +59,7 @@ describe('random', function() {
     });
 
     describe('#randomNum', function(){
-        it('number range', function(){
+        it('should be in the expected range', function(){
             for(var i= 0; i < 10; i++) {
                 tool.randomNum().should.greaterThan(-1);
             }
@@ -68,12 +68,16 @@ describe('random', function() {
             }
         });
 
-        it('random integer', function(){
-           for(var i= 0; i < 10; i++) {
+        it('should be a integer default integer', function(){
+            for(var i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100)).should.be.true;
             } 
+           for(var i= 0; i < 10; i++) {
+                isInt(tool.randomNum(0, 100, true)).should.be.true;
+            } 
         });
-        it('random float', function(){
+        
+        it('should be a float number', function(){
            for(var i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100, false)).should.be.false;
             } 
