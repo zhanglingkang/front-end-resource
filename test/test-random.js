@@ -44,6 +44,16 @@ describe('random', function() {
     });
 
     describe('#randomItemInArr', function(){
+        beforeEach(function() {
+            //mock 
+            sandbox = sinon.sandbox.create();
+            sandbox.stub(window.console, "error");
+        });
+
+        afterEach(function() {
+            sandbox.restore();
+        });
+
         it('should in given array', function(){
             var arr = [1,2,3,4];
             for(var i = 0; i < 10; i++) {
@@ -54,6 +64,7 @@ describe('random', function() {
         it('should throw a error if param is not array', function(){
             var obj = {};
             tool.randomItemInArr.bind(obj).should.throw();
+            sinon.assert.calledOnce(console.error);
         });
 
     });
@@ -76,7 +87,7 @@ describe('random', function() {
                 isInt(tool.randomNum(0, 100, true)).should.be.true;
             } 
         });
-        
+
         it('should be a float number', function(){
            for(var i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100, false)).should.be.false;
