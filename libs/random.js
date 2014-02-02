@@ -1,3 +1,8 @@
+/**
+ * @file 提供生成随机数，随机字母等功能的工具库
+ * @author Joel <iamjoel007@gmail.com>
+ */
+
 (function  (ctx) {
     if(!ctx.tool) {
         ctx.tool = {};
@@ -12,9 +17,12 @@
 
     var random = Math.random; 
 
-
-    /*
+    /**
+    * @function
     * 生成随机字母
+    * @param {Integer} [alphaNum=1] - 生成字母长度
+    * @param {Object} [option={}]- 生成字母类型：默认为小写 可选：{allowUpperCase:true}|{allowAll:true})
+    * @return {String}
     */
     tool.makeRandomAlpha = function(alphaNum, option) {
         alphaNum = isNaN(alphaNum) ? 1 : parseInt(alphaNum);
@@ -35,8 +43,11 @@
 
     };
 
-    /*
+    /**
+    * @function
     * 随机取数组中的某个元素
+    * @param {Array} arr - 源数组
+    * @return 与arr中元素的类型一致
     */
     tool.randomItemInArr = function(arr){
         if(!isArray(arr)) {
@@ -48,8 +59,13 @@
         return arr[randomIndex];
     };
 
-     /*
-    * 随机取数组中的某个元素 [min,max)
+    /** 
+    * @function
+    * 生成某个范围的随机数字，包含最小值，不包含最大值
+    * @param {Integer} [min=0] - 最小值
+    * @param {Integer} [max=99999999] - 最大值
+    * @param {Boolean} [beInteger=true] - 是否是整数
+    * @return {Number}
     */
     tool.randomNum = function(min, max, beInteger) {
         min = min || 0;
