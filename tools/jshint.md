@@ -1,8 +1,9 @@
 ## jshint
-### 默认值
+### jshint默认值
 https://github.com/jshint/jshint/blob/master/examples/.jshintrc
 
-### 更多资源
+### 资源
+* [官网](http://jshint.com)
 * [jshint github](https://github.com/jshint/jshint)
-* [jshint offical site](http://jshint.com)
-* [jshint options reference](http://www.jshint.com/docs/options/)
+* [jshint Grunt插件](https://github.com/gruntjs/grunt-contrib-jshint)
+* [jshint options参考](http://www.jshint.com/docs/options/)
