@@ -2,30 +2,30 @@ chai.Should();
 var tool = window.tool;
 var isAlpha = function(str) {
     return /^[a-zA-Z]+$/g.test(str);
-}
+};
 var isUpperAlpha = function(str) {
     return /^[A-Z]+$/g.test(str);
-}
+};
 var isLowerAlpha = function(str) {
     return /^[a-z]+$/g.test(str);
-}
+};
 var isInt = function(str) {
-   return /^\d+$/g.test(str); 
-}
+    return /^\d+$/g.test(str); 
+};
 describe('random', function() {
     describe('#makeRandomAlpha', function() {
         it('should equal to the given cases default lowerCase', function() {
             for (var i = 0; i < 10; i++) {
                 isLowerAlpha(tool.makeRandomAlpha()).should.be.true;
             }
-            for (var i = 0; i < 10; i++) {
+            for (i = 0; i < 10; i++) {
                 isUpperAlpha(
                     tool.makeRandomAlpha(1, {
                         allowUpperCase: true
                     })
                 ).should.be.true;
             }
-            for (var i = 0; i < 10; i++) {
+            for (i = 0; i < 10; i++) {
                 isAlpha(
                     tool.makeRandomAlpha(1, {
                         allowAll: true
@@ -36,7 +36,9 @@ describe('random', function() {
         });
 
         it('should be equal to the given length default 1', function() {
-            tool.makeRandomAlpha().split('').length.should.equal(1); // use split because Ie6 not support String.prototype.length
+            // use split because Ie6 not support String.prototype.length。
+            // 但悲催的是，Ie6不支持chai
+            tool.makeRandomAlpha().split('').length.should.equal(1); 
             tool.makeRandomAlpha(-1).split('').length.should.equal(1);
             tool.makeRandomAlpha(0).split('').length.should.equal(1);
             tool.makeRandomAlpha(10).split('').length.should.equal(10);
@@ -44,6 +46,7 @@ describe('random', function() {
     });
 
     describe('#randomItemInArr', function(){
+        var sandbox;
         beforeEach(function() {
             //mock 
             sandbox = sinon.sandbox.create();
@@ -74,7 +77,7 @@ describe('random', function() {
             for(var i= 0; i < 10; i++) {
                 tool.randomNum().should.greaterThan(-1);
             }
-            for(var i= 0; i < 10; i++) {
+            for(i= 0; i < 10; i++) {
                 tool.randomNum(5,100).should.greaterThan(4).lessThan(100);
             }
         });
@@ -83,13 +86,13 @@ describe('random', function() {
             for(var i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100)).should.be.true;
             } 
-           for(var i= 0; i < 10; i++) {
+            for(i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100, true)).should.be.true;
             } 
         });
 
         it('should be a float number', function(){
-           for(var i= 0; i < 10; i++) {
+            for(var i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100, false)).should.be.false;
             } 
         });

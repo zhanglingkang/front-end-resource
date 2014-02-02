@@ -1,5 +1,7 @@
 (function  (ctx) {
-    ctx.tool || (ctx.tool = {});
+    if(!ctx.tool) {
+        ctx.tool = {};
+    }
     var tool = ctx.tool; 
     var UPPERCASE_ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var LOWER_ALPHA = 'abcdefghijklmnopqrstuvwxyz';
@@ -19,8 +21,12 @@
         alphaNum = alphaNum <= 0 ? 1 : alphaNum;
         var type = TYPE_LOWER_ALPHA_ONLY;
         option = option || {};
-        option.allowUpperCase && (type = TYPE_UPPER_ALPHA_ONLY);
-        option.allowAll && (type = TYPE_ALL_ALPHA);
+        if(option.allowUpperCase === true) {
+            type = TYPE_UPPER_ALPHA_ONLY;
+        }
+        if(option.allowAll === true) {
+            type = TYPE_ALL_ALPHA;
+        }
         var strArr = [];
         for(var i = 0; i < alphaNum; i++) {
             strArr.push(makeOneRandomAlpha(type));
@@ -78,11 +84,11 @@
                 alphas = LOWER_ALPHA;
         }
         return tool.randomItemInArr(alphas.split(''));
-    };
+    }
 
     
 
     function isArray (arr) {
-        return toString.call(arr) === '[object Array]';
-    };
+        return Object.toString.call(arr) === '[object Array]';
+    }
 })(window);
