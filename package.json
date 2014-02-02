@@ -1,0 +1,27 @@
+{
+  "name": "fontend-resource",
+  "version": "0.0.0",
+  "description": "fontend-resource",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamjoel/fontEnd.git"
+  },
+  "author": "joel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamjoel/fontEnd/issues"
+  },
+  "homepage": "https://github.com/iamjoel/fontEnd",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "matchdep": "~0.3.0",
+    "grunt-contrib-jshint": "~0.8.0"
+  }
+}
