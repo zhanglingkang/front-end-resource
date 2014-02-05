@@ -3,7 +3,7 @@
 * 继承
 * 闭包
 * javascript 怪异的地方
-* 正则
+* 正则(查看reg-reference.md)
 * 设计模式
 * mvx
     * mvc
