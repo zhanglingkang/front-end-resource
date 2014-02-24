@@ -1,5 +1,6 @@
 * DOM
     * 查询
+        * 选择元素(查看jquery-select-elem.md)
         * 属性
         * 数据(data-*)
         * 特性探测（jquery的较新版本已不支持浏览器探测，而建议用特性探测）
