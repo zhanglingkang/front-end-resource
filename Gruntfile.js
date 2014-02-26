@@ -20,6 +20,22 @@
         destination: 'doc'
       }
     }
+    , bowercopy: {
+        options: {
+            // srcPrefix: 'bower_components',// default find in in .bowerrc
+            clean: false
+        },
+        // Anything can be copied
+        libs: {
+            options: {
+                destPrefix: 'libs/vendor'
+            },
+            files: {
+              // shit  https://github.com/timmywil/grunt-bowercopy/issues/10
+              'jquery/dict/jquery.js': 'jquery.js'
+            }
+        }
+      }
   });
 
 
