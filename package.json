@@ -21,7 +21,7 @@
   "homepage": "https://github.com/iamjoel/fontEnd",
   "devDependencies": {
     "grunt": "~0.4.2",
-    "matchdep": "~0.3.0",
+    "load-grunt-tasks": "~0.4.0",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-jsdoc": "~0.5.1",
     "grunt-bowercopy": "~0.8.0"

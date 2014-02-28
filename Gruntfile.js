@@ -41,8 +41,8 @@
   });
 
 
-  // 加载所有的plugin，so easy!
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  // Load grunt tasks from NPM packages
+  require( "load-grunt-tasks" )( grunt );
 
   grunt.registerTask('doc', ['jsdoc']);
   grunt.registerTask('bower', 'bowercopy');// alias for bowercopy
