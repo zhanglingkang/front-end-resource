@@ -8,6 +8,7 @@
         }
         , src: [
           'libs/**/*.js'
+          , '!libs/vendor/*.js'
           , 'test/**/*.js'
           , '!test/vendor/*.js'
         ]
@@ -23,7 +24,7 @@
     , bowercopy: {
         options: {
             // srcPrefix: 'bower_components',// default find in in .bowerrc
-            clean: false
+            //clean: false // default false
         },
         // Anything can be copied
         libs: {
@@ -31,8 +32,9 @@
                 destPrefix: 'libs/vendor'
             },
             files: {
-              // shit  https://github.com/timmywil/grunt-bowercopy/issues/10
-              'jquery/dict/jquery.js': 'jquery.js'
+              'requirejs.js': 'requirejs/require.js'
+              ,'jquery.min.js': 'jquery/dist/jquery.min.js'
+              ,'lodash.min.js': 'lodash/dist/lodash.min.js'
             }
         }
       }
@@ -43,7 +45,8 @@
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.registerTask('doc', ['jsdoc']);
-  grunt.registerTask('build', ['jshint']);
+  grunt.registerTask('bower', 'bowercopy');// alias for bowercopy
+  grunt.registerTask('build', ['jshint','bower']);
 
   grunt.registerTask('default', ['build']);
 };

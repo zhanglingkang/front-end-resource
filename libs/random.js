@@ -21,7 +21,8 @@
     * @function
     * 生成随机字母
     * @param {Integer} [alphaNum=1] - 生成字母长度
-    * @param {Object} [option={}]- 生成字母类型：默认为小写 可选：{allowUpperCase:true}|{allowAll:true})
+    * @param {Object} [option={}]- 
+    * 生成字母类型：默认为小写 可选：{allowUpperCase:true}|{allowAll:true})
     * @return {String}
     */
     tool.makeRandomAlpha = function(alphaNum, option) {
