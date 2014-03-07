@@ -10,7 +10,7 @@ var isLowerAlpha = function(str) {
     return /^[a-z]+$/g.test(str);
 };
 var isInt = function(str) {
-    return /^\d+$/g.test(str); 
+    return /^\d+$/g.test(str);
 };
 describe('random', function() {
     describe('#makeRandomAlpha', function() {
@@ -38,7 +38,7 @@ describe('random', function() {
         it('should be equal to the given length default 1', function() {
             // use split because Ie6 not support String.prototype.length。
             // 但悲催的是，Ie6不支持chai
-            tool.makeRandomAlpha().split('').length.should.equal(1); 
+            tool.makeRandomAlpha().split('').length.should.equal(1);
             tool.makeRandomAlpha(-1).split('').length.should.equal(1);
             tool.makeRandomAlpha(0).split('').length.should.equal(1);
             tool.makeRandomAlpha(10).split('').length.should.equal(10);
@@ -48,13 +48,13 @@ describe('random', function() {
     describe('#randomItemInArr', function(){
         var sandbox;
         beforeEach(function() {
-            //mock 
-            sandbox = sinon.sandbox.create();
-            sandbox.stub(window.console, "error");
+            //mock
+            sinon.spy(window.console, "error");
         });
 
         afterEach(function() {
-            sandbox.restore();
+            // Unwraps the spy;
+            window.console.error.restore();
         });
 
         it('should in given array', function(){
@@ -85,16 +85,16 @@ describe('random', function() {
         it('should be a integer default integer', function(){
             for(var i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100)).should.be.true;
-            } 
+            }
             for(i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100, true)).should.be.true;
-            } 
+            }
         });
 
         it('should be a float number', function(){
             for(var i= 0; i < 10; i++) {
                 isInt(tool.randomNum(0, 100, false)).should.be.false;
-            } 
+            }
         });
     });
 });
