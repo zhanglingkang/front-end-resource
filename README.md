@@ -1,4 +1,12 @@
 ## 前端知识整理
+### 项目的目录结构
+* `front-end-knowledge` 前端的学习文档
+* `api` 第三方组件自己使用的一些用例
+* `libs` 工具代码
+* `test` 对工具代码的测试
+* `doc` 工具代码的文档
+
+
 ### 如何写出cool的前端代码
 * 代码风格
     * 确定代码风格，可参考 [google code style](http://code.google.com/p/google-styleguide/), [idiomatic.js](https://github.com/rwaldron/idiomatic.js/tree/master/translations/zh_CN)

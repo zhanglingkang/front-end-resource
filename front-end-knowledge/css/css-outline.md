@@ -9,7 +9,7 @@
     * 常见浏览器bug
         * fuck ie 6
             * 双边距
-* 常见布局
+* 布局 http://zh.learnlayout.com/
     * 左右两栏
     * 左右大小可变，中间大小固定
 * 最佳实践
