@@ -1,4 +1,4 @@
-## 前端知识整理
+## 前端知识整理 ![code ship](https://www.codeship.io/projects/726b3dd0-a342-0131-a48d-6a2466794c2b/status)
 ### 项目的目录结构
 * `front-end-knowledge` 前端的学习文档
 * `api` 第三方组件api文档
