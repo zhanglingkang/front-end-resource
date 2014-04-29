@@ -1,13 +1,23 @@
+// The below Use Anywhere setup was so graciously provided to me by:
+// <https://github.com/umdjs/umd/blob/master/returnExports.js>
 /**
  * @file 提供生成随机数，随机字母等功能的工具库
  * @author Joel <iamjoel007@gmail.com>
  */
-
-(function  (ctx) {
-    if(!ctx.tool) {
-        ctx.tool = {};
-    }
-    var tool = ctx.tool;
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        root.tool = factory();
+  }
+}(this, function () {
     var UPPERCASE_ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var LOWER_ALPHA = 'abcdefghijklmnopqrstuvwxyz';
     var ALL_ALPHA = LOWER_ALPHA + UPPERCASE_ALPHA;
@@ -25,7 +35,7 @@
     * 生成字母类型：默认为小写 可选：{allowUpperCase:true}|{allowAll:true})
     * @return {String}
     */
-    tool.makeRandomAlpha = function(alphaNum, option) {
+    var makeRandomAlpha = function(alphaNum, option) {
         alphaNum = isNaN(alphaNum) ? 1 : parseInt(alphaNum);
         alphaNum = alphaNum <= 0 ? 1 : alphaNum;
         var type = TYPE_LOWER_ALPHA_ONLY;
@@ -50,7 +60,7 @@
     * @param {Array} arr - 源数组
     * @return 与arr中元素的类型一致
     */
-    tool.randomItemInArr = function(arr){
+    var randomItemInArr = function(arr){
         if(!isArray(arr)) {
             console.error('param@arr: %s shoule be array',arr);
             throw new Error('param@arr shoule be array');
@@ -68,7 +78,7 @@
     * @param {Boolean} [beInteger=true] - 是否是整数
     * @return {Number}
     */
-    tool.randomNum = function(min, max, beInteger) {
+    var randomNum = function(min, max, beInteger) {
         min = min || 0;
         max = max || 99999999;
         beInteger = beInteger !== undefined ? beInteger : true;
@@ -100,7 +110,7 @@
             default :
                 alphas = LOWER_ALPHA;
         }
-        return tool.randomItemInArr(alphas.split(''));
+        return randomItemInArr(alphas.split(''));
     }
 
 
@@ -109,4 +119,9 @@
         return Object.prototype
             .toString.call(arr) === '[object Array]';
     }
-})(window);
+    return {
+        makeRandomAlpha : makeRandomAlpha
+        , randomItemInArr : randomItemInArr
+        , randomNum : randomNum
+    };
+}));
