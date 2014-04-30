@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sinonjs</title>
+  	<link rel="stylesheet" media="all" href="../test/vendor/mocha.css">
+
+</head>
+<body>
+	<!-- http://sinonjs.org/docs/ -->
+	<div id="mocha"></div>
+	<script src="../test/vendor/mocha.js"></script>
+    <script src="../test/vendor/chai.js"></script>
+	<script src = "../libs/vendor/jquery.min.js"></script>
+	<script src = "../test/vendor/sinon.js"></script>
+	<script>mocha.setup('bdd')</script>
+	<script>
+		$(document).ready(function () {
+			chai.Should();
+			describe('spy', function() {
+		        it('callback called', function() {
+		        	var callback = sinon.spy();
+					callback();
+					callback.called.should.equal(true);
+		        });
+			});
+
+			mocha.run();
+		});
+	</script>
+	<script>
+  	</script>
+</body>
+</html>
