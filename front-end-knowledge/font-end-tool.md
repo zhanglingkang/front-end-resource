@@ -27,6 +27,16 @@
     * Trailing Spaces: 让多余的空格无所遁形
     * 开启vim模式
 
+## 代码版本控制
+* git
+    * github : 客户端 https://help.github.com/articles/set-up-git
+    * gitlab : 在windows下，建议用cygwin，在上面装git插件。安装配置可参考
+    http://www.cnblogs.com/EasonWu/archive/2012/11/27/git-windows-setup-by-cygwin.html
+
+## 图片查看
+* photoshop
+* [picpick](http://www.picpick.org/en/) 轻量级的查看图片软件支持：查看psd格式；量色；测距离等。
+
 ## 静态服务器
 * [anywhere](https://npmjs.org/package/anywhere) 需nodejs的环境
 
