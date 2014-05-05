@@ -22,6 +22,7 @@
     $(document).ready(function() {
         chai.Should();
         describe('spy', function() {
+            // http://sinonjs.org/docs/#spies
             describe('spy not exist function', function() {
                 it('callback should be called', function() {
                     var callback = sinon.spy();
@@ -52,8 +53,6 @@
                 });
             });
 
-
-
             describe('spy arguments', function() {
                 it('arguments should be a,b,c', function() {
 	            	sinon.spy(console, 'log');
@@ -63,7 +62,20 @@
 	            	console.log.getCall(0).args[2].should.equal('c');
 	            	console.log.restore();
 	            });
+            });
 
+            describe('spy throw', function() {
+                it('function should throw', function() {
+                    function testFn() {
+                        throw 'some error';
+                    }
+                    try {
+                      var fn = sinon.spy(testFn);
+                        fn();
+                        fn.threw().should.ok;  
+                    } catch(exp){}
+                    
+                });
             });
         });
 
