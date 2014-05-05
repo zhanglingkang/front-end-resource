@@ -18,5 +18,15 @@
     * 测试
     * 持续集成
 
+## js书籍推荐
+* [eloquentjavascript](http://eloquentjavascript.net)
+* JavaScript The Good Parts
+* JavaScript DOM编程艺术
+* JavaScript高级程序设计
+* 编写可维护的javascript
+* 测试驱动的javascript开发
+* 了不起的node.js
+* 深入浅出node.js
+　
 ## 参考
 http://javascript.ruanyifeng.com/
