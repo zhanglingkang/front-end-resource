@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>立方体</title>
+    <style>
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{
+    	margin: 0;
+    	padding: 0;
+    }
+    #cube-con {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        margin: 40px auto;
+        perspective: 1000px;
+    }
+    #cube {
+        width: 100%;
+        height: 100%;
+        transform: translateZ(-100px);
+        position: absolute;
+        transform-style: preserve-3d;/* 3d的视角*/
+        transition: transform 1s ease 0s;
+    }
+    #cube figure {
+        width: 196px;
+        height: 196px;
+        line-height: 196px;
+        display: block;
+        position: absolute;
+        border: 2px solid black;
+        color:#fff;
+        font-size: 130px;
+    	font-weight: bold;
+    	text-align: center;
+    	opacity: 0.8;
+    }
+    #cube .front {
+    	background:#1ABC9C;
+    	transform: rotateY( 0deg ) translateZ( 100px );
+    }
+    #cube .back {
+    	background:#3498DB;
+    	transform: rotateX( 180deg ) translateZ( 100px);
+    }
+    #cube .right {
+    	background:#8E44AD;
+    	transform: rotateY( 90deg ) translateZ( 100px );
+    }
+    #cube .left {
+    	background:#34495E;
+        transform: rotateY( -90deg ) translateZ( 100px );
+    }
+    #cube .top {
+    	background:#F39C12;
+    	transform: rotateX( 90deg ) translateZ( 100px );
+    }
+    #cube .bottom {
+    	background:#C0392B;
+    	transform: rotateX( -90deg ) translateZ( 100px );
+    }
+	/* cube的旋转 */
+    #cube.show-front {
+    	transform: translateZ(-100px);
+	}
+	#cube.show-back {
+	    transform: translateZ(-100px) rotateX(-180deg);
+	}
+	#cube.show-right {
+	    transform: translateZ(-100px) rotateY(-90deg);
+	}
+	#cube.show-left {
+	    transform: translateZ(-100px) rotateY(90deg);
+	}
+	#cube.show-top {
+	    transform: translateZ(-100px) rotateX(-90deg);
+	}
+	#cube.show-bottom {
+	    transform: translateZ(-100px) rotateX(90deg);
+	}
+
+	#control-btn-wrap{
+		list-style: none outside none;
+	    clear: both;
+	    overflow: hidden;
+	    width: 310px;
+	    margin: 0 auto;
+	}
+	#control-btn-wrap li{
+		float: left;
+		margin-right: 10px;
+	}
+    </style>
+</head>
+
+<body>
+	<!-- http://beiyuu.com/css3-animation/ -->
+    <section id="cube-con">
+        <div id="cube">
+            <figure class="front">1</figure>
+            <figure class="back">2</figure>
+            <figure class="right">3</figure>
+            <figure class="left">4</figure>
+            <figure class="top">5</figure>
+            <figure class="bottom">6</figure>
+        </div>
+    </section>
+    <ul id="control-btn-wrap">
+    	<li><a href="javascript:void(0);" class="control-cube-btn" data-action="front">显示1</a></li>
+    	<li><a href="javascript:void(0);" class="control-cube-btn" data-action="back">显示2</a></li>
+    	<li><a href="javascript:void(0);" class="control-cube-btn" data-action="right">显示3</a></li>
+    	<li><a href="javascript:void(0);" class="control-cube-btn" data-action="left">显示4</a></li>
+    	<li><a href="javascript:void(0);" class="control-cube-btn" data-action="top">显示5</a></li>
+    	<li><a href="javascript:void(0);" class="control-cube-btn" data-action="bottom">显示6</a></li>
+    </ul>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script>
+    $(document).ready(function(){
+    	var cube = $('#cube')[0];
+    	$('.control-cube-btn').click(function(){
+    		cube.className = 'show-' + $(this).data('action')
+    	});
+
+    });
+    </script>
+</body>
+
+</html>
