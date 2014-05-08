@@ -1,6 +1,31 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json')
+    , connect: {
+      test: {
+        port: 3001
+        , base: '.'
+      }
+    }
+    , mocha: {
+      'test-lib' :{// 自己写的脚本
+        options: {
+          urls: [ 'localhost:3001/test/test-random.html' ]
+          , options: {
+            timeout: 10000
+          }
+          , run: true
+
+          // src: [ 'test/*.html' , '!test/*.html']
+        }
+      }
+      // , 'test-lib' :{// 学习第三方库写的测试脚本
+      //   options: {
+      //     // urls: [ 'localhost:3001/test/*.html' ]
+      //     urls: [ 'test/*.html' ]
+      //   }
+      // }
+    }
     , jshint: {
       all: {
         options: {
