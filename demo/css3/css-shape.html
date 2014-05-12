@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>css 图形</title>
+</head>
+
+<body>
+    <style>
+    #oval {
+        width: 200px;
+        height: 100px;
+        background: red;
+        -moz-border-radius: 100px / 50px;
+        -webkit-border-radius: 100px / 50px;
+        border-radius: 100px / 50px;
+    }
+    </style>
+    <div id="oval"></div>
+
+    <style>
+    #test-border-radious {
+        width: 200px;
+        height: 100px;
+        background: red;
+        /* 左上x，右上x，左下x，右下x / 左上y，右上y，左下y，右下y */
+        border-radius: 5px 50px 15px 20px / 120px 85px 50px 10px;
+    }
+    </style>
+    <div id="test-border-radious"></div>
+<!-- http://www.w3cplus.com/css/css-simple-shapes-cheat-sheet -->
+    <!-- http://www.w3cplus.com/css3/border-radius -->
+</body>
+
+</html>
