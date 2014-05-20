@@ -32,7 +32,7 @@
     </style>
     <!-- http://www.w3cplus.com/css3/border-radius -->
     <div id="test-border-radious"></div>
-    
+
     <!-- 平行四边形 -->
     <style>
     #parallelogram {
@@ -51,7 +51,7 @@
 
     <!-- 梯形 -->
     <style>
-    #trapezoid {
+    #trapezoid-1 {
         width: 100px;
         height: 70px;
         -webkit-transform: skew(-20deg);
@@ -62,8 +62,8 @@
         background: red;
         margin: 30px;
     }
-    #trapezoid:after{
-        content: '';
+    #trapezoid-1:after {
+        content:'';
         display: block;
         width: 100px;
         height: 70px;
@@ -76,7 +76,29 @@
         transform: skew(40deg);
     }
     </style>
-    <div id="trapezoid"></div>
+    <div id="trapezoid-1"></div>
+
+    <style>
+    #trapezoid-2 {
+        height: 0;
+        width: 100px;
+        border-bottom: 100px solid red;
+        border-left: 60px solid transparent;
+        border-right: 60px solid transparent;
+    }
+    </style>
+    <div id="trapezoid-2"></div>
+
+    <style>
+    #triangle-up {
+        height: 0;
+        width: 0;
+        border: 50px solid red;
+        border-color: transparent transparent red transparent;
+        margin: 30px;
+    }
+    </style>
+    <div id="triangle-up"></div>
 
 </body>
 
