@@ -55,3 +55,4 @@
 * [前端编码规范参考](http://isobar-idev.github.io/code-standards/)
 * [如何与最新的前端技术保存同步](http://uptodate.frontendrescue.org/)
 
+[![Analytics](https://ga-beacon.appspot.com/UA-51355680-1/front-end-resource/readme)](https://github.com/igrigorik/ga-beacon)
