@@ -1,3 +1,49 @@
+## <a name='TOC'>目录</a>
+  1. [缩进](#spacing)
+  1. [格式](#formatting)
+  1. [例子](#example)
+  1. [常见页面元素命名](#fileNameDefine)
+
+## <a name='spacing'>缩进</a>
+* 代码缩进使用4个空格
+* `:`后有一个空格
+* `{`前有一个空格
+* 规则块间有一空行
+* `}`要另起一行
+* 多个选择器公用一段样式时，每个选择器都要占一行
+
+## <a name='formatting'>格式</a>
+* 颜色用十六进制，如`#000`。除非要用透明值时，使用`rgba()`
+* 值是0时，不能加单位。如用`margin:0;`而不是`margin:0px;`
+
+
+## <a name='example'>例子</a>
+```
+/* Example of good basic formatting practices */
+.styleguide-format {
+∙∙∙∙color: #000; /* 缩进使用4个空格 */
+    background-color: rgba(0, 0, 0, .5);
+    border: 1px solid #0f0;
+}
+
+/* Example of individual selectors getting their own lines (for error reporting) */
+.multiple,
+.classes,
+.get-new-lines {
+    display: block;
+}
+
+/* Avoid unnecessary shorthand declarations */
+.not-so-good {
+    margin: 0 0 20px;
+}
+.good {
+    margin-bottom: 20px;
+}
+
+```
+
+
 ## <a name='fileNameDefine'>常见页面元素命名</a>
 (1) 页面结构
 
