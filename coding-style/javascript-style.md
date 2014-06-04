@@ -11,6 +11,7 @@
   1. [代码缩进/空格](#whitespace)
   1. [注释](#comment)
   1. [jquery](#jquery)
+  1. [参考](#reference)
 
 ## <a name='fileNameDefine'>文件命名</a>
 使用分割线。
@@ -231,7 +232,7 @@ var hero = {
 ```
 [返回顶部](#TOC)
 
-## 参考
+## <a name='reference'>参考</a>
 * [Pragmatic jQuery Style](https://github.com/modulejs/pragmatic-jquery/blob/master/README.md)
 * [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 * [Google JavaScript代码风格指南](http://chajn.org/jsguide/javascriptguide.html)
