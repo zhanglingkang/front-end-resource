@@ -6,4 +6,7 @@
 * [我的css代码风格](https://github.com/iamjoel/front-end-resource/blob/master/coding-style/css-style.md) 参考
 	* [github css style guide](https://github.com/styleguide/css)
 	* [kss(Knyle Style Sheets)](https://github.com/kneath/kss)
-* [我的html代码风格](https://github.com/iamjoel/front-end-resource/blob/master/coding-style/html-style.md)
+* [我的html代码风格](https://github.com/iamjoel/front-end-resource/blob/master/coding-style/html-style.md) 参考
+	* [github templates guide](https://github.com/styleguide/templates)
+	* [google htmlcssguide](http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml)
+

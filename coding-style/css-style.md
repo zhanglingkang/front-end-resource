@@ -1,8 +1,10 @@
+# css代码风格
 ## <a name='TOC'>目录</a>
-  1. [缩进](#spacing)
-  1. [格式](#formatting)
-  1. [例子](#example)
-  1. [常见页面元素命名](#fileNameDefine)
+1. [缩进](#spacing)
+1. [格式](#formatting)
+1. [例子](#example)
+1. [常见页面元素命名](#fileNameDefine)
+1. [参考](#reference)
 
 ## <a name='spacing'>缩进</a>
 * 代码缩进使用4个空格
@@ -11,11 +13,12 @@
 * 规则块间有一空行
 * `}`要另起一行
 * 多个选择器公用一段样式时，每个选择器都要占一行
+[返回顶部](#TOC)
 
 ## <a name='formatting'>格式</a>
 * 颜色用十六进制，如`#000`。除非要用透明值时，使用`rgba()`
 * 值是0时，不能加单位。如用`margin:0;`而不是`margin:0px;`
-
+[返回顶部](#TOC)
 
 ## <a name='example'>例子</a>
 ```
@@ -42,7 +45,7 @@
 }
 
 ```
-
+[返回顶部](#TOC)
 
 ## <a name='fileNameDefine'>常见页面元素命名</a>
 (1) 页面结构
@@ -101,3 +104,9 @@
     合作伙伴：partner
     友情链接：link
     版权：copyright
+[返回顶部](#TOC)
+
+## <a name='reference'>参考</a>
+* [github css style guide](https://github.com/styleguide/css)
+* [kss(Knyle Style Sheets)](https://github.com/kneath/kss)
+[返回顶部](#TOC)

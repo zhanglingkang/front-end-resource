@@ -1,17 +1,18 @@
+# javascript代码风格
 ## <a name='TOC'>目录</a>
-  1. [文件命名](#fileNameDefine)
-  1. [变量命名](#varDefine)
-  1. [常量命名](#constantDefine)
-  1. [方法命名](#functionDefine)
-  1. [类命名](#classDefine)
-  1. [定义变量](#defineVar)
-  1. [定义对象](#defineObject)
-  1. [字符串](#string)
-  1. [大括号](#brace)
-  1. [代码缩进/空格](#whitespace)
-  1. [注释](#comment)
-  1. [jquery](#jquery)
-  1. [参考](#reference)
+1. [文件命名](#fileNameDefine)
+1. [变量命名](#varDefine)
+1. [常量命名](#constantDefine)
+1. [方法命名](#functionDefine)
+1. [类命名](#classDefine)
+1. [定义变量](#defineVar)
+1. [定义对象](#defineObject)
+1. [字符串](#string)
+1. [大括号](#brace)
+1. [代码缩进/空格](#whitespace)
+1. [注释](#comment)
+1. [jquery](#jquery)
+1. [参考](#reference)
 
 ## <a name='fileNameDefine'>文件命名</a>
 使用分割线。
@@ -236,5 +237,6 @@ var hero = {
 * [Pragmatic jQuery Style](https://github.com/modulejs/pragmatic-jquery/blob/master/README.md)
 * [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 * [Google JavaScript代码风格指南](http://chajn.org/jsguide/javascriptguide.html)
+[返回顶部](#TOC)
 
 
