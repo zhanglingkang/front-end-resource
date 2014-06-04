@@ -10,3 +10,12 @@
 	* [github templates guide](https://github.com/styleguide/templates)
 	* [google htmlcssguide](http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml)
 
+## 检查代码风格工具
+* js
+	* [jshint](https://github.com/iamjoel/front-end-resource/blob/master/coding-style/jshint.md)
+* css
+	* [csslint](https://github.com/iamjoel/front-end-resource/blob/master/coding-style/csslint.md)
+* html
+	* [HTMLHint](https://github.com/yaniswang/HTMLHint)
+	* [w3c validation](http://validator.w3.org/nu/)
+
