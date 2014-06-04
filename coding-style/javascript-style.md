@@ -236,7 +236,7 @@ var hero = {
 ## <a name='reference'>参考</a>
 * [Pragmatic jQuery Style](https://github.com/modulejs/pragmatic-jquery/blob/master/README.md)
 * [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
-* [Google JavaScript代码风格指南](http://chajn.org/jsguide/javascriptguide.html)
+* [Google JavaScript代码风格指南](http://chajn.org/jsguide/javascriptguide.html)    
 [返回顶部](#TOC)
 
 

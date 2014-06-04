@@ -55,17 +55,17 @@
 
 ## <a name='url'>url</a>
 * 省略协议。使用`<script src="//xxx"></script>`而不也`<script src="http://xxx"></script>`
-* 在域名末尾加`/` 原因见 http://www.douban.com/note/214496506/
+* 在域名末尾加`/` 原因见 http://www.douban.com/note/214496506/    
 [返回顶部](#TOC)
 
 ## <a name='other'>其他</a>
 * 重要图片必须加上alt属性; 给重要的元素和截断的元素加上title
 * 元素属性使用双引号
-* html的元素，属性，值，css选择器，选择器的属性和值使用小写字母
+* html的元素，属性，值，css选择器，选择器的属性和值使用小写字母    
 [返回顶部](#TOC)
 
 ## <a name='reference'>参考</a>
 * [github templates guide](https://github.com/styleguide/templates)
 * [google htmlcssguide](http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml)
-* http://www.zhihu.com/question/19963993
+* http://www.zhihu.com/question/19963993    
 [返回顶部](#TOC)
