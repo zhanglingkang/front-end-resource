@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>复制到剪贴板demo</title>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="./vendor/ZeroClipboard.js"></script>
+</head>
+<div class="demo-area">
+	<label for="copy-input">输入要复制到剪切板的文字:</label><br>
+	<textarea id="copy-input" cols="30" rows="10"></textarea><br>
+	<button id="copy-button">复制到剪贴板</button><br>
+	<textarea placeholder="ctrl+v 黏贴" cols="30" rows="10"></textarea><br>
+</div>
+
+
+<body>
+    <script>
+    $(document).ready(function() {
+        var $copyInput = $('#copy-input');
+        ZeroClipboard.config({
+            swfPath: './vendor/ZeroClipboard.swf'
+        });
+
+        var client = new ZeroClipboard(document.getElementById("copy-button"));
+
+        client.on("ready", function(readyEvent) {
+            client.on("copy", function(event) {
+                var clipboard = event.clipboardData;
+                var copyText = $copyInput.val();
+                clipboard.setData("text/plain", copyText);// 将内容添加到剪切板
+            });
+
+            client.on("error", function(event) {
+                $(".demo-area").hide();
+                alert('error[name="' + event.name + '"]: ' + event.message);
+                ZeroClipboard.destroy();
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>
