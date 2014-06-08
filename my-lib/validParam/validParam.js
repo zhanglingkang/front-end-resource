@@ -64,6 +64,9 @@ depend on lodash
                 case 'num':
                     validMsg = _.isNumber(value) ? true : ERROR_MSG_PREFIX + 'number';
                     break;
+                case 'int':
+                    validMsg = _.isNumber(value) && _.indexOf((value +''),'.') === -1 ? true : ERROR_MSG_PREFIX + 'number';
+                    break;
                 case 'bool':
                     validMsg = _.isBoolean(value) ? true : ERROR_MSG_PREFIX + 'bool';
                     break;
