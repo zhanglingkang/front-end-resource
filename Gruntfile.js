@@ -41,9 +41,9 @@ module.exports = function(grunt) {
       }
     }
     , jsdoc : {
-      src : ['libs/**/*.js']
+      src : ['my-lib/*/*.js','!my-lib/doc/**/*.js']
       , options: {
-        destination: 'doc'
+        destination: 'my-lib/doc'
       }
     }
     , bowercopy: {
