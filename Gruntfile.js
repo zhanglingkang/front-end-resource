@@ -38,9 +38,11 @@ module.exports = function(grunt) {
             }
         },
         'jsdoc': {
-            src: ['my-lib/*/*.js', '!my-lib/doc/**/*.js'],
-            options: {
-                destination: 'my-lib/doc'
+            'my-lib': {
+                src: ['my-lib/*/*.js'],
+                options: {
+                    destination: 'my-lib/doc'
+                }
             }
         },
         'markdown': {
