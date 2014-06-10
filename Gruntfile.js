@@ -43,13 +43,32 @@ module.exports = function(grunt) {
                 destination: 'my-lib/doc'
             }
         },
-        'clean':{
-            files: ['.grunt','build']
+        'markdown': {
+            'coding-style': {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: 'coding-style/*.md',
+                    dest: 'coding-style/html/',
+                    ext: '.html'
+                }]
+            }
+        },
+        'clean': {
+            files: ['.grunt', 'build']
         },
         'copy': {
-            'vendor':{
-              'src': ['vendor/**/*'],
-              'dest': 'build/'
+            'vendor': {
+                'src': ['vendor/**/*'],
+                'dest': 'build/'
+            },
+            'coding-style': {
+                'expand': true,
+                'flatten': true,
+                'src': [
+                    'coding-style/html/*'
+                ],
+                'dest': 'build/coding-style'
             },
             'my-lib': {
                 'src': [
@@ -112,8 +131,8 @@ module.exports = function(grunt) {
     grunt.registerTask('doc', ['jsdoc']);
     grunt.registerTask('bower', 'bowercopy'); // alias for bowercopy
     grunt.registerTask('build', ['jshint', 'bower']);
-    grunt.registerTask('pre', ['clean','copy']);
-    grunt.registerTask('publish', ['pre','gh-pages']);
+    grunt.registerTask('pre', ['clean', 'markdown', 'copy']);
+    grunt.registerTask('publish', ['pre', 'gh-pages']);
 
     grunt.registerTask('default', ['build']);
 };
