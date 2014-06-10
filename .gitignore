@@ -4,7 +4,7 @@
 node_modules
 bower_components
 build
-
+.grunt
 
 ###############
 #  fixed file #
