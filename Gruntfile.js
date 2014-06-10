@@ -58,6 +58,10 @@ module.exports = function(grunt) {
             files: ['.grunt', 'build']
         },
         'copy': {
+            'index': {
+              'src': 'index.html',
+              'dest': 'build/'
+            },
             'vendor': {
                 'src': ['vendor/**/*'],
                 'dest': 'build/'
@@ -68,7 +72,7 @@ module.exports = function(grunt) {
                 'src': [
                     'coding-style/html/*'
                 ],
-                'dest': 'build/coding-style'
+                'dest': 'build/coding-style/'
             },
             'my-lib': {
                 'src': [
