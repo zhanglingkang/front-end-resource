@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>翻牌效果</title>
+	<style>
+		#card-wrap {
+			color: #FFFFFF;
+		    font-size: 140px;
+		    font-weight: bold;
+			width: 200px;
+			height: 260px;
+			line-height: 260px;
+			text-align: center;
+			position: relative;
+			perspective: 800px;/* 属性设置镜头到元素平面的距离。所有元素都是放置在z=0的平面上。比如perspective(300px)表示，镜头距离元素表面的位置是300像素 */
+		}
+
+		#card {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			transform-style: preserve-3d;
+			transition: transform 1s;
+		}
+
+	    #card div{
+		    position: absolute;
+		    width: 100%;
+		    height: 100%;
+		    backface-visibility: hidden;
+	    }
+
+        #card .front {
+		    background: #E74C3C;
+	    }
+	    #card .back {
+		    background: #3498DB;
+		    transform: rotateY( 180deg );
+	    }
+	    #card.flipped {
+		    transform: rotateY( 180deg );
+	    }
+
+	</style>
+</head>
+<body>
+	<!-- http://beiyuu.com/css3-animation/ -->
+	<h2>点击下面的纸牌查看翻牌效果</h2>
+    <div id="card-wrap">
+	    <div id="card">
+		    <div class="front">正</div>
+		    <div class="back">反</div>
+	    </div>
+    </div>
+    <script>
+    	document.querySelector('#card')
+    		.addEventListener(
+    			'click'
+    			, function(){
+    				if(this.className === 'flipped'){
+    					this.className = '';
+    				} else {
+    					this.className = 'flipped';
+    				}
+				}
+			);
+    </script>
+</body>
+</html>

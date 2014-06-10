@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>sinonjs</title>
+    <link rel="stylesheet" media="all" href="../test/vendor/mocha.css">
+
+</head>
+
+<body>
+    <!-- http://sinonjs.org/docs/ -->
+    <div id="mocha"></div>
+    <script src="../test/vendor/mocha.js"></script>
+    <script src="../test/vendor/chai.js"></script>
+    <script src="../libs/vendor/jquery.min.js"></script>
+    <script src="../test/vendor/sinon.js"></script>
+    <script>
+    mocha.setup('bdd')
+    </script>
+    <script>
+    $(document).ready(function() {
+        chai.Should();
+        describe('spy', function() {
+            // http://sinonjs.org/docs/#spies
+            describe('spy not exist function', function() {
+                it('callback should be called', function() {
+                    var callback = sinon.spy();
+                    callback();
+                    callback.called.should.equal(true);
+                });
+            });
+
+            describe('spy exist function', function() {
+                it('function should be called', function() {
+                    function testFn() {
+                        console.log('testFn called!');
+                    }
+                    var fn = sinon.spy(testFn);
+                    fn();// shit, 这个必须用返回函数来测。。。
+                    fn.called.should.equal(true);
+                });
+
+                it('function of obj should be called', function() {
+                    var obj = {
+                        sayHel: function() {
+                            console.log('sayHel called');
+                        }
+                    };
+                    sinon.spy(obj, 'sayHel');
+                    obj.sayHel();
+                    obj.sayHel.called.should.ok; //.ok等价于  equal(true)
+                });
+            });
+
+            describe('spy arguments', function() {
+                it('arguments should be a,b,c', function() {
+	            	sinon.spy(console, 'log');
+	            	console.log('a', 'b', 'c');
+	            	console.log.getCall(0).args[0].should.equal('a');
+	            	console.log.getCall(0).args[1].should.equal('b');
+	            	console.log.getCall(0).args[2].should.equal('c');
+	            	console.log.restore();
+	            });
+            });
+
+            describe('spy throw', function() {
+                it('function should throw', function() {
+                    function testFn() {
+                        throw 'some error';
+                    }
+                    try {
+                      var fn = sinon.spy(testFn);
+                        fn();
+                        fn.threw().should.ok;  
+                    } catch(exp){}
+                    
+                });
+            });
+        });
+
+        mocha.run();
+    });
+    </script>
+    <script>
+    </script>
+</body>
+
+</html>

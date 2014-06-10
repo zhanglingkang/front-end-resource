@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <script src="../../vendor/lodash.min.js"></script>
+    <script src="../../vendor/jquery.min.js"></script>
+    <script src="./validParam.js"></script>
+    <script>
+    $(document).ready(function($) {
+        var valid = validParam;
+        var validObj = [{
+            value: undefined,
+            valid: 'required'
+        }, {
+            value: 123,
+            valid: 'required'
+        }, {
+            value: 'aaa',
+            valid: 'number'
+        }, {
+            value: 111,
+            valid: 'number'
+        }, {
+            value: undefined,
+            valid: ['required','number']
+        }, {
+            value: 'aaa',
+            valid: 'balbal'
+        }];
+        console.log(valid(validObj));
+
+        // function doSth(name, param){
+        //     if(valid({
+        //         value : name,
+        //         valid:['required', 'string']
+        //     })){
+
+        //     }
+        // }
+
+    });
+    </script>
+</body>
+
+</html>
