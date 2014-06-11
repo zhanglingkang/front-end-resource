@@ -1,6 +1,7 @@
 /**
  * @file 提供生成随机数，随机字母等功能的工具库
  * @author Joel <iamjoel007@gmail.com>
+ * @version 0.0.1
  */
 
 (function  (ctx) {

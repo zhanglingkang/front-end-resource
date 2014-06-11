@@ -1,0 +1,175 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h1 id="html-">html代码风格</h1>
+<h2 id="-a-name-toc-a-"><a name='TOC'>目录</a></h2>
+<ol>
+<li><a href="#doctype">Doctype</a></li>
+<li><a href="#charset">编码</a></li>
+<li><a href="#css">样式表文件</a></li>
+<li><a href="#js">脚本文件</a></li>
+<li><a href="#bool-attr">布尔值属性</a></li>
+<li><a href="#url">url</a></li>
+<li><a href="#other">其他</a></li>
+<li><a href="#reference">参考</a></li>
+</ol>
+<h2 id="-a-name-doctype-doctype-a-"><a name='doctype'>Doctype</a></h2>
+<p>使用<code>html5</code>的</p>
+<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+<h2 id="-a-name-charset-a-"><a name='charset'>编码</a></h2>
+<p><code>&lt;head&gt;</code>的第一行放页面的编码</p>
+<pre><code>&lt;meta charset=&quot;utf-8&quot;&gt;</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-css-a-"><a name='css'>样式表文件</a></h2>
+<ul>
+<li>非特殊情况下样式文件必须外链至<code>&lt;head&gt;</code>。</li>
+<li>引入样式表文件时, 须略去默认类型声明，如<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;</code></pre>
+<a href="#TOC">返回顶部</a></li>
+</ul>
+<h2 id="-a-name-js-a-"><a name='js'>脚本文件</a></h2>
+<ul>
+<li>非特殊情况下脚本文件必须外链至页面底部</li>
+<li>引入脚本文件时, 须略去默认类型声明，如<pre><code>&lt;script scr=&quot;&quot;&gt;&lt;/script&gt;</code></pre>
+<a href="#TOC">返回顶部</a></li>
+</ul>
+<h2 id="-a-name-bool-attr-a-"><a name='bool-attr'>布尔值属性</a></h2>
+<p>有些属性不需要被设置，如 <code>disabled</code>,<code>checked</code>。因此，不要设置它。即使要设置也要符合<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-microsyntaxes.html#boolean-attributes">规范</a>。如</p>
+<pre><code>&lt;input type=&quot;text&quot; disabled&gt;
+
+&lt;input type=&quot;checkbox&quot; value=&quot;1&quot; checked&gt;
+
+&lt;select&gt;
+  &lt;option value=&quot;1&quot; selected&gt;1&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-url-url-a-"><a name='url'>url</a></h2>
+<ul>
+<li>省略协议。使用<code>&lt;script src=&quot;//xxx&quot;&gt;&lt;/script&gt;</code>而不也<code>&lt;script src=&quot;http://xxx&quot;&gt;&lt;/script&gt;</code></li>
+<li>在域名末尾加<code>/</code> 原因见 <a href="http://www.douban.com/note/214496506/">http://www.douban.com/note/214496506/</a><br><a href="#TOC">返回顶部</a></li>
+</ul>
+<h2 id="-a-name-other-a-"><a name='other'>其他</a></h2>
+<ul>
+<li>重要图片必须加上alt属性; 给重要的元素和截断的元素加上title</li>
+<li>元素属性使用双引号</li>
+<li>html的元素，属性，值，css选择器，选择器的属性和值使用小写字母<br><a href="#TOC">返回顶部</a></li>
+</ul>
+<h2 id="-a-name-reference-a-"><a name='reference'>参考</a></h2>
+<ul>
+<li><a href="https://github.com/styleguide/templates">github templates guide</a></li>
+<li><a href="http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml">google htmlcssguide</a></li>
+<li><a href="http://www.zhihu.com/question/19963993">http://www.zhihu.com/question/19963993</a><br><a href="#TOC">返回顶部</a></li>
+</ul>
+
+  </body>
+</html>

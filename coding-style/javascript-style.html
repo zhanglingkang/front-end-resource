@@ -1,0 +1,319 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h1 id="javascript-">javascript代码风格</h1>
+<h2 id="-a-name-toc-a-"><a name='TOC'>目录</a></h2>
+<ol>
+<li><a href="#fileNameDefine">文件命名</a></li>
+<li><a href="#varDefine">变量命名</a></li>
+<li><a href="#constantDefine">常量命名</a></li>
+<li><a href="#functionDefine">方法命名</a></li>
+<li><a href="#classDefine">类命名</a></li>
+<li><a href="#defineVar">定义变量</a></li>
+<li><a href="#defineObject">定义对象</a></li>
+<li><a href="#string">字符串</a></li>
+<li><a href="#brace">大括号</a></li>
+<li><a href="#whitespace">代码缩进/空格</a></li>
+<li><a href="#comment">注释</a></li>
+<li><a href="#jquery">jquery</a></li>
+<li><a href="#reference">参考</a></li>
+</ol>
+<h2 id="-a-name-filenamedefine-a-"><a name='fileNameDefine'>文件命名</a></h2>
+<p>使用分割线。</p>
+<pre><code class="lang-js">child_process.js
+string_decoder.js
+_linklist.js</code></pre>
+<h2 id="-a-name-vardefine-a-"><a name='varDefine'>变量命名</a></h2>
+<p>使用小驼峰式命名法。<a href="https://github.com/modulejs/pragmatic-jquery#why-lowercamelcase">原因</a></p>
+<pre><code class="lang-js">var thisIsMyVal = &quot;foo&quot;;</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-constantdefine-a-"><a name='constantDefine'>常量命名</a></h2>
+<p>全部大写，单词间用_分隔。</p>
+<pre><code class="lang-js">var LOCALHOST = &quot;http://localhost&quot;;
+var REMORT_PORT = &quot;8080&quot;;</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-functiondefine-a-"><a name='functionDefine'>方法命名</a></h2>
+<p>使用小驼峰式命名法。</p>
+<pre><code class="lang-js">function thisIsMyFunction() {
+    // balabala
+}</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-classdefine-a-"><a name='classDefine'>类命名</a></h2>
+<p>使用大驼峰式命名法。</p>
+<pre><code class="lang-js">var Greeter = Class.extend({
+    name: null,
+
+    _constructor: function(name) {
+        this.name = name;
+    },
+
+    greet: function() {
+        alert(&#39;Good Morning &#39; + this.name);
+    }
+});</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-definevar-a-"><a name='defineVar'>定义变量</a></h2>
+<pre><code class="lang-js">var a = &quot;alpha&quot;;
+var b = &quot;beta&quot;;
+var c = &quot;chi&quot;;</code></pre>
+<p>原因</p>
+<pre><code class="lang-js">var a = &quot;alpha&quot;,
+    b = &quot;beta&quot; // &lt;-- 遗漏逗号
+    c = &quot;chi&quot;; // &lt;-- c成为全局变量</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-defineobject-a-"><a name='defineObject'>定义对象</a></h2>
+<pre><code class="lang-js">var hero = {
+    firstName: &#39;Bob&#39;
+  , lastName: &#39;Parr&#39;
+  , heroName: &#39;Mr. Incredible&#39;
+  , superPower: &#39;strength&#39;
+};</code></pre>
+<p>原因</p>
+<pre><code class="lang-js">var hero = {
+  firstName: &#39;Bob&#39;,
+  lastName: &#39;Parr&#39;,
+  heroName: &#39;Mr. Incredible&#39;, // &lt;-- 注释最后一行是忘记删除逗号
+  //superPower: &#39;strength&#39;    
+};</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-string-a-"><a name='string'>字符串</a></h2>
+<ul>
+<li><p>定义字符串统一使用单引号。</p>
+<pre><code class="lang-javascript">  // bad
+  var name = &quot;Bob Parr&quot;;
+
+  // good
+  var name = &#39;Bob Parr&#39;;</code></pre>
+</li>
+<li><p>字符过长，换行连接使用加号。
+```javascript
+  // bad
+  var errorMessage = &#39;This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.&#39;;</p>
+<p>  // bad
+  var errorMessage = &#39;This is a super long error that \
+  was thrown because of Batman. \
+  When you stop to think about \
+  how Batman had anything to do \
+  with this, you would get nowhere \
+  fast.&#39;;</p>
+</li>
+</ul>
+<pre><code>// good
+var errorMessage = &#39;This is a super long error that &#39; +
+  &#39;was thrown because of Batman.&#39; +
+  &#39;When you stop to think about &#39; +
+  &#39;how Batman had anything to do &#39; +
+  &#39;with this, you would get nowhere &#39; +
+  &#39;fast.&#39;;</code></pre>
+<pre><code>* 一个的字符串的值是由多个字符串连接而成的，使用join而不是字符串连接
+```javascript
+    // bad
+   var obj = {
+       name :&#39;joel&#39;
+       ,age :18
+   };
+   var str = &#39;&#39;;
+   for (var key in obj){
+      if(obj.hasOwnProperty(key)){
+         str += obj[key];
+      } 
+   }
+    // good
+   var obj = {
+       name :&#39;joel&#39;
+       ,age :18
+   };
+   var str = &#39;&#39;;
+   var arr = [];
+   for (var key in obj){
+      if(obj.hasOwnProperty(key)){
+         arr.push(obj[key]);
+      } 
+   }
+   str = arr.join(&#39;&#39;);</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-brace-a-"><a name='brace'>大括号</a></h2>
+<p>大括号位于行尾</p>
+<pre><code class="lang-javascript">   // bad
+   function ()
+   {
+
+
+    // good
+   function () {</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-whitespace-a-"><a name='whitespace'>代码缩进</a></h2>
+<ul>
+<li>缩进使用4个空格（sublime等IDE可配置1个tab等于几个空格）。不要混用空格和tab。<pre><code class="lang-javascript">function() {
+∙∙∙∙var name;
+}</code></pre>
+</li>
+<li><p>方法的参数列表，逗号前不需空格，逗号后需空一格</p>
+<pre><code class="lang-javascript">function(a,∙b) {
+
+}</code></pre>
+</li>
+<li>&quot;{&quot;，&quot;}&quot; 前后需空一格;&quot;:&quot;，&quot;,&quot;后面空一格，前面不需空格;if，for，方法名与&quot;(&quot;之间不要空格;操作符(+，-等)与操作数间需要有一个空格<pre><code class="lang-javascript">function a(a,∙b)∙{
+   return a∙+∙b;
+}
+if()∙{
+}∙else∙{
+}</code></pre>
+<a href="#TOC">返回顶部</a></li>
+</ul>
+<h2 id="-a-name-comment-a-"><a name='comment'>注释</a></h2>
+<ul>
+<li><p>用// FIXME:来标示bug</p>
+<pre><code class="lang-javascript">  function Calculator() {
+
+    // FIXME: shouldn&#39;t use a global here
+    total = 0;
+
+    return this;
+  }</code></pre>
+</li>
+<li><p>用//  TODO:来标示要做的</p>
+<pre><code class="lang-javascript">  function Calculator() {
+
+    // TODO: total should be configurable by an options param
+    this.total = 0;
+
+    return this;
+  }</code></pre>
+<p><a href="#TOC">返回顶部</a></p>
+</li>
+</ul>
+<h2 id="-a-name-jquery-jquery-a-"><a name='jquery'>jquery</a></h2>
+<ul>
+<li><p>jquery对象声明使用前缀$
+```javascript
+  // bad
+  var sidebar = $(&#39;.sidebar&#39;);
+  var that = $(this);</p>
+<p>  // good
+  var $sidebar = $(&#39;.sidebar&#39;);
+  var $this = $(this);</p>
+</li>
+</ul>
+<p>```
+<a href="#TOC">返回顶部</a></p>
+<h2 id="-a-name-reference-a-"><a name='reference'>参考</a></h2>
+<ul>
+<li><a href="https://github.com/modulejs/pragmatic-jquery/blob/master/README.md">Pragmatic jQuery Style</a></li>
+<li><a href="https://github.com/airbnb/javascript">Airbnb JavaScript Style Guide</a></li>
+<li><a href="http://chajn.org/jsguide/javascriptguide.html">Google JavaScript代码风格指南</a><br><a href="#TOC">返回顶部</a></li>
+</ul>
+
+  </body>
+</html>
