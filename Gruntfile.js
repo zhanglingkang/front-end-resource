@@ -51,7 +51,25 @@ module.exports = function(grunt) {
                     expand: true,
                     flatten: true,
                     src: 'coding-style/*.md',
-                    dest: 'coding-style/html/',
+                    dest: 'coding-style/md2html/',
+                    ext: '.html'
+                }]
+            },
+            'learn': {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: 'learn/README.md',
+                    dest: 'learn/md2html/',
+                    ext: '.html'
+                }]
+            },
+            'my-lib': {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: 'my-lib/README.md',
+                    dest: 'my-lib/md2html/',
                     ext: '.html'
                 }]
             }
@@ -72,7 +90,7 @@ module.exports = function(grunt) {
                 'expand': true,
                 'flatten': true,
                 'src': [
-                    'coding-style/html/*'
+                    'coding-style/md2html/*'
                 ],
                 'dest': 'build/coding-style/'
             },

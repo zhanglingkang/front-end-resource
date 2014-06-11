@@ -5,7 +5,7 @@ node_modules
 bower_components
 build
 .grunt
-*/html
+*/md2html
 
 ###############
 #  fixed file #
