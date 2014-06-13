@@ -18,9 +18,11 @@
 ****
 ##以下均依赖jquery
 * 幻灯
-    * [wowslider](http://wowslider.com/rq/jquery-image-viewer/)  幻灯切换时各种很炫的效果。收费。 
+    * [wowslider](http://wowslider.com/rq/jquery-image-viewer/)  幻灯切换时各种很炫的效果。收费。
     * [cycle2](http://jquery.malsup.com/cycle2/) 普通的幻灯，竟然不支持垂直滚动。。。
     * [jcarousel](http://sorgalla.com/jcarousel/) 普通的幻灯
+    * [reveal](https://github.com/hakimel/reveal.js) 3d滚动。做ppt相当不错
+    * [roundabout](https://github.com/fredleblanc/roundabout) 3d切换，看的后面图片的边
 	
 
 * 浏览图片
