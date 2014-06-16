@@ -1,6 +1,6 @@
 * javascript 语法 查看javascript-basic.md，或查看阮一峰的[教程](javascript.ruanyifeng.com/grammar/basic.html)，或http://gitbookio.github.io/javascript/
 * 标准库
-	* Object
+	* [Object](./stdlib/object.md)
 	* String
 	* Number
 	* Math
