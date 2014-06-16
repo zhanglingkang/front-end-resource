@@ -36,7 +36,7 @@
         * done
         * fail
         * always
-* 工具方法
+* [工具方法](./utilities.md)
     * 类型探测 isArray,isFunction...
     * 字符串 trim
     * 合并 extend
