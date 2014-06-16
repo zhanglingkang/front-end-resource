@@ -1,6 +1,6 @@
 * DOM
     * 查询
-        * 选择元素(查看jquery-select-elem.md)
+        * [选择元素](./jquery-select-elem.md)
         * 属性
         * 数据(data-*)
         * 特性探测（jquery的较新版本已不支持浏览器探测，而建议用特性探测）
@@ -10,9 +10,9 @@
         * 给元素加/删除父级元素(wrap/unwrap)
         * 元素的css
         * 数据(data-*)
-    * 删除  
+    * 删除
         * 属性
-        * 数据(data-*)  
+        * 数据(data-*)
     * 复制
     * 移动
 * 事件
