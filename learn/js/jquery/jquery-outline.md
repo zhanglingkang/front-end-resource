@@ -1,6 +1,6 @@
 * DOM
     * 查询
-        * [选择元素](./jquery-select-elem.md)
+        * [选择元素](./select-elem.md)
         * 属性
         * 数据(data-*)
         * 特性探测（jquery的较新版本已不支持浏览器探测，而建议用特性探测）
@@ -11,6 +11,7 @@
         * 元素的css
         * 数据(data-*)
     * 删除
+        * [元素](./modify-elem.md#remove)
         * 属性
         * 数据(data-*)
     * 复制
