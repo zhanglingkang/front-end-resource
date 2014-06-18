@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>string tests</title>
+  <link rel="stylesheet" media="all" href="../../../vendor/test/mocha.css">
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../../../vendor/test/mocha.js"></script>
+  <script src="../../../vendor/test/chai.js"></script>
+  <script src="../../../vendor/test/sinon.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script>
+  (function () {
+    // https://github.com/visionmedia/should.js/
+    // http://w3school.com.cn/jsref/jsref_obj_string.asp
+    chai.Should();
+
+    // chai这个框架不支持ie9-
+    // 已测试 ie9，Firefox，chrome。
+    describe('String', function() {
+      describe('#charAt', function() {
+        it('应该返回第一个字符，如果参数是0', function() {
+          'Hello'.charAt(0).should.eql('H');
+        });
+
+        it('应该返回空字符串，如果参数的值大于字符串的长度', function() {
+          var s = 'hell';
+          s.charAt(s.length + 1).should.eql('');
+        });
+
+        it('应该参数会转化成整数，如果参数能转化成整数', function() {
+          'word'.charAt(1.3).should.eql('o');
+          'word'.charAt(1.9).should.eql('o');
+          'word'.charAt([1]).should.eql('o');
+        });
+
+        it('应该返回第一个字符，如果参数不能转化成数字', function() {
+          'word'.charAt('s').should.eql('w');
+          'word'.charAt({}).should.eql('w');
+        });
+
+        it('应该返回空字符串，如果参数是负数', function() {
+          'word'.charAt(-1).should.eql('');
+          'word'.charAt(-2).should.eql('');
+        });
+
+        it('应该不改变被调用的字符串', function() {
+          var s = 'word';
+          s.charAt(1);
+          s.should.eql('word');
+        });
+      });
+
+      describe('#concat', function() {
+        it('应该返回连接的字符串', function() {
+          'a'.concat('b').should.eql('ab');
+        });
+
+        it('应该不改变被调用的字符串', function() {
+          var origin = 'a';
+          origin.concat('b');
+          origin.should.eql('a');
+        });
+
+        it('应该不改变参数', function() {
+          var param = 'a';
+          'b'.concat(param);
+          param.should.eql('a');
+        });
+
+        it('应该支持多个参数', function() {
+          'a'.concat('a','a').should.eql('aaa');
+        });
+
+
+        it('应该支持连接非字符串类型。非字符串类型会转化成字符串', function() {
+          'a'.concat([1,2]).should.eql('a'.concat([1,2].toString()));
+          'a'.concat({}).should.eql('a'.concat({}.toString()));
+        });
+      });
+
+      describe('#indexOf', function() {
+        it('应该返回参数所在字符串中的位置', function() {
+          // (1).should.be.equal(1); // ie9下有问题
+          // ('a').should.be.equal('a'); // ie9是可以的。。。
+          ('Hello'.indexOf('el') === 1).should.be.true;
+        });
+
+        it('应该返回-1，如果字符串中不包含参数的值', function() {
+          ('Hello'.indexOf('a') === -1).should.be.true;
+        });
+
+        it('应该从第二个参数开始找第一个参数所在字符串中的位置', function() {
+          ('Hello'.indexOf('He',1) === -1).should.be.true;
+        });
+
+        it('应该从后往前找，如果第二个参数是负数', function() {
+          ('Hello'.indexOf('He',-1) === 0).should.be.true;
+        });
+
+        it('应该会忽略第二个参数，如果第二个参数不能转化成整数', function() {
+          ('Hello'.indexOf('He','a') === 0).should.be.true;
+          ('Hello'.indexOf('He',[]) === 0).should.be.true;
+        });
+
+        it('应该第二个参数会转化成整数', function() {
+          var s = '47848Hello';
+          (s.indexOf('He','1') === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He', 1.3) === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He',[1]) === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He',[1,2]) === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He',['1',2]) === s.indexOf('He',1)).should.be.true;
+        });
+      });
+
+      describe('#split', function() {
+        it('应该返回用指定字符分割的数组', function() {
+          var res = 'a,a,a'.split(',');
+          res.should.eql(['a','a','a']);// deep equal
+        });
+
+        it('应该支持参数是字符串类型', function() {
+          var res = 'a,,a,,a'.split(',,');
+          res.should.eql(['a','a','a']);// deep equal
+        });
+
+        it('应该不改变被调用的字符串', function() {
+          var origin = 'aaa';
+          origin.split();
+          origin.should.equal('aaa');
+        });
+
+        it('应该返回被调用的字符串，如果不传参数', function() {
+          'abc'.split().should.have.lengthOf(1);
+        });
+      });
+
+    });
+  })();
+  </script>
+  <script>
+    mocha.run();
+  </script>
+</body>
+</html>
