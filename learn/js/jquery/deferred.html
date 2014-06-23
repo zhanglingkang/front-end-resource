@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>defferred</title>
+    <script src="../../vendor/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+    // 在promise上，调用resolve，执行done，调用reject，执行fail
+    // when 是 返回promise的控制
+    $(document).ready(function() {
+        function doThing(isFail) {
+        	isFail = isFail === undefined ?  true : isFail;
+            var dfd = $.Deferred();
+            setTimeout(function() {
+            	dfd.notify('0%');
+            	dfd.notify('10%');
+            	dfd.notify('30%');
+            	dfd.notify('100%');
+                if (!isFail) {
+                    dfd.resolve({
+                        times: ++doThing.succTimes
+                    });
+                } else {
+                    dfd.reject({
+                        times: ++doThing.failTimes
+                    });
+                }
+            }, 100);
+            return dfd.promise();
+        }
+        doThing.succTimes = 0;
+        doThing.failTimes = 0;
+
+        doThing(false).progress(function(state){
+        	console.log('things is done %s', state);
+        }).then(function(data){
+        	console.log('then:things is done %s', data);
+        });
+        // 做多件事情
+        // 成功
+        $.when(doThing(false), doThing(false), doThing(false)).done(success).fail(fail);
+
+        // 失败 只要一个失败了，那么就失败了
+        $.when(doThing(), doThing(false), doThing(false)).done(success).fail(fail);
+
+        $.when(doThing(), doThing()).done(success).fail(fail);
+
+        function success(data){
+        	console.log('success:%s times', data.times);
+        }
+
+		function fail(data){
+        	console.log('fail:%s times', data.times);
+        }
+    });
+    </script>
+</body>
+
+</html>

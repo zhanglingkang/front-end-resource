@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>string tests</title>
+  <link rel="stylesheet" media="all" href="../../../vendor/test/mocha.css">
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../../../vendor/test/mocha.js"></script>
+  <script src="../../../vendor/test/chai.js"></script>
+  <script src="../../../vendor/test/sinon.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script>
+  (function () {
+    // https://github.com/visionmedia/should.js/
+    // http://w3school.com.cn/jsref/jsref_obj_string.asp
+    chai.Should();
+
+    // chai这个框架不支持ie9-
+    // 已测试 ie9，Firefox，chrome。
+    describe('String', function() {
+      describe('#charAt(index)', function() {
+        it('应该返回第一个字符，如果参数是0', function() {
+          'Hello'.charAt(0).should.eql('H');
+        });
+
+        it('应该返回空字符串，如果参数的值大于字符串的长度', function() {
+          var s = 'hell';
+          s.charAt(s.length + 1).should.eql('');
+        });
+
+        it('应该参数会转化成整数，如果参数能转化成整数', function() {
+          'word'.charAt(1.3).should.eql('o');
+          'word'.charAt(1.9).should.eql('o');
+          'word'.charAt([1]).should.eql('o');
+        });
+
+        it('应该返回第一个字符，如果参数不能转化成数字', function() {
+          'word'.charAt('s').should.eql('w');
+          'word'.charAt({}).should.eql('w');
+        });
+
+        it('应该返回空字符串，如果参数是负数', function() {
+          'word'.charAt(-1).should.eql('');
+          'word'.charAt(-2).should.eql('');
+        });
+
+        it('应该不改变被调用的字符串', function() {
+          var s = 'word';
+          s.charAt(1);
+          s.should.eql('word');
+        });
+      });
+
+      describe('#concat(stringX,stringX,...,stringX)', function() {
+        it('应该返回连接的字符串', function() {
+          'a'.concat('b').should.eql('ab');
+        });
+
+        it('应该不改变被调用的字符串', function() {
+          var origin = 'a';
+          origin.concat('b');
+          origin.should.eql('a');
+        });
+
+        it('应该不改变参数', function() {
+          var param = 'a';
+          'b'.concat(param);
+          param.should.eql('a');
+        });
+
+        it('应该支持多个参数', function() {
+          'a'.concat('a','a').should.eql('aaa');
+        });
+
+
+        it('应该支持连接非字符串类型。非字符串类型会转化成字符串', function() {
+          'a'.concat([1,2]).should.eql('a'.concat([1,2].toString()));
+          'a'.concat({}).should.eql('a'.concat({}.toString()));
+        });
+      });
+
+      describe('#indexOf(searchvalue,fromindex)', function() {
+        it('应该返回参数所在字符串中的位置', function() {
+          // (1).should.be.equal(1); // ie9下有问题
+          // ('a').should.be.equal('a'); // ie9是可以的。。。
+          ('Hello'.indexOf('el') === 1).should.be.true;
+        });
+
+        it('应该返回-1，如果字符串中不包含参数的值', function() {
+          ('Hello'.indexOf('a') === -1).should.be.true;
+        });
+
+        it('应该从第二个参数开始找第一个参数所在字符串中的位置', function() {
+          ('Hello'.indexOf('He',1) === -1).should.be.true;
+        });
+
+        it('应该从后往前找，如果第二个参数是负数', function() {
+          ('Hello'.indexOf('He',-1) === 0).should.be.true;
+        });
+
+        it('应该会忽略第二个参数，如果第二个参数不能转化成整数', function() {
+          ('Hello'.indexOf('He','a') === 0).should.be.true;
+          ('Hello'.indexOf('He',[]) === 0).should.be.true;
+        });
+
+        it('应该第二个参数会转化成整数', function() {
+          var s = '47848Hello';
+          (s.indexOf('He','1') === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He', 1.3) === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He',[1]) === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He',[1,2]) === s.indexOf('He',1)).should.be.true;
+          (s.indexOf('He',['1',2]) === s.indexOf('He',1)).should.be.true;
+        });
+      });
+
+      describe('#match(regexp|string)', function() {
+        it('应该返回长度是1的数组，内容是匹配的字符串，如果参数是字符串', function() {
+          'hell'.match('he').should.be.instanceOf(Array).and.have.lengthOf(1);
+        });
+
+        it('应该返回null，如果没有找到匹配', function() {
+          ('hell'.match('abc') === null).should.be.true;
+          ('hell'.match(/abc/) === null).should.be.true;
+        });
+
+        it('应该返回长度是括号数加1的数组，如果能找到匹配，并且参数是正则', function() {
+          'abc2abc'.match(/([a-z])+\d([a-z])+/).should.be.instanceOf(Array).and.have.lengthOf(3);
+          'abc2abc'.match(/(([a-z])+\d)/).should.be.instanceOf(Array).and.have.lengthOf(3);
+        });
+
+        it('应该返回数组的第一个值是匹配的值，如果能找到匹配', function() {
+          '1234a'.match(/\d+/)[0].should.equal('1234');
+        });
+
+        it('应该进行全局匹配，如果参数的正则带g', function() {
+          '1234a1234'.match(/\d+/g).should.have.lengthOf(2);
+        });
+
+        it('应该参数中的括号无效，如果参数的正则带g', function() {
+          '1234a1234'.match(/((\d)+)/g).should.have.lengthOf(2);
+        });
+
+      });
+
+      describe('#replace(regexp|string,replacement)', function() {
+        it('应该调用字符串中符合条件的内容被替换', function() {
+          'he1'.replace('he', 'haha').should.equal('haha1');
+          'he1'.replace(/[a-z]+/, 'haha').should.equal('haha1');
+        });
+
+        it('应该全局被替换，如果是正则带g', function() {
+          'he1he'.replace('he', '1').should.equal('11he');
+          'he1he'.replace(/he/g, '1').should.equal('111');
+        });
+
+        it('应该对满足条件的替换字符串进行处理', function() {
+          'abc def ghi'.replace(/[a-z]+/g, function (word) {
+            return word.charAt(0).toUpperCase() + word.substr(1);
+          }).should.equal('Abc Def Ghi');
+        });
+
+      });
+
+      describe('#search(regexp|string)', function() {
+        it('应该返回参数在字符串中第一次出现的位置，从0开始', function() {
+          ('wordword'.search('wo') === 0).should.be.true;
+          ('word'.search(/wo/) === 0).should.be.true;
+          ('word'.search(/Wo/i) === 0).should.be.true;
+        });
+
+        it('应该返回-1，如果匹配不到参数', function() {
+          ('word'.search(/aa/) === -1).should.be.true;
+        });
+
+        it('应该忽略参数的/g', function() {
+          ('wowo'.search(/wo/g) === 0).should.be.true;
+        });
+      });
+
+      describe('#slice(start,end)', function() {
+        it('应该返回指定区间的字符串，包括开始，不包括结束', function() {
+          '12345'.slice(0,3).should.equal('123');
+          '12345'.slice(1,3).should.equal('23');
+        });
+
+        it('应该从后往前数，如果参数是负数', function() {
+          '12345'.slice(0,-1).should.equal('1234');
+          '12345'.slice(0,-2).should.equal('123');
+          '12345'.slice(-3,-2).should.equal('3');
+        });
+
+        it('应该返回空字符串，如果第一个参数的位置大于第二个参数', function() {
+          '12345'.slice(2,1).should.equal('');
+          '12345'.slice(-3,-4).should.equal('');
+        });
+
+        it('应该返回第一个参数的位置到字符串尾的子字符串，如果不传第二个参数', function() {
+          '12345'.slice(1).should.equal('2345');
+        });
+
+        it('应该不改变原字符串，当slice方法被调用', function() {
+          var s = '12345';
+          s.slice(0,4);
+          s.should.eql('12345');
+        });
+
+      });
+
+      describe('#split(separator[,howmany])', function() {
+        it('应该返回用指定字符分割的数组', function() {
+          var res = 'a,a,a'.split(',');
+          res.should.eql(['a','a','a']);// deep equal
+        });
+
+        it('应该支持参数是字符串类型', function() {
+          var res = 'a,,a,,a'.split(',,');
+          res.should.eql(['a','a','a']);// deep equal
+        });
+
+        it('应该不改变被调用的字符串', function() {
+          var origin = 'aaa';
+          origin.split();
+          origin.should.equal('aaa');
+        });
+
+        it('应该返回被调用的字符串，如果不传参数', function() {
+          'abc'.split().should.have.lengthOf(1);
+        });
+
+        it('应该返回数组的长度小于等于传入的第二个参数的值', function() {
+          'a,b,c'.split(',', 1).should.have.lengthOf(1);
+          'a,b,c'.split(',', 2).should.have.lengthOf(2);
+          'a,b,c'.split(',', 4).should.have.lengthOf(3);
+        });
+      });
+
+      describe('#substr(start,length)', function() {
+        it('应该返回指定区间的字符串', function() {
+          '12345'.substr(0,3).should.equal('123');
+          '12345'.substr(1,3).should.equal('234');
+        });
+
+        it('应该从后往前数，如果第一个参数是负数', function() {
+          '12345'.substr(-3,2).should.equal('34');
+        });
+
+        it('应该返回空字符串，如果第二个参数是负数', function() {
+          '12345'.substr(1,-1).should.equal('');
+        });
+
+        it('应该返回第一个参数的位置到字符串尾的子字符串，如果不传第二个参数', function() {
+          '12345'.substr(1).should.equal('2345');
+        });
+
+        it('应该不改变原字符串，当substr方法被调用', function() {
+          var s = '12345';
+          s.substr(0,4);
+          s.should.eql('12345');
+        });
+
+      });
+
+      describe('#substring([start][,end])', function() {
+        it('应该返回指定位置直至末尾的字符串，如果不传第二个参数', function() {
+          '12345'.substring(3).should.equal('45');
+        });
+
+        it('应该返回指定区间的字符串', function() {
+          '12345'.substring(0,3).should.equal('123');
+          '12345'.substring(1,3).should.equal('23');
+        });
+
+        it('应该参数转化为0，如果参数不能转化为正整数', function() {
+          '12345'.substring(-1).should.equal('12345');
+          '12345'.substring().should.equal('12345');
+          '12345'.substring(-1,2).should.equal('12');
+          '12345'.substring(0,-1).should.equal('');
+          '12345'.substring(-1,-2).should.equal('');
+        });
+
+        it('应该不改变原字符串，当substring方法被调用', function() {
+          var s = '12345';
+          s.substring(0,4);
+          s.should.eql('12345');
+        });
+
+      });
+    });
+  })();
+  </script>
+  <script>
+    mocha.run();
+  </script>
+</body>
+</html>
