@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>array test</title>
+    <link rel="stylesheet" media="all" href="../../../vendor/test/mocha.css">
+</head>
+
+<body>
+    <div id="mocha"></div>
+    <script src="../../../vendor/test/mocha.js"></script>
+    <script src="../../../vendor/test/chai.js"></script>
+    <script src="../../../vendor/test/sinon.js"></script>
+    <script>
+    mocha.setup('bdd')
+    </script>
+    <script>
+    (function() {
+        // https://github.com/visionmedia/should.js/
+        // http://www.w3school.com.cn/jsref/jsref_obj_array.asp
+        chai.Should();
+
+        // chai这个框架不支持ie9-
+        // 已测试 ie9，Firefox，chrome。
+        describe('Array', function() {
+            describe('#concat(arrayX,arrayX,......,arrayX)', function() {
+                it('应该返回连接后的数组', function() {
+                    [2, 3].concat(['a']).should.eql([2, 3, 'a']);
+                    [2, 3].concat(['a', 'b']).should.eql([2, 3, 'a', 'b']);
+                    [2, 3].concat('a').should.eql([2, 3, 'a']);
+                    [2, 3].concat('a', [4, 5], 6).should.eql([2, 3, 'a', 4, 5, 6]);
+                });
+
+                it('应该不改变原数组，如果方法被调用', function() {
+                    var arr = [2, 3];
+                    arr.concat(['a']);
+                    arr.should.eql([2, 3]);
+                });
+            });
+
+            describe('#join([separator])', function() {
+                it('应该返回数组连接后的字符串', function() {
+                    [2, 3].join(',').should.eql('2,3');
+                    [2, 3].join('#').should.eql('2#3');
+                    [2, 3].join('').should.eql('23');
+                    [2, 3, 5].join('ac').should.eql('2ac3ac5');
+                });
+
+                it('应该默认分隔符为","，如果不传参数', function() {
+                    [2, 3].join().should.eql('2,3');
+                });
+
+                it('应该不改变原数组，如果方法被调用', function() {
+                    var arr = [4, 5];
+                    arr.join();
+                    arr.should.eql([4, 5]);
+                });
+            });
+
+            describe('#pop()', function() {
+                it('应该返回值是数组的最后一个元素', function() {
+                    ([1, 2, 3].pop() === 3).should.be.true;
+                });
+
+                it('应该数组内容为除去末位，当方法被调用', function() {
+                    var arr = [1, 2, 3];
+                    arr.pop();
+                    arr.should.eql([1, 2]);
+                });
+            });
+
+            describe('#push(newelement1,newelement2,....,newelementX)', function() {
+                it('应该数组内容追加参数内容', function() {
+                    var arr = [1, 2, 3];
+                    arr.push(4);
+                    arr.should.eql([1, 2, 3, 4]);
+                    arr.push([1]);
+                    arr.should.eql([1, 2, 3, 4, [1]]);
+                    arr.push('a', 'b');
+                    arr.should.eql([1, 2, 3, 4, [1], 'a', 'b']);
+                });
+            });
+
+            describe('#reverse()', function() {
+                it('应该返回值是翻转后的数组', function() {
+                    [1, 2, 3].reverse().should.eql([3, 2, 1]);
+                });
+
+                it('应该数组内容被翻转，当方法被调用后', function() {
+                    var arr = [1, 2, 3];
+                    arr.reverse();
+                    arr.should.eql([3, 2, 1]);
+                });
+            });
+
+        });
+
+    })();
+    </script>
+    <script>
+    mocha.run();
+    </script>
+</body>
+
+</html>
