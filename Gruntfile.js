@@ -106,7 +106,7 @@ module.exports = function(grunt) {
             'learn': {
                 'src': [
                     'learn/**/*.html',
-                    'learn/**/*.css',
+                    'learn/**/*.css', 
                     'learn/**/*.js',
                     '!**/node_modules/**'
                 ],
@@ -158,5 +158,5 @@ module.exports = function(grunt) {
     grunt.registerTask('pre', ['clean', 'markdown', 'copy']);
     grunt.registerTask('publish', ['pre', 'gh-pages']);
 
-    grunt.registerTask('default', ['build']);
+    grunt.registerTask('default', ['publish']);
 };
