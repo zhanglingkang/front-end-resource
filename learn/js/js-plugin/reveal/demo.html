@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="vendor/reveal.min.css">
+		<link rel="stylesheet" href="vendor/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="vendor/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Reveal.js</h1>
+					<h3>用html来做幻灯片</h3>
+					<p>
+						用键盘的方向键，或者点击右下角的导航按钮来切换幻灯
+						<small>作者 <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+					</p>
+					<p><a href="http://slides.com/">在线制作版</a></p>
+				</section>
+
+				<section>
+					<h3>按“s”可以查看一些隐藏东东</h3>
+					<aside class="notes">
+						note：这边可以聊聊 李纳斯的故事~
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h3>竖直方向翻转的幻灯</h3>
+						<p>
+							<a href="#" class="navigate-down">向下</a>
+						</p>
+					</section>
+					<section>
+						<h3><a href="#" class="navigate-down">向下</a></h3>
+					</section>
+					<section>
+						<h3><a href="#" class="navigate-down">再向下</a></h3>
+					</section>
+					<section>
+						<h3>垂直方向的最后一张~</h3>
+					</section>
+				</section>
+
+				<section>
+					<h2>查看幻灯片的缩略图</h2>
+					<p>
+						按 <strong>ESC</strong> 来查看幻灯片的缩略图
+					</p>
+					<p>
+						点击缩略图中的某张幻灯来查看该幻灯
+					</p>
+				</section>
+
+				<section>
+					<h2>无序列表展示</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>有序列表展示</h2>
+					<ol>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ol>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="vendor/head.min.js"></script>
+		<script src="vendor/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'vendor/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'vendor/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'vendor/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'vendor/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'vendor/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'vendor/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
