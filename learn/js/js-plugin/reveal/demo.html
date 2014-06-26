@@ -120,7 +120,7 @@
 
                 查看 markdown支持[点这里](https://github.com/hakimel/reveal.js#markdown)
 
-                [![我的头像](http://upload.jianshu.io/users/upload_avatars/16777/696406859b93757b8ca724ea2893bcc3213ef56740e7-pv4Tka_fw580.jpg?imageMogr/thumbnail/90x90/quality/100)](github.com/iamjoel)
+                [![我的头像](http://upload.jianshu.io/users/upload_avatars/16777/696406859b93757b8ca724ea2893bcc3213ef56740e7-pv4Tka_fw580.jpg?imageMogr/thumbnail/90x90/quality/100)](https://github.com/iamjoel)
 
                 * 苹果 
                 * 香蕉
@@ -154,9 +154,9 @@
             </section>
 
             <section id="themes">
-                <h2>风格</h2>
+                <h2>主题</h2>
                 <p>
-                    Reveal.js 支持的风格:
+                    Reveal.js 支持的主题:
                     <br>
                     <a href="?#/themes">Default</a> -
                     <a href="?theme=sky#/themes">Sky</a> -
@@ -318,22 +318,21 @@ function linkify( selector ) {
 
 
     <script>
-    // Full list of configuration options available here:
-    // https://github.com/hakimel/reveal.js#configuration
+    // 所有的设置见 https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
-        controls: true,
-        progress: true,
+        controls: true, // 幻灯右下角
+        progress: true, // 幻灯最下面的进度条
         history: true,
         center: true,
 
-        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        theme: Reveal.getQueryHash().theme, // 设置主题
+        transition: Reveal.getQueryHash().transition || 'default', // 幻灯切换时的渐变 default/cube/page/concave/zoom/linear/fade/none
 
         // Parallax scrolling
         // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
         // parallaxBackgroundSize: '2100px 900px',
 
-        // Optional libraries used to extend on reveal.js
+        // reveal.js上的一些插件
         dependencies: [{
             src: 'vendor/classList.js',
             condition: function() {
