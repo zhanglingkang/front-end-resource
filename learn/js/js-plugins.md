@@ -14,6 +14,7 @@
  * 让ie6-8有高级浏览器的特性 [ieBetter](https://github.com/zhangxinxu/ieBetter.js)
  * uri操作 [uri.js](https://github.com/medialize/URI.js) 
  * [cookie](https://github.com/ScottHamper/Cookies)
+ * [bowser](https://github.com/ded/bowser) 浏览器探测
 
 ****
 ##以下均依赖jquery
