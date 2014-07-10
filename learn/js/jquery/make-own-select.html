@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+<input type="text">
+<input type="text" value="aaa">
+    <script src="../../../vendor/jquery.min.js"></script>
+    <script>
+    $(function() {
+        $.extend($.expr[':'], {
+            notEmptyInput: function(el) {
+                return $(el).is(':text') && $(el).val() !== "";
+            }
+        });
+        var $notEmptyInput = $(':notEmptyInput');
+        console.log($notEmptyInput.length, $notEmptyInput.val());;
+    });
+    </script>
+</body>
+
+</html>
