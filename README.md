@@ -1,9 +1,9 @@
 ## web前端资源
 该项目的内容包括：    
-* [代码风格](./coding-style)。内容在文件夹`coding-style`中。具体包括：
-    * html代码风格
-    * css代码风格
-    * js代码风格
+* [代码风格/规范](./coding-style)。内容在文件夹`coding-style`中。具体包括：
+    * [html代码风格](./coding-style/html-style.md)
+    * [css代码风格](./coding-style/css-style.md)
+    * [js代码风格](./coding-style/javascript-style.md)
 * [前端知识整理](./learn)。内容在文件夹`learn`中。具体包括：
     * html，css，js的知识整理
     * 第三方组件/框架的学习demo

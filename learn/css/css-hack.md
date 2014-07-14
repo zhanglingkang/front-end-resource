@@ -1,5 +1,6 @@
-color:red; /* 所有浏览器都支持 */    
-color:red !important;/* 除IE6外 */    
+https://github.com/logeshpaul/CSS-Hacks
+
+
 _color:red; /* IE6支持 */    
 *color:red; /* IE6、IE7支持 */    
 +color:red;/*IE7支持*/    
