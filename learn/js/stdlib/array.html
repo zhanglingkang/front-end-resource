@@ -8,228 +8,295 @@
 </head>
 
 <body>
-    <div id="mocha"></div>
-    <script src="../../../vendor/test/mocha.js"></script>
-    <script src="../../../vendor/test/chai.js"></script>
-    <script src="../../../vendor/test/sinon.js"></script>
-    <script>
+<div id="mocha"></div>
+<script src="../../../vendor/test/mocha.js"></script>
+<script src="../../../vendor/test/chai.js"></script>
+<script src="../../../vendor/test/sinon.js"></script>
+<script>
     mocha.setup('bdd')
-    </script>
-    <script>
-    (function() {
-        // test api https://github.com/visionmedia/should.js/
-        // array api http://www.w3school.com.cn/jsref/jsref_obj_array.asp
-        chai.Should();
+</script>
+<script>
+(function () {
+    // test api https://github.com/visionmedia/should.js/
+    // array api http://www.w3school.com.cn/jsref/jsref_obj_array.asp
+    chai.Should();
 
-        // chai这个框架不支持ie9-
-        // 已测试 ie9，Firefox，chrome。
-        describe('Array', function() {
-            describe('#concat(arrayX,arrayX,......,arrayX)', function() {
-                it('应该返回连接后的数组', function() {
-                    [2, 3].concat(['a']).should.eql([2, 3, 'a']);
-                    [2, 3].concat(['a', 'b']).should.eql([2, 3, 'a', 'b']);
-                    [2, 3].concat('a').should.eql([2, 3, 'a']);
-                    [2, 3].concat('a', [4, 5], 6).should.eql([2, 3, 'a', 4, 5, 6]);
-                });
-
-                it('应该不改变原数组，如果方法被调用', function() {
-                    var arr = [2, 3];
-                    arr.concat(['a']);
-                    arr.should.eql([2, 3]);
-                });
+    // chai这个框架不支持ie9-
+    // 已测试 ie9，Firefox，chrome。
+    describe('Array', function () {
+        describe('#concat(arrayX,arrayX,......,arrayX)', function () {
+            it('应该返回连接后的数组', function () {
+                [2, 3].concat(['a']).should.eql([2, 3, 'a']);
+                [2, 3].concat(['a', 'b']).should.eql([2, 3, 'a', 'b']);
+                [2, 3].concat('a').should.eql([2, 3, 'a']);
+                [2, 3].concat('a', [4, 5], 6).should.eql([2, 3, 'a', 4, 5, 6]);
             });
 
-            describe('#join([separator])', function() {
-                it('应该返回数组连接后的字符串', function() {
-                    [2, 3].join(',').should.eql('2,3');
-                    [2, 3].join('#').should.eql('2#3');
-                    [2, 3].join('').should.eql('23');
-                    [2, 3, 5].join('ac').should.eql('2ac3ac5');
-                });
-
-                it('应该默认分隔符为","，如果不传参数', function() {
-                    [2, 3].join().should.eql('2,3');
-                });
-
-                it('应该不改变原数组，如果方法被调用', function() {
-                    var arr = [4, 5];
-                    arr.join();
-                    arr.should.eql([4, 5]);
-                });
+            it('应该不改变原数组，如果方法被调用', function () {
+                var arr = [2, 3];
+                arr.concat(['a']);
+                arr.should.eql([2, 3]);
             });
-
-            describe('#pop()', function() {
-                it('应该返回值是数组的最后一个元素', function() {
-                    ([1, 2, 3].pop() === 3).should.be.true;
-                });
-
-                it('应该数组内容为除去末位，当方法被调用', function() {
-                    var arr = [1, 2, 3];
-                    arr.pop();
-                    arr.should.eql([1, 2]);
-                });
-            });
-
-            describe('#push(newelement1,newelement2,....,newelementX)', function() {
-                it('应该数组内容追加参数内容', function() {
-                    var arr = [1, 2, 3];
-                    arr.push(4);
-                    arr.should.eql([1, 2, 3, 4]);
-                    arr.push([1]);
-                    arr.should.eql([1, 2, 3, 4, [1]]);
-                    arr.push('a', 'b');
-                    arr.should.eql([1, 2, 3, 4, [1], 'a', 'b']);
-                });
-            });
-
-            describe('#reverse()', function() {
-                it('应该返回值是翻转后的数组', function() {
-                    [1, 2, 3].reverse().should.eql([3, 2, 1]);
-                });
-
-                it('应该数组内容被翻转，当方法被调用后', function() {
-                    var arr = [1, 2, 3];
-                    arr.reverse();
-                    arr.should.eql([3, 2, 1]);
-                });
-            });
-
-            describe('#shift()', function() {
-                it('应该返回值数组的第一个元素', function() {
-                    ([1, 2, 3].shift() === 1).should.be.true;
-                });
-
-                it('应该删除数组的第一个元素，当方法被调用后', function() {
-                    var arr = [1, 2, 3];
-                    arr.shift();
-                    arr.should.eql([2, 3]);
-                });
-            });
-
-            describe('#slice(start[,end])', function() {
-                it('应该返回值数组的指定区间内的元素组成的数组，包括start，不包括end', function() {
-                    [1, 2, 3, 4].slice(0, 2).should.eql([1, 2]);
-                    [1, 2, 3, 4].slice(1, 4).should.eql([2, 3, 4]);
-                });
-
-                it('应该返回指定的开始到数组的元素结束组成的数组，不传第二个参数', function() {
-                    [1, 2, 3, 4].slice(0).should.eql([1, 2, 3, 4]);
-                    [1, 2, 3, 4].slice(2).should.eql([3, 4]);
-                });
-
-                it('应该返回指定本身数组，不传参数', function() {
-                    [1, 2, 3, 4].slice().should.eql([1, 2, 3, 4]);
-                });
-
-                it('应该不改变原数组，如果方法被调用', function() {
-                    var arr = [1, 2, 3, 4];
-                    arr.slice();
-                    arr.should.eql([1, 2, 3, 4]);
-                });
-
-                it('应该返回是一个新的数组（当不传参数时，可以用来克隆数组）', function() {
-                    var arr = [1, 2, 3, 4];
-                    var arr2 = arr.slice();
-                    arr2[0] = 5;
-                    arr.should.eql(arr);
-                });
-
-                it('应该可以将 arguments对象转化成数组，当用slice来调用arguments', function() {
-                    function add() {
-                        var args = Array.prototype.slice.call(arguments);
-                        var sum = 0;
-                        args.forEach(function(each) {
-                            sum += each;
-                        });
-                        return sum;
+        });
+        describe('#every(callbackfn[, thisArg])', function () {
+            it('应该在callbackfn返回false时停止为剩下的元素执行callbackfn函数', function () {
+                var joinResult = "";
+                [2, 3, 4].every(function (value, index, array) {
+                    joinResult += value;
+                    if (value === 3) {
+                        return false;
                     }
-
-                    (add(1, 2, 3) === 6).should.be.true;
-
+                    return true;
                 });
+                joinResult.should.eql("23");
+                joinResult = "";
+                [2, 3, 4].every(function (value, index, array) {
+                    joinResult += value;
+                    return true;
+                });
+                joinResult.should.eql("234");
+            });
+            it('应该返回true，在callbackfn为所有数组元素返回true时', function () {
+                [2, 3, 4].every(function () {
+                    return true;
+                }).should.eql(true);
+                [2, 3, 4].every(function () {
+                    return false;
+                }).should.eql(false);
+            });
+            it('应该在thisArg不为空时，callbackfn函数中的this等于thisArg', function () {
+                var thisArg = {};
+                [2].every(function () {
+                    this.name = "Bob";
+                }, thisArg);
+                thisArg.name.should.eql("Bob");
+            });
+        });
 
+        describe("#filter(callbackFn[,thisArg])", function () {
+            it("应该返回包含回调函数为其返回 true 的所有值的新数组", function () {
+                [2, 3, 4, 5].filter(function (value, index, array) {
+                    if (value % 2 == 0) {
+                        return true;
+                    }
+                }).should.eql([2, 4]);
+            });
+            it('应该在thisArg不为空时，callbackfn函数中的this等于thisArg', function () {
+                var thisArg = {};
+                [2].filter(function () {
+                    this.name = "Bob";
+                }, thisArg);
+                thisArg.name.should.eql("Bob");
+            });
+            it('应该不改变原数组', function () {
+                var arr = [2, 3, 4, 5];
+                arr.filter(function (value, index, array) {
+                    if (value % 2 == 0) {
+                        return true;
+                    }
+                });
+                arr.should.eql([2, 3, 4, 5]);
+            });
+        });
+        describe('#join([separator])', function () {
+            it('应该返回数组连接后的字符串', function () {
+                [2, 3].join(',').should.eql('2,3');
+                [2, 3].join('#').should.eql('2#3');
+                [2, 3].join('').should.eql('23');
+                [2, 3, 5].join('ac').should.eql('2ac3ac5');
+            });
+
+            it('应该默认分隔符为","，如果不传参数', function () {
+                [2, 3].join().should.eql('2,3');
+            });
+
+            it('应该不改变原数组，如果方法被调用', function () {
+                var arr = [4, 5];
+                arr.join();
+                arr.should.eql([4, 5]);
+            });
+        });
+
+        describe('#pop()', function () {
+            it('应该返回值是数组的最后一个元素', function () {
+                ([1, 2, 3].pop() === 3).should.be.true;
+            });
+
+            it('应该数组内容为除去末位，当方法被调用', function () {
+                var arr = [1, 2, 3];
+                arr.pop();
+                arr.should.eql([1, 2]);
+            });
+        });
+
+        describe('#push(newelement1,newelement2,....,newelementX)', function () {
+            it('应该数组内容追加参数内容', function () {
+                var arr = [1, 2, 3];
+                arr.push(4);
+                arr.should.eql([1, 2, 3, 4]);
+                arr.push([1]);
+                arr.should.eql([1, 2, 3, 4, [1]]);
+                arr.push('a', 'b');
+                arr.should.eql([1, 2, 3, 4, [1], 'a', 'b']);
+            });
+        });
+
+        describe('#reverse()', function () {
+            it('应该返回值是翻转后的数组', function () {
+                [1, 2, 3].reverse().should.eql([3, 2, 1]);
+            });
+
+            it('应该数组内容被翻转，当方法被调用后', function () {
+                var arr = [1, 2, 3];
+                arr.reverse();
+                arr.should.eql([3, 2, 1]);
+            });
+        });
+
+        describe('#shift()', function () {
+            it('应该返回值数组的第一个元素', function () {
+                ([1, 2, 3].shift() === 1).should.be.true;
+            });
+
+            it('应该删除数组的第一个元素，当方法被调用后', function () {
+                var arr = [1, 2, 3];
+                arr.shift();
+                arr.should.eql([2, 3]);
+            });
+        });
+
+        describe('#slice(start[,end])', function () {
+            it('应该返回值数组的指定区间内的元素组成的数组，包括start，不包括end', function () {
+                [1, 2, 3, 4].slice(0, 2).should.eql([1, 2]);
+                [1, 2, 3, 4].slice(1, 4).should.eql([2, 3, 4]);
+            });
+
+            it('应该返回指定的开始到数组的元素结束组成的数组，不传第二个参数', function () {
+                [1, 2, 3, 4].slice(0).should.eql([1, 2, 3, 4]);
+                [1, 2, 3, 4].slice(2).should.eql([3, 4]);
+            });
+
+            it('应该返回指定本身数组，不传参数', function () {
+                [1, 2, 3, 4].slice().should.eql([1, 2, 3, 4]);
+            });
+
+            it('应该不改变原数组，如果方法被调用', function () {
+                var arr = [1, 2, 3, 4];
+                arr.slice();
+                arr.should.eql([1, 2, 3, 4]);
+            });
+
+            it('应该返回是一个新的数组（当不传参数时，可以用来克隆数组）', function () {
+                var arr = [1, 2, 3, 4];
+                var arr2 = arr.slice();
+                arr2[0] = 5;
+                arr.should.eql(arr);
+            });
+
+            it('应该可以将 arguments对象转化成数组，当用slice来调用arguments', function () {
+                function add() {
+                    var args = Array.prototype.slice.call(arguments);
+                    var sum = 0;
+                    args.forEach(function (each) {
+                        sum += each;
+                    });
+                    return sum;
+                }
+
+                (add(1, 2, 3) === 6).should.be.true;
 
             });
 
-            describe('#sort()', function() {
-                it('应该按照字母顺序进行排序', function() {
-                    [22, 12, 8, -3, -5].sort().should.eql([-3, -5, 12, 22, 8]);
-                    ['hi', 'xx', 'abc', 'acc', 1].sort().should.eql([1, 'abc', 'acc', 'hi', 'xx']);
-                });
-                it('应该按照自定义函数规则进行排序', function() {
-                    [22, 12, 8, -3, -5].sort(function(a, b) {
-                        return a - b;
-                    }).should.eql([-5, -3, 8, 12, 22]);
-
-                    [{
-                        name: 'xx',
-                        age: 18
-                    }, {
-                        name: 'joel',
-                        age: 17
-                    }, {
-                        name: 'jack',
-                        age: 35
-                    }].sort(function(a, b) {
-                        return a.age - b.age;
-                    }).should.eql([{
-                        name: 'joel',
-                        age: 17
-                    }, {
-                        name: 'xx',
-                        age: 18
-                    }, {
-                        name: 'jack',
-                        age: 35
-                    }]);
-                });
-            });
-
-            describe('#splice(index,howmany[,item1,.....,itemX])', function() {
-                it('应该返回删除元素组成的数组', function() {
-                    [3, 5, 7, 2].splice(1, 1).should.eql([5]);
-                    [3, 5, 7, 2].splice(1, 2).should.eql([5, 7]);
-                    [3, 5, 7, 2].splice(1, 2, 'a').should.eql([5, 7]);
-                });
-
-                it('应该原数组变为被删除元素后的数组', function() {
-                    var arr = [3, 5, 7, 2];
-                    arr.splice(1, 1);
-                    arr.should.eql([3, 7, 2]);
-                });
-
-                it('应该支持新增元素', function() {
-                    var arr = [3, 5, 7, 2];
-                    arr.splice(1, 1, 'c', 'f');
-                    arr.should.eql([3, 'c', 'f', 7, 2]);
-                });
-            });
-
-            describe('#unshift(newelement1[,newelement2,....,newelementX])', function() {
-                it('应该返回数组增加后的长度', function() {
-                    ([1, 2, 3].unshift() === 3).should.be.true;
-                    ([1, 2, 3].unshift(0) === 4).should.be.true;
-                    ([1, 2, 3].unshift(0, 4, 8) === 6).should.be.true;
-                });
-
-                it('应该删除数组的第一个元素，当方法被调用后', function() {
-                    var arr = [1, 3, 5];
-                    arr.unshift(2);
-                    arr.should.eql([2, 1, 3, 5]);
-
-                    var arr2 = [1, 3, 5];
-                    arr2.unshift(2,3);
-                    arr2.should.eql([2, 3, 1, 3, 5]);
-                });
-            });
 
         });
 
-    })();
-    </script>
-    <script>
+        describe('#sort()', function () {
+            it('应该按照字母顺序进行排序', function () {
+                [22, 12, 8, -3, -5].sort().should.eql([-3, -5, 12, 22, 8]);
+                ['hi', 'xx', 'abc', 'acc', 1].sort().should.eql([1, 'abc', 'acc', 'hi', 'xx']);
+            });
+            it('应该按照自定义函数规则进行排序', function () {
+                [22, 12, 8, -3, -5].sort(function (a, b) {
+                    return a - b;
+                }).should.eql([-5, -3, 8, 12, 22]);
+
+                [
+                    {
+                        name: 'xx',
+                        age: 18
+                    },
+                    {
+                        name: 'joel',
+                        age: 17
+                    },
+                    {
+                        name: 'jack',
+                        age: 35
+                    }
+                ].sort(function (a, b) {
+                            return a.age - b.age;
+                        }).should.eql([
+                            {
+                                name: 'joel',
+                                age: 17
+                            },
+                            {
+                                name: 'xx',
+                                age: 18
+                            },
+                            {
+                                name: 'jack',
+                                age: 35
+                            }
+                        ]);
+            });
+        });
+
+        describe('#splice(index,howmany[,item1,.....,itemX])', function () {
+            it('应该返回删除元素组成的数组', function () {
+                [3, 5, 7, 2].splice(1, 1).should.eql([5]);
+                [3, 5, 7, 2].splice(1, 2).should.eql([5, 7]);
+                [3, 5, 7, 2].splice(1, 2, 'a').should.eql([5, 7]);
+            });
+
+            it('应该原数组变为被删除元素后的数组', function () {
+                var arr = [3, 5, 7, 2];
+                arr.splice(1, 1);
+                arr.should.eql([3, 7, 2]);
+            });
+
+            it('应该支持新增元素', function () {
+                var arr = [3, 5, 7, 2];
+                arr.splice(1, 1, 'c', 'f');
+                arr.should.eql([3, 'c', 'f', 7, 2]);
+            });
+        });
+
+        describe('#unshift(newelement1[,newelement2,....,newelementX])', function () {
+            it('应该返回数组增加后的长度', function () {
+                ([1, 2, 3].unshift() === 3).should.be.true;
+                ([1, 2, 3].unshift(0) === 4).should.be.true;
+                ([1, 2, 3].unshift(0, 4, 8) === 6).should.be.true;
+            });
+
+            it('应该删除数组的第一个元素，当方法被调用后', function () {
+                var arr = [1, 3, 5];
+                arr.unshift(2);
+                arr.should.eql([2, 1, 3, 5]);
+
+                var arr2 = [1, 3, 5];
+                arr2.unshift(2, 3);
+                arr2.should.eql([2, 3, 1, 3, 5]);
+            });
+        });
+
+    });
+
+})();
+</script>
+<script>
     mocha.run();
-    </script>
+</script>
 </body>
 
 </html>
